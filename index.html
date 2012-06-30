@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Opal Rails by elia</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Opal Rails</h1>
+        <p class="header">Stop writing Javascript and get back to Ruby!</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/elia/opal-rails/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/elia/opal-rails/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/elia/opal-rails">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/elia">elia</a></p>
+
+
+      </header>
+      <section>
+        <h1>Opal Rails</h1>
+
+<p><em>Rails (3.2+) bindings for <a href="http://opalrb.org">Opal JS</a> engine.</em></p>
+
+<h2>Installation</h2>
+
+<p>In your <code>Gemfile</code></p>
+
+<div class="highlight">
+<pre><span class="n">gem</span> <span class="s1">'opal-rails'</span>
+</pre>
+</div>
+
+
+<h2>Usage</h2>
+
+<h3>Asset Pipeline</h3>
+
+<div class="highlight">
+<pre><span class="c1">// app/assets/application.js</span>
+
+<span class="c1">// The Opal runtime</span>
+<span class="c1">// = require opal</span>
+<span class="c1">//</span>
+<span class="c1">// Dom manipulation</span>
+<span class="c1">// = require opal-dom</span>
+</pre>
+</div>
+
+
+<p>and then just use the <code>.rb</code> or <code>.opal</code> extensions:</p>
+
+<div class="highlight">
+<pre><span class="c1"># app/assets/javascripts/hi-world.js.rb</span>
+
+<span class="nb">puts</span> <span class="s2">"G'day world!"</span>
+</pre>
+</div>
+
+
+<h3>As a template</h3>
+
+<p>You can use it for your dynamic templates too (Probably in conjunction with ERB to pass dynamic state)</p>
+
+<div class="highlight">
+<pre><span class="c1"># app/views/posts/show.js.opal.erb</span>
+
+<span class="no">Element</span><span class="o">.</span><span class="n">id</span><span class="p">(</span><span class="s1">'&lt;%= dom_id @post %&gt;'</span><span class="p">)</span><span class="o">.</span><span class="n">show</span>
+</pre>
+</div>
+
+
+<h3>As an Haml filter (optional)</h3>
+
+<p>Of course you need to require <code>haml-rails</code> separately since its presence is not assumed</p>
+
+<div class="highlight">
+<pre><span class="cp">-# app/views/posts/show.html.haml</span>
+
+<span class="nt">%article</span><span class="p">=</span> <span class="n">post</span><span class="o">.</span><span class="n">body</span>
+
+<span class="nt">%a</span><span class="nf">#show-comments</span> Display Comments!
+
+<span class="nc">.comments</span>(<span class="na">style=</span><span class="s">"display:none;"</span>)
+  <span class="p">-</span> <span class="n">post</span><span class="o">.</span><span class="n">comments</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">comment</span><span class="o">|</span>
+    <span class="nc">.comment</span><span class="p">=</span> <span class="n">comment</span><span class="o">.</span><span class="n">body</span>
+
+<span class="nd">:opal</span>
+  <span class="nd">Document.ready? do</span>
+    <span class="nd">Element.id('show-comments').on :click do</span>
+      <span class="nd">Element.find('.comments').first.show</span>
+      <span class="nd">false # aka preventDefault</span>
+    <span class="nd">end</span>
+  <span class="nd">end</span>
+</pre>
+</div>
+
+
+<h3>Spec!</h3>
+
+<p>Add a <code>spec.js</code> into <code>assets/javascripts</code> to require your specs</p>
+
+<div class="highlight">
+<pre><span class="c1">// = require_tree ./spec</span>
+</pre>
+</div>
+
+
+<p>and then a spec folder with you specs!</p>
+
+<div class="highlight">
+<pre><span class="c1"># assets/javascripts/spec/example_spec.js.rb</span>
+
+<span class="n">describe</span> <span class="s1">'a spec'</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s1">'has successful examples'</span> <span class="k">do</span>
+    <span class="s1">'I run'</span><span class="o">.</span><span class="n">should</span> <span class="o">=~</span> <span class="sr">/run/</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre>
+</div>
+
+
+<p>Then visit <code>/opal_spec</code> from your app and <strong>reload at will</strong>.</p>
+
+<p><img src="http://f.cl.ly/items/001n0V0g0u0v14160W2G/Schermata%2007-2456110%20alle%201.06.29%20am.png" alt="1 examples, 0 failures"></p>
+
+<h2>License</h2>
+
+<p>Copyright © 2012 by Elia Schito</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+		          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-7137430-8");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
