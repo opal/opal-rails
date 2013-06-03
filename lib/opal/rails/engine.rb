@@ -1,9 +1,13 @@
 require 'rails'
+require 'opal/default_options'
 
 module Opal
   module Rails
     class Engine < ::Rails::Engine
       config.app_generators.javascript_engine :opal
+
+      config.opal = ActiveSupport::OrderedOptions.new
+
 
       # Cache eager_load_paths now, otherwise the assets dir is added
       # and its .rb files are eagerly loaded.
@@ -17,6 +21,8 @@ module Opal
         Opal.paths.each do |path|
           app.assets.append_path path
         end
+
+        Opal.default_options = config.opal
       end
 
     end

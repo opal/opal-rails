@@ -22,6 +22,24 @@ rails new <app-name> --javascript=opal
 ```
 
 
+### Configuration
+
+Add your configuration in `config/application.rb` with the following contents:
+
+```ruby
+module MyApp
+  class Application < Rails::Application
+    # These are the available options with their default value:
+    config.opal.method_missing      = true
+    config.opal.optimized_operators = true
+    config.opal.arity_check         = false
+    config.opal.const_missing       = true
+  end
+end
+```
+
+
+
 ## Usage
 
 
