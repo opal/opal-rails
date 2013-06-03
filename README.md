@@ -2,6 +2,7 @@
 
 [![Build Status](https://secure.travis-ci.org/elia/opal-rails.png)](http://travis-ci.org/elia/opal-rails)
 [![Code Climate](https://codeclimate.com/github/elia/opal-rails.png)](https://codeclimate.com/github/elia/opal-rails)
+[![Gem Version](https://badge.fury.io/rb/opal-rails.png)](http://badge.fury.io/rb/opal-rails)
 
 _Rails (3.2+, 4.0) bindings for [Opal Ruby](http://opalrb.org) engine. ([Changelog](https://github.com/opal/opal-rails/blob/master/CHANGELOG.md))_
 
