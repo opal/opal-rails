@@ -39,6 +39,11 @@ end
 ```
 
 
+### Gotchas
+
+After changing the version of the `opal` gem (e.g. via `bundle update opal`) or any configuration flag **you should trash the `#{Rails.root}/tmp/cache/assets` folder**, otherwise you could see a cached source compiled before the change.
+
+
 
 ## Usage
 
