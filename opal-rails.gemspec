@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'opal-jquery', '>= 0.0.8'
   s.add_runtime_dependency 'opal-spec',   '>= 0.2.15'
   s.add_runtime_dependency 'jquery-rails'
+  s.add_runtime_dependency 'source_map'
 
   s.add_development_dependency 'rspec',       '~> 2.13'
   s.add_development_dependency 'rspec-rails', '~> 2.13'
