@@ -7,8 +7,8 @@ module Sprockets
     # with a .rb or .opal extension in the extension chain.
     def headers_with_opal_source_maps(env, asset, length)
       headers_without_opal_source_maps(env, asset, length).tap do |headers|
-        if asset.pathname =~ /\.(rb|opal)[\.$]/
-          headers['X-SourceMap'] = '/__opal_source_maps__/'+asset.logical_path + '.js.map'
+        if asset.pathname.to_s =~ /\.(rb|opal)\b/
+          headers['X-SourceMap'] = '/__opal_source_maps__/'+asset.logical_path + '.map'
         end
       end
     end
