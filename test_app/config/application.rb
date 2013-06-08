@@ -1,3 +1,7 @@
+require 'fileutils'
+# Clear assets cache to avoid false errors
+FileUtils.rmtree(File.expand_path('../../tmp/cache/assets'))
+
 require File.expand_path('../boot', __FILE__)
 
 # Pick the frameworks you want:
