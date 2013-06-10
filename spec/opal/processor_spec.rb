@@ -1,9 +1,10 @@
 require 'spec_helper'
 
 describe Opal::Processor do
-  # Preparing a context that responds to #logical_path and #require_asset
-  # should't be necessary:
-  let(:_context) { double('_context', :logical_path => 'asdf.js.rb' ) }
+  let(:pathname) { Pathname('/Code/app/mylib/opal/asdf.rb') }
+  let(:_context) do
+    double('_context', :logical_path => 'asdf.js.rb', :pathname => pathname)
+  end
 
   it "is registered for '.opal' files" do
     Tilt['test.opal'].should eq(Opal::Processor)
