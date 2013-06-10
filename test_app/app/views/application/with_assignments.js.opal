@@ -5,4 +5,4 @@ return {
   hash_var:   @hash_var,
   object_var: @object_var,
   local_var:  local_var
-}.to_native
+}.to_n
