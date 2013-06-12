@@ -1,6 +1,6 @@
 require 'rails'
-require 'opal/default_options'
 require 'opal/server'
+require 'opal/processor'
 
 module Opal
   module Rails
@@ -23,7 +23,11 @@ module Opal
           app.assets.append_path path
         end
 
-        Opal.default_options = config.opal
+        config.opal.each_pair do |key, value|
+          key = "#{key}="
+          Rails.logger.info [key, Opal::Processor.respond_to?( key)].inspect
+          Opal::Processor.send(key, value) if Opal::Processor.respond_to? key
+        end
 
         config = app.config
         maps_app = Opal::SourceMapServer.new(app.assets)
