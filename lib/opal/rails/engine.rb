@@ -18,11 +18,13 @@ module Opal
         app.config.eager_load_paths = app.config.eager_load_paths.dup - Dir["#{app.root}/app/{assets,views}"]
       end
 
-      config.after_initialize do |app|
+      initializer 'opal.asset_paths', :after => 'sprockets.environment', :group => :all do |app|
         Opal.paths.each do |path|
           app.assets.append_path path
         end
+      end
 
+      config.after_initialize do |app|
         config.opal.each_pair do |key, value|
           key = "#{key}="
           Rails.logger.info [key, Opal::Processor.respond_to?( key)].inspect
