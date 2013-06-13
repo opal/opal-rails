@@ -27,7 +27,6 @@ module Opal
       config.after_initialize do |app|
         config.opal.each_pair do |key, value|
           key = "#{key}="
-          Rails.logger.info [key, Opal::Processor.respond_to?( key)].inspect
           Opal::Processor.send(key, value) if Opal::Processor.respond_to? key
         end
 
