@@ -5,6 +5,6 @@ gem 'capybara-webkit' unless ENV['CI']
 gem 'opal',        :github => 'opal/opal'
 gem 'opal-jquery', :github => 'opal/opal-jquery'
 
-platform :ruby_18 do
+if RUBY_VERSION.to_f == 1.8
   gem 'nokogiri', '< 1.6'
 end
