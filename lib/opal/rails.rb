@@ -8,4 +8,3 @@ require 'opal/rails/version'
 require 'opal/rails/haml_filter' if defined?(Haml)
 
 require 'jquery-rails'
-require 'opal/sprockets_source_map_header'
