@@ -7,7 +7,7 @@ TestApp::Application.configure do
   config.cache_classes = false
 
   # Log error messages when you accidentally call methods on nil.
-  config.whiny_nils = true
+  config.whiny_nils = true unless Rails.version.to_i == 4
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
@@ -28,4 +28,6 @@ TestApp::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.eager_load = false if Rails.version.to_i == 4
 end
