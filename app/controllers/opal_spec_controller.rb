@@ -25,8 +25,8 @@ class OpalSpecController < ActionController::Base
   end
 
   def spec_files_for_glob glob = '**'
-    Dir[Rails.root.join("{app,lib}/assets/javascripts/spec/#{glob}{,_spec.js.{rb,opal}}")].map do |path|
-      path.split('assets/javascripts/spec/').last
+    Dir[Rails.root.join("{app,lib}/assets/javascripts/spec/#{glob}{,_spec{.js,}.{rb,opal}}")].map do |path|
+      path.split('assets/javascripts/spec/').flatten.last.gsub(/(\.rb|\.opal)/, '')
     end.uniq
   end
 end
