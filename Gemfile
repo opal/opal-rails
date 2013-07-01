@@ -7,4 +7,5 @@ gem 'opal-jquery', :github => 'opal/opal-jquery'
 
 if RUBY_VERSION.to_f == 1.8
   gem 'nokogiri', '< 1.6'
+  gem 'rails', '< 4.0'
 end
