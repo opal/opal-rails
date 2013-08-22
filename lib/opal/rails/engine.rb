@@ -25,6 +25,8 @@ module Opal
       end
 
       config.after_initialize do |app|
+        require 'opal/rails/haml_filter' if defined?(Haml)
+
         config.opal.each_pair do |key, value|
           key = "#{key}="
           Opal::Processor.send(key, value) if Opal::Processor.respond_to? key
