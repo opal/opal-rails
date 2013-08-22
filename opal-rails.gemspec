@@ -19,11 +19,12 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ['lib']
 
-  s.add_runtime_dependency 'opal',  '~> 0.4.1'
+  s.add_runtime_dependency 'opal',           '~> 0.4.4'
+  s.add_runtime_dependency 'opal-sprockets', '~> 0.2.0'
 
   s.add_runtime_dependency 'rails', '>= 3.2.13', '< 5.0'
   s.add_runtime_dependency 'opal-jquery', '>= 0.0.8'
-  s.add_runtime_dependency 'opal-spec',   '>= 0.2.15'
+  s.add_runtime_dependency 'opal-spec',   '~> 0.3.1'
   s.add_runtime_dependency 'jquery-rails'
 
   s.add_development_dependency 'rspec',       '~> 2.13'
