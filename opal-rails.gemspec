@@ -23,8 +23,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'opal-sprockets', '~> 0.2.0'
 
   s.add_runtime_dependency 'rails', '>= 3.2.13', '< 5.0'
-  s.add_runtime_dependency 'opal-jquery', '>= 0.0.8'
-  s.add_runtime_dependency 'opal-spec',   '~> 0.3.1'
+  s.add_runtime_dependency 'opal-jquery',        '>= 0.0.8'
+  s.add_runtime_dependency 'opal-spec',          '~> 0.3.1'
   s.add_runtime_dependency 'opal-activesupport'
   s.add_runtime_dependency 'jquery-rails'
 
