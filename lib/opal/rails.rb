@@ -1,5 +1,6 @@
 require 'opal'
 require 'opal-jquery'
+require 'opal-activesupport'
 require 'opal-spec'
 
 require 'opal/rails/engine'
