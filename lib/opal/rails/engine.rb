@@ -27,17 +27,19 @@ module Opal
       config.after_initialize do |app|
         require 'opal/rails/haml_filter' if defined?(Haml)
 
+        config = app.config
         config.opal.each_pair do |key, value|
           key = "#{key}="
           Opal::Processor.send(key, value) if Opal::Processor.respond_to? key
         end
 
-        config = app.config
-        maps_app = Opal::SourceMapServer.new(app.assets)
+        if config.opal.source_map_enabled
+          maps_app = Opal::SourceMapServer.new(app.assets)
 
-        app.routes.prepend do
-          mount maps_app => maps_app.prefix
-          get '/opal_spec' => 'opal_spec#run'
+          app.routes.prepend do
+            mount maps_app => maps_app.prefix
+            get '/opal_spec' => 'opal_spec#run'
+          end
         end
       end
 
