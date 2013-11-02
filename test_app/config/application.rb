@@ -68,5 +68,8 @@ module TestApp
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Disabled by default, we need it for tests
+    config.opal.source_map_enabled = true
   end
 end
