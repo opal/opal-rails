@@ -33,13 +33,13 @@ module Opal
           Opal::Processor.send(key, value) if Opal::Processor.respond_to? key
         end
 
-        if config.opal.source_map_enabled
-          maps_app = Opal::SourceMapServer.new(app.assets)
-
-          app.routes.prepend do
+        app.routes.prepend do
+          if config.opal.source_map_enabled
+            maps_app = Opal::SourceMapServer.new(app.assets)
             mount maps_app => maps_app.prefix
-            get '/opal_spec' => 'opal_spec#run'
           end
+
+          get '/opal_spec' => 'opal_spec#run'
         end
       end
 
