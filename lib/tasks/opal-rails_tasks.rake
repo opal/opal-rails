@@ -4,7 +4,7 @@ Opal::Spec::RakeTask.new('opal:spec' => :environment) do |server|
   require 'tempfile'
 
   asset_paths = Opal.paths + Rails.configuration.assets.paths.to_a
-  tempfile = Tempfile.new(['opal-spec', '.js.rb'])
+  tempfile = Tempfile.new(['opal-rspec', '.js.rb'])
 
   server.sprockets.clear_paths
   asset_paths << File.dirname(tempfile.path)
@@ -13,7 +13,7 @@ Opal::Spec::RakeTask.new('opal:spec' => :environment) do |server|
   asset_paths.each { |path| server.append_path path }
 
   required_assets = ['opal']
-  required_assets << 'opal-spec-runner'
+  required_assets << 'opal-rspec-runner'
 
   asset_paths.each do |path|
     Dir["#{path}/spec/**_spec.js.{opal,rb}"].each do |spec|
