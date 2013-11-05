@@ -27,13 +27,6 @@ describe Opal::SourceMap do
     end
   end
 
-  it "points to a file on the disk" do
-    path = map['sources'].first
-    pathname = Pathname(path.gsub(%r{^file\://}, ''))
-    expect(pathname.exist?).to be_true
-  end
-
-
   def extract_map_url response
     response.headers['X-SourceMap'] or
     response.body.scan(%r{^//@ sourceMappingURL=([^\n]+)}).flatten.first.strip

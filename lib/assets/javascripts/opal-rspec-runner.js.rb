@@ -1,9 +1,9 @@
 require 'jquery'
 
 require 'opal'
-require 'opal-spec'
+require 'opal-rspec'
 require 'opal-jquery'
 
 Document.ready? do
-  Opal::Spec::Runner.new.run
+  Opal::RSpec::Runner.new.run
 end
