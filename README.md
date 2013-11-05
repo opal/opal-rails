@@ -131,7 +131,7 @@ Of course you need to require `haml-rails` separately since its presence is not 
 
 ### Spec!
 
-Add specs into `app/assets/javascripts/specs`:
+Add specs into `app/assets/javascripts/spec`:
 
 and then a spec folder with you specs!
 
