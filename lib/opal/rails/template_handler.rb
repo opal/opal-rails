@@ -10,7 +10,7 @@ module Opal
       def call(template)
         escaped = template.source.gsub(':', '\:')
         string = '%q:' + escaped + ':'
-        "Opal.parse('Object.new.instance_eval {' << #{assigns} << #{local_assigns} << #{string} << '}')"
+        "Opal.compile('Object.new.instance_eval {' << #{assigns} << #{local_assigns} << #{string} << '}')"
       end
 
       private
