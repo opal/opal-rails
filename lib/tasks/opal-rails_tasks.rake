@@ -1,6 +1,6 @@
-require 'opal/spec/rake_task'
+require 'opal/rspec/rake_task'
 
-Opal::Spec::RakeTask.new('opal:spec' => :environment) do |server|
+Opal::RSpec::RakeTask.new('opal:spec' => :environment) do |server|
   require 'tempfile'
 
   asset_paths = Opal.paths + Rails.configuration.assets.paths.to_a
