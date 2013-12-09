@@ -20,7 +20,6 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   s.add_runtime_dependency 'opal',           '~> 0.6.0'
-  s.add_runtime_dependency 'opal-sprockets', '~> 0.4.0'
 
   s.add_runtime_dependency 'rails', '>= 3.2.13', '< 5.0'
   s.add_runtime_dependency 'opal-jquery',        '>= 0.1.0'
