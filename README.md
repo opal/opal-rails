@@ -43,9 +43,9 @@ end
 
 ### Gotchas
 
-After changing the version of the `opal` gem (e.g. via `bundle update opal`) or any configuration flag **you should trash the `#{Rails.root}/tmp/cache/assets` folder**, otherwise you could see a cached source compiled before the change.
+<del>After changing the version of the `opal` gem (e.g. via `bundle update opal`) or any configuration flag **you should trash the `#{Rails.root}/tmp/cache/assets` folder**, otherwise you could see a cached source compiled before the change.</del>
 
-Waiting for [this pull request on sprockets](https://github.com/sstephenson/sprockets/pull/508) to be merged.
+Now ships with a patch to sprockets cache key to include processor version that is also in this [pull request](https://github.com/sstephenson/sprockets/pull/508).
 
 
 
