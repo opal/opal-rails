@@ -4,7 +4,6 @@ gemspec
 gem 'capybara-webkit' unless ENV['CI']
 gem 'opal',        :github => 'opal/opal'
 gem 'opal-jquery', :github => 'opal/opal-jquery'
-gem 'opal-rspec',  :github => 'opal/opal-rspec'
 
 # gem 'opal',         :path => '~/Code/opal'
 # gem 'opal-jquery',  :path => '~/Code/opal-jquery'
