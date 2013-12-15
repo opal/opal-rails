@@ -27,6 +27,11 @@ describe 'controller assignments' do
 
   def opal_eval source
     opal_source = get_source_of '/assets/opal.js'
+
+    # Any lib should be already required in the page,
+    # require won't work in this kind of templates.
+    opal_source << get_source_of('/assets/native.js')
+
     context = ExecJS.compile opal_source
     context.eval source
   rescue
