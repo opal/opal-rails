@@ -104,7 +104,7 @@ post.find('.comments').html = comments_html
 ```
 
 
-### As an Haml filter (optional)
+### As a Haml filter (optional)
 
 Of course you need to require `haml-rails` separately since its presence is not assumed
 
