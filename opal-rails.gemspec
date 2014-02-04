@@ -26,10 +26,10 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-rails'
   s.add_dependency 'opal-activesupport',  '>= 0.0.5'
 
+  s.add_development_dependency 'execjs'
+  s.add_development_dependency 'launchy'
+  s.add_development_dependency 'capybara'
+
   s.add_development_dependency 'rspec',       '~> 2.13'
   s.add_development_dependency 'rspec-rails', '~> 2.13'
-
-  s.add_development_dependency 'capybara',    '< 2'
-  s.add_development_dependency 'launchy'
-  s.add_development_dependency 'execjs'
 end
