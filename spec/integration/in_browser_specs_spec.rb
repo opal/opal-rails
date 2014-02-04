@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe 'In-browser specs runner' do
-  it 'runs all specs', :js do
+feature 'In-browser specs runner' do
+  scenario 'runs all specs', :js do
     visit '/opal_spec'
 
     page.should have_content('subdirectory/other_spec.js')
@@ -9,7 +9,7 @@ describe 'In-browser specs runner' do
     page.should have_content('2 examples, 0 failures')
   end
 
-  it "runs single spec file", :js do
+  scenario "runs single spec file", :js do
     visit '/opal_spec'
     click_link 'subdirectory/other_spec.js'
 
