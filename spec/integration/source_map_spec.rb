@@ -29,7 +29,7 @@ describe Opal::SourceMap do
 
   def extract_map_url response
     response.headers['X-SourceMap'] or
-    response.body.scan(%r{^//@ sourceMappingURL=([^\n]+)}).flatten.first.strip
+    response.body.scan(%r{^//[@#] sourceMappingURL=([^\n]+)}).flatten.first.to_s.strip
   end
 
 end
