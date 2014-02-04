@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'In-browser specs runner' do
+feature 'In-browser specs runner', :type => :request do
   scenario 'runs all specs', :js do
     visit '/opal_spec'
 
