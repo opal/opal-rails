@@ -4,7 +4,7 @@ gemspec
 gem 'capybara-webkit'
 gem 'capybara', '< 2'
 
-gem 'opal',        :github => 'opal/opal'
+# gem 'opal',        :github => 'opal/opal'
 gem 'opal-jquery', :github => 'opal/opal-jquery'
 
 # gem 'opal',         :path => '~/Code/opal'
