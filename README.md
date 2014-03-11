@@ -71,6 +71,7 @@ Opal requires are forwarded to the Asset Pipeline at compile time (similarly to 
 puts "G'day world!" # check the console!
 
 # Dom manipulation
+require 'opal-jquery'
 
 Document.ready?
   Element.find('body > header').html = '<h1>Hi there!</h1>'
