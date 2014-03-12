@@ -73,7 +73,7 @@ puts "G'day world!" # check the console!
 # Dom manipulation
 require 'opal-jquery'
 
-Document.ready?
+Document.ready? do
   Element.find('body > header').html = '<h1>Hi there!</h1>'
 end
 ```
