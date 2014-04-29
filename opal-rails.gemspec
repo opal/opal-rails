@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   s.add_dependency 'rails',               '>= 3.2.13', '< 5.0'
-  s.add_dependency 'opal',                '~> 0.6.0'
+  s.add_dependency 'opal',                '~> 0.7.0.dev'
   s.add_dependency 'opal-jquery',         '>= 0.1.0'
   s.add_dependency 'opal-rspec',          '~> 0.3.0.beta1'
   s.add_dependency 'jquery-rails'
