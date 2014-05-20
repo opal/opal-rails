@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ['lib']
 
-  s.add_dependency 'rails',               '>= 3.2.13', '< 5.0'
+  s.add_dependency 'rails',               '>= 4.0', '< 5.0'
   s.add_dependency 'opal',                '~> 0.7.0.dev'
   s.add_dependency 'opal-jquery',         '>= 0.1.0'
   s.add_dependency 'opal-rspec',          '~> 0.3.0.beta1'
@@ -28,8 +28,8 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'execjs'
   s.add_development_dependency 'launchy'
-  s.add_development_dependency 'capybara'
+  s.add_development_dependency 'capybara',    '~> 2.2.1'
 
-  s.add_development_dependency 'rspec',       '~> 2.13'
-  s.add_development_dependency 'rspec-rails', '~> 2.13'
+  s.add_development_dependency 'rspec',       '~> 3.0.0.beta2'
+  s.add_development_dependency 'rspec-rails', '~> 3.0.0.beta2'
 end
