@@ -13,7 +13,7 @@ _Rails (3.2+, 4.0) bindings for [Opal Ruby](http://opalrb.org) engine. ([Changel
 
 In your `Gemfile`
 
-``` ruby
+```ruby
 gem 'opal-rails'
 ```
 
