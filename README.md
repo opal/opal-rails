@@ -150,7 +150,7 @@ describe 'a spec' do
 end
 ```
 
-Then visit `/opal_spec` from your app and **reload at will**.
+Then visit `/opal_spec` from your app and **reload at will** or use the command line with `rake opal:spec`.
 
 ![1 examples, 0 failures](http://f.cl.ly/items/001n0V0g0u0v14160W2G/Schermata%2007-2456110%20alle%201.06.29%20am.png)
 
