@@ -26,6 +26,7 @@ module Opal
 
       config.after_initialize do |app|
         require 'opal/rails/haml_filter' if defined?(Haml)
+        require 'opal/rails/slim_filter' if defined?(Slim)
 
         config = app.config
         config.opal.each_pair do |key, value|
