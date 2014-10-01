@@ -36,8 +36,14 @@ module Opal
 
         app.routes.prepend do
           if Opal::Processor.source_map_enabled
-            maps_app = Opal::SourceMapServer.new(app.assets)
-            mount maps_app => maps_app.prefix
+            prefix = app.config.assets.prefix
+            maps_app = Opal::SourceMapServer.new(app.assets, prefix)
+
+            namespace :assets do
+              get '*path.map'   => maps_app
+              get '*path.js.rb' => maps_app
+              get '*path.rb'    => maps_app
+            end
           end
 
           get '/opal_spec' => 'opal_spec#run'
