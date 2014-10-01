@@ -15,6 +15,8 @@ ENV['RAILS_ENV'] = 'test'
 require File.expand_path('test_app/config/environment.rb', root_dir)
 
 require 'rspec/rails'
+require 'support/capybara'
+require 'support/reset_assets_cache'
 
 Rails.backtrace_cleaner.remove_silencers!
 
