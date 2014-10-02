@@ -4,6 +4,7 @@
 [![Code Climate](https://img.shields.io/codeclimate/github/elia/opal-rails.svg)](https://codeclimate.com/github/elia/opal-rails)
 [![Gem Version](https://badge.fury.io/rb/opal-rails.svg)](http://badge.fury.io/rb/opal-rails)
 ![fun guaranteed](https://img.shields.io/badge/fun-guaranteed-brightgreen.svg)
+![web scale](http://img.shields.io/badge/webscale-over%209000-green.svg)
 
 _Rails (3.2+, 4.0) bindings for [Opal Ruby](http://opalrb.org) engine. ([Changelog](https://github.com/opal/opal-rails/blob/master/CHANGELOG.md))_
 
