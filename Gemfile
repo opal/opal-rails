@@ -2,14 +2,9 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'capybara-webkit'
-
-gem 'opal',        :github => 'opal/opal'
-gem 'opal-jquery', :github => 'opal/opal-jquery'
-
-# gem 'opal',         :path => '~/Code/opal'
-# gem 'opal-jquery',  :path => '~/Code/opal-jquery'
-# gem 'opal-rspec',   :path => '~/Code/opal-rspec'
-# gem 'opal-browser', :path => '~/Code/opal-browser'
+gem 'opal-jquery', github: 'opal/opal-jquery'
+gem 'opal',        github: 'opal'
+# gem 'opal',        path: '../opal'
 
 if RUBY_VERSION.to_f < 1.9
   gem 'nokogiri', '< 1.6'
