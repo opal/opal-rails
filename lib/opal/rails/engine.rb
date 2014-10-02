@@ -38,12 +38,7 @@ module Opal
           if Opal::Processor.source_map_enabled
             prefix = app.config.assets.prefix
             maps_app = Opal::SourceMapServer.new(app.assets, prefix)
-
-            namespace :assets do
-              get '*path.map'   => maps_app
-              get '*path.js.rb' => maps_app
-              get '*path.rb'    => maps_app
-            end
+            mount Rack::Cascade.new([maps_app, app.assets]) => prefix
           end
 
           get '/opal_spec' => 'opal_spec#run'
