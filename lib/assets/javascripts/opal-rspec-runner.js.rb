@@ -1,6 +1,5 @@
-require 'jquery.js'
-
 require 'opal'
+require 'jquery'
 require 'opal-rspec'
 require 'opal-jquery'
 

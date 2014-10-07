@@ -1,4 +1,4 @@
-require 'jquery.js'
-require 'jquery_ujs.js'
+require 'jquery'
+require 'jquery_ujs'
 require 'opal'
 require 'opal-jquery'
