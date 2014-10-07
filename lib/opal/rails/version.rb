@@ -1,5 +1,5 @@
 module Opal
   module Rails
-    VERSION = '0.6.4.pre'
+    VERSION = '0.7.0.dev'
   end
 end
