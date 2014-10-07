@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 feature 'In-browser specs runner' do
-  before { skip 'STILL NEED TO FIX FOR OPAL-RSPEC' }
-
   scenario 'runs all specs', :js do
     visit '/opal_spec'
 
