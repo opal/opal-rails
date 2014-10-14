@@ -18,18 +18,25 @@ class <%= controller_class_name %>View
   end
   attr_reader :element
 
-  # Put here the setup for
   def setup
+    # Put here the setup for the view behavior
     say_hello_when_a_link_is_clicked
   end
 
   def say_hello_when_a_link_is_clicked
-    element.find('a') do |event|
+    all_links.on :click do |event|
       # Use prevent_default to stop default behavior (as you would do in jQuery)
       # event.prevent_default
 
       puts "Hello! (You just clicked on a link: #{event.current_target.text})"
     end
+  end
+
+
+  private
+
+  def all_links
+    @all_links ||= element.find('a')
   end
 end
 <% end -%>
