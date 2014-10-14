@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
 
   required_ruby_version = '>= 1.9.3'
 
-  s.add_dependency 'rails',               '>= 4.0', '< 5.0'
+  s.add_dependency 'rails',               '>= 3.2', '< 5.0'
   s.add_dependency 'opal',                '~> 0.7.0.dev'
   s.add_dependency 'opal-jquery',         '>= 0.1.0'
   s.add_dependency 'opal-rspec',          '~> 0.4.0.beta1'
