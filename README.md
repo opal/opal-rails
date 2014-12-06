@@ -157,6 +157,42 @@ Then visit `/opal_spec` from your app and **reload at will** or use the command 
 ![1 examples, 0 failures](http://f.cl.ly/items/001n0V0g0u0v14160W2G/Schermata%2007-2456110%20alle%201.06.29%20am.png)
 
 
+### Shared templates
+
+As long as the templates are inside the sprockets/opal load path, then you should be able to just require them.
+
+Let's say we have this template `app/views/shared/test.haml`:
+
+```haml
+.row
+  .col-sm-12
+    = @bar
+```
+
+We need to make sure Opal can see and compile that template. So we need to add the path to sprockets:
+
+```ruby
+# config/initializers/opal.rb
+Rails.application.config.assets.paths << Rails.root.join('app', 'views', 'shared').to_s
+```
+
+Now, somewhere in `application.rb` you need to require that template, and you can just run it through `Template`:
+
+```ruby
+# app/assets/javascripts/application.rb
+require 'opal'
+require 'opal-haml'
+require 'test'
+
+@bar = "hello world"
+
+template = Template['test']
+template.render(self)
+# =>  '<div class="row"><div class="col-sm-12">hello world</div></div>'
+```
+
+
+
 ## License
 
 © 2012-2014 Elia Schito
