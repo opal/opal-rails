@@ -132,6 +132,7 @@ Of course you need to require `haml-rails` separately since its presence is not 
       Element.find('.comments').effect(:fade_in)
     end
   end
+
 ```
 
 
