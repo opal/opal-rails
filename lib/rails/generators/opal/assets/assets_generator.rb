@@ -9,10 +9,7 @@ module Opal
 
       def initialize(*args)
     
-        module_name = case ::Rails::Generators.const_defined? 'ModelHelpers'
-          when true then  'ModelHelpers'
-          else 'ResourceHelpers'
-        end
+        module_name = ::Rails::Generators.const_defined?('ModelHelpers') ? 'ModelHelpers' : 'ResourceHelpers'
         ::Rails::Generators.const_get(module_name).skip_warn = true
         super
       end
