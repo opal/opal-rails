@@ -8,7 +8,12 @@ module Opal
       source_root __dir__+'/templates'
 
       def initialize(*args)
-        ::Rails::Generators::ModelHelpers.skip_warn = true
+    
+        module_name = case ::Rails::Generators.const_defined? 'ModelHelpers'
+          when true then  'ModelHelpers'
+          else 'ResourceHelpers'
+        end
+        ::Rails::Generators.const_get(module_name).skip_warn = true
         super
       end
 
