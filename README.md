@@ -55,13 +55,16 @@ Now ships with a patch to sprockets cache key to include processor version that 
 
 ### Asset Pipeline
 
-```js
+Make sure you have renamed `app/assets/application.js` to `app/assets/application.js.rb`.
+Also change the javascript require statements to Ruby methods. 
+Otherwise you might have problems with Source Maps.
+
+```ruby
 // app/assets/application.js.rb
 
-//= require opal
-//= require opal_ujs
-//= require turbolinks
-//= require_tree .
+require 'opal'
+require 'opal_ujs'
+require 'turbolinks'
 ```
 
 Opal requires are forwarded to the Asset Pipeline at compile time (similarly to what happens for RubyMotion). You can use either the `.rb` or `.opal` extension:
