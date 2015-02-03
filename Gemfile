@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'capybara-webkit'
-gem 'opal-jquery', github: 'opal/opal-jquery'
+# gem 'opal-jquery', github: 'opal/opal-jquery'
 # gem 'opal',        github: 'opal'
 # gem 'opal-jquery', path: '../opal-jquery'
 # gem 'opal',        path: '../opal'
