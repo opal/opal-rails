@@ -15,7 +15,7 @@ module Opal
       end
 
       def copy_opal
-        template 'javascript.js.rb', File.join('app/assets/javascripts', class_path, "#{controller_name}_view.js.rb")
+        template 'javascript.js.rb', File.join('app/assets/javascripts', "#{controller_name.underscore}_view.js.rb")
       end
     end
   end
