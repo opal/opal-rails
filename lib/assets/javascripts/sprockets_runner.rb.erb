@@ -1,0 +1,11 @@
+# This file is used by Opal::Server to basically load all spec files that
+# can be found in the spec/ directory.
+
+require 'opal'
+require 'opal-rspec'
+<% spec_location = Rails.application.config.opal.spec_location %>
+<% Dir.glob("#{spec_location}/**/*_spec*.{rb,opal}").each do |s| %>
+require <%= s.sub(/^#{spec_location}\//, '').sub(/\.(rb|opal)$/, '').sub(/\.js/,'').inspect %>
+<% end %>
+
+Opal::RSpec::Runner.autorun
