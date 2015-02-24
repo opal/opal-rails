@@ -4,6 +4,15 @@ class OpalSpecController < ActionController::Base
   def run
   end
 
+  def file
+    spec_file = Dir["#{spec_location}/#{params[:path]}*.{rb,opal}"].first
+    Opal.paths.concat Rails.application.config.assets.paths
+    builder = Opal::Builder.new
+    file = File.new spec_file
+    builder.build_str file.read, spec_file
+
+    render js: builder.to_s
+  end
 
   private
 
@@ -25,8 +34,12 @@ class OpalSpecController < ActionController::Base
   end
 
   def spec_files_for_glob glob = '**'
-    Dir[Rails.root.join("{app,lib}/assets/javascripts/spec/#{glob}.{rb,opal}")].map do |path|
-      path.split('assets/javascripts/spec/').flatten.last.gsub(/(\.rb|\.opal)/, '')
+    Dir[Rails.root.join("#{spec_location}/#{glob}.{rb,opal}")].map do |path|
+      path.split("#{spec_location}/").flatten.last.gsub(/(\.rb|\.opal)/, '')
     end.uniq
+  end
+
+  def spec_location
+    Rails.application.config.opal.spec_location
   end
 end

@@ -138,12 +138,12 @@ Of course you need to require `haml-rails` separately since its presence is not 
 
 ### Spec!
 
-Add specs into `app/assets/javascripts/spec`:
+Add specs into `/spec-opal`:
 
 and then a spec folder with you specs!
 
 ```ruby
-# app/assets/javascripts/spec/example_spec.js.rb
+# spec-opal/example_spec.js.rb
 
 describe 'a spec' do
   it 'has successful examples' do
@@ -153,6 +153,23 @@ end
 ```
 
 Then visit `/opal_spec` from your app and **reload at will** or use the command line with `rake opal:spec`.
+
+#### CHANGE from versions pre 0.7.1
+
+Specs used to run out of app/assets/javascripts/spec which was problematic because require_tree . would cause opal/sprockets to compile the specs for non spec running.  This could result in bad specs that prevent your application Opal code from compiling, and even if it compiles you'll get exceptions about the test framework methods not being defined.  To address this, specs have been moved out of the app/assets/javascripts to Rails.root/spec-opal.  The name spec-opal was chosen to put it close to the spec directory.  We don't want to put specs in spec directory because we don't want the "backend" rspec to run those.
+
+The location of specs is configurable. To restore the old location of app/assets/javascripts/spec add an initializer file like the below.
+
+```ruby
+# config/initializers/opal.rb
+Rails.application.config.opal.spec_location = "app/assets/javascripts/spec"
+
+```
+
+Similarly, you can put the opal specs in another location via a similar initializer call.
+
+
+
 
 ![1 examples, 0 failures](http://f.cl.ly/items/001n0V0g0u0v14160W2G/Schermata%2007-2456110%20alle%201.06.29%20am.png)
 

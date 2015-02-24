@@ -8,6 +8,7 @@ Opal::RSpec::RakeTask.new('opal:spec' => :environment) do |server|
 
   server.sprockets.clear_paths
   asset_paths << File.dirname(tempfile.path)
+  asset_paths << Rails.application.config.opal.spec_location
   server.main = File.basename(tempfile.path, '.js.rb')
 
   asset_paths.each { |path| server.append_path path }

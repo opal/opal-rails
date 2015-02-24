@@ -8,7 +8,8 @@ module Opal
       config.app_generators.javascript_engine :opal
 
       config.opal = ActiveSupport::OrderedOptions.new
-
+      # new default location, override-able in a Rails initializer
+      config.opal.spec_location = "spec-opal"
 
       # Cache eager_load_paths now, otherwise the assets dir is added
       # and its .rb files are eagerly loaded.
@@ -42,6 +43,7 @@ module Opal
           end
 
           get '/opal_spec' => 'opal_spec#run'
+          get '/opal_spec_files/*path' => 'opal_spec#file'
         end
       end
 
