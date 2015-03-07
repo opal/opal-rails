@@ -8,7 +8,7 @@ def conf_spec_server server, close_tmp_file=true
   asset_paths << opal_rails_specs_location
 
   asset_paths.each { |path| server.append_path path }
-  server.main = 'sprockets_runner.rb.erb'
+  server.main = 'sprockets_runner'
 end
 
 Opal::RSpec::RakeTask.new('opal:spec' => :environment) do |server|
