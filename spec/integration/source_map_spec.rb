@@ -32,10 +32,9 @@ describe Opal::SourceMap do
 
   def extract_map_path response
     source_map_regexp = %r{^//[@#] sourceMappingURL=([^\n]+)}
-    map_path = (response.headers['X-SourceMap'] ||
-                 response.body.scan(source_map_regexp).
-                 flatten.first.to_s.strip)
-    File.join(File.dirname(js_asset_path), map_path) if map_path
-  end
+    header_map_path = response.headers['X-SourceMap']
+    comment_map_path = response.body.scan(source_map_regexp).flatten.first.to_s.strip
 
+    header_map_path or comment_map_path
+  end
 end
