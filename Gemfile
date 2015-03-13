@@ -3,7 +3,7 @@ gemspec
 
 gem 'capybara-webkit'
 # gem 'opal-jquery', github: 'opal/opal-jquery'
-# gem 'opal',        github: 'opal'
+gem 'opal',        github: 'opal', branch: 'elia/source-maps-fix'
 # gem 'opal-jquery', path: '../opal-jquery'
 # gem 'opal',        path: '../opal'
 
