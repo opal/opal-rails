@@ -1,9 +1,17 @@
 <h2>Running:</h2>
 
 <ul>
+  <% if pattern.present? %>
+    <li><%= link_to 'All specs', opal_spec_path %></li>
+  <% end %>
+
   <% spec_files.each do |spec_file| %>
     <li>
-      <%= link_to spec_file, "/opal_spec?pattern=#{URI.escape(spec_file)}" %>
+      <% spec_file = clean_spec_path(spec_file) %>
+      <%= link_to spec_file, opal_spec_path(pattern: spec_file) %>
     </li>
   <% end %>
 </ul>
+
+
+<%= javascript_include_tag opal_spec_files_path(pattern: pattern) %>

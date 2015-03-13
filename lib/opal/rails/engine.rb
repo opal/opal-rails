@@ -45,8 +45,8 @@ module Opal
             mount maps_app => maps_prefix
           end
 
-          get '/opal_spec' => 'opal_spec#run'
-          get '/opal_spec_files/*path' => 'opal_spec#file'
+          get '/opal_spec'       => 'opal_spec#run',  as: :opal_spec
+          get '/opal_spec_files' => 'opal_spec#file', as: :opal_spec_files
         end
       end
 
