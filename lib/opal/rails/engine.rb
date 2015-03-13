@@ -36,7 +36,7 @@ module Opal
         end
 
         app.routes.prepend do
-          if Opal::Processor.source_map_enabled
+          if Opal::Processor.source_map_enabled && config.assets.compile
             prefix = app.config.assets.prefix
             maps_app = Opal::SourceMapServer.new(app.assets, prefix)
             mount Rack::Cascade.new([maps_app, app.assets]) => prefix
