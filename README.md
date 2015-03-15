@@ -55,13 +55,13 @@ Now ships with a patch to sprockets cache key to include processor version that 
 
 ### Asset Pipeline
 
-You can rename `app/assets/application.js` to `application.js.rb`. Even if not necessary, it is recommended to change Sprockets' `//= require` statements to Ruby' `require` methods.
+You can rename `app/assets/javascripts/application.js` to `application.js.rb`. Even if not necessary, it is recommended to change Sprockets' `//= require` statements to Ruby' `require` methods.
 Sprockets' `//= require` statements won't be known by the opal builder and therefore you can end up adding something twice.
 
 Both of the following examples would work:
 
 ```js
-# app/assets/application.js.rb
+# app/assets/javascripts/application.js.rb
 
 //= require opal
 //= require opal_ujs
@@ -70,7 +70,7 @@ Both of the following examples would work:
 ```
 
 ```ruby
-# app/assets/application.js.rb
+# app/assets/javascripts/application.js.rb
 
 require 'opal'
 require 'opal_ujs'
