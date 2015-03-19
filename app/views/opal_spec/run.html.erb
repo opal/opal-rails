@@ -1,10 +1,10 @@
+<% if pattern.present? %>
+  <%= link_to 'All specs', opal_spec_path %>
+<% end %>
+
 <h2>Running:</h2>
-
+<% raise controller.send(:builder).spec_files.inspect %>
 <ul>
-  <% if pattern.present? %>
-    <li><%= link_to 'All specs', opal_spec_path %></li>
-  <% end %>
-
   <% spec_files.each do |spec_file| %>
     <li>
       <% spec_file = clean_spec_path(spec_file) %>
