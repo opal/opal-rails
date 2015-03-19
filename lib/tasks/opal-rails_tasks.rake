@@ -1,28 +1,28 @@
 require 'opal/rspec/rake_task'
 
 Opal::RSpec::RakeTask.new('opal:spec' => :environment) do |server|
-  require 'tempfile'
+  require 'opal/rails/spec_builder'
+  pattern = ENV['PATTERN'] || nil
 
-  asset_paths = Opal.paths + Rails.configuration.assets.paths.to_a
-  tempfile = Tempfile.new(['opal-rspec', '.js.rb'])
+  builder = Opal::Rails::SpecBuilder.new(
+    spec_location: Rails.application.config.opal.spec_location,
+    sprockets: Rails.application.config.assets,
+    pattern: pattern,
+  )
 
   server.sprockets.clear_paths
-  asset_paths << File.dirname(tempfile.path)
-  asset_paths << Rails.application.config.opal.spec_location
-  server.main = File.basename(tempfile.path, '.js.rb')
+  builder.paths.each { |path| server.append_path path }
 
-  asset_paths.each { |path| server.append_path path }
+  # require 'tempfile'
+  # tempfile = Tempfile.new(['opal-rspec', '.js.rb'])
+  # tempfile.puts builder.main_code
+  # tempfile.close
+  # server.main = File.basename(tempfile.path, '.js.rb')
+  # server.append_path File.dirname(tempfile.path)
 
-  required_assets = ['opal']
-  required_assets << 'opal-rspec-runner'
-
-  asset_paths.each do |path|
-    Dir["#{path}/spec/**_spec.js.{opal,rb}"].each do |spec|
-      spec = spec[path.size+1..-1] # +1 is for the trailing slash
-      required_assets << spec
-    end
-  end
-
-  required_assets.each { |a| tempfile.puts "require #{a.inspect}" }
-  tempfile.close
+  spec_file = Rails.root.join('tmp/opal_spec.rb')
+  server.append_path spec_file.dirname.to_s
+  spec_file.open('w') { |f| f << builder.main_code }
+  main = spec_file.basename.to_s.gsub(/\.rb$/, '')
+  server.main = main
 end
