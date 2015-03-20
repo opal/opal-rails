@@ -32,15 +32,15 @@ module Opal
       end
 
       def main_code(files = spec_files)
-        main_code = []
-        main_code << 'require "opal"'
-        main_code << 'require "opal-rspec"'
-        files.each do |file|
-          file = clean_spec_path(file)
-          main_code << %Q{require #{file.inspect}}
-        end
-        main_code << 'Opal::RSpec::Runner.autorun'
-        main_code.join("\n")
+        requires(files).map { |file| "require #{file.inspect}\n" }.join + boot_code
+      end
+
+      def requires(files)
+        ['opal', 'opal-rspec', *files.map{|f| clean_spec_path(f)}]
+      end
+
+      def boot_code
+        'Opal::RSpec::Runner.autorun'
       end
 
       def spec_files
