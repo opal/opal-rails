@@ -11,8 +11,8 @@ module Opal
       attr_reader :sprockets, :pattern, :spec_location, :root
 
       def to_s
-        builder.build_str main_code, 'opal_spec.rb'
-        builder.to_s
+        builder.build_str main_code, 'opal_spec'
+        builder.to_s + 'Opal.load("opal_spec");'
       end
 
       def builder
