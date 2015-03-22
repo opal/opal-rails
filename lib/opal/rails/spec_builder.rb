@@ -28,7 +28,7 @@ module Opal
       end
 
       def paths
-        Opal.paths + sprockets.paths + [spec_location]
+        [spec_location] + Opal.paths + sprockets.paths
       end
 
       def main_code(files = spec_files)
