@@ -5,14 +5,16 @@ module OpalHelper
     javascript_tag js_code
   end
 
-  def spec_include_tag(*sources)
-    options = sources.extract_options!.stringify_keys
-    path_options = options.extract!('protocol', 'extname').symbolize_keys
-    sources.uniq.map { |source|
-      tag_options = {
-        "src" => "/opal_spec_files/#{source}"
-      }.merge!(options)
-      content_tag(:script, "", tag_options)
-    }.join("\n").html_safe
+  def javascript_include_tag(*sources)
+    sources_copy = sources.dup.tap(&:extract_options!)
+    sprockets = Rails.application.assets
+
+    script_tags = super
+
+    sources_copy.map do |source|
+      loading_code = Opal::Processor.load_asset_code(sprockets, source)
+      script_tags << javascript_tag(loading_code)
+    end
+    script_tags
   end
 end
