@@ -3,7 +3,7 @@ module Opal
     class SpecBuilder
       def initialize(options)
         @root = options.fetch(:root) { ::Rails.root }
-        @pattern = options.fetch(:pattern, nil)
+        @pattern = options[:pattern] || '**/*_spec'
         @sprockets = options.fetch(:sprockets)
         @spec_location = options.fetch(:spec_location)
       end
@@ -31,8 +31,8 @@ module Opal
         [spec_location] + Opal.paths + sprockets.paths
       end
 
-      def main_code(files = spec_files)
-        requires(files).map { |file| "require #{file.inspect}\n" }.join + boot_code
+      def main_code
+        requires(spec_files).map { |file| "require #{file.inspect}\n" }.join + boot_code
       end
 
       def requires(files)
@@ -44,19 +44,10 @@ module Opal
       end
 
       def spec_files
-        @spec_files ||= some_spec_files || all_spec_files
+        @spec_files ||= pattern.split(':').map { |path| spec_files_for_glob(path) }.flatten
       end
 
-      def some_spec_files
-        return if pattern.blank?
-        pattern.split(':').map { |path| spec_files_for_glob(path) }.flatten
-      end
-
-      def all_spec_files
-        spec_files_for_glob '**/*_spec'
-      end
-
-      def spec_files_for_glob glob = '**'
+      def spec_files_for_glob(glob)
         Dir[root.join("#{spec_location}/#{glob}{,.js}.{rb,opal}")]
       end
 
