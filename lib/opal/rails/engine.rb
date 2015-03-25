@@ -21,9 +21,13 @@ module Opal
       end
 
       initializer 'opal.asset_paths', :after => 'sprockets.environment', :group => :all do |app|
+        app.assets.append_path app.root.join('tmp/opal_spec').to_s
+        app.assets.append_path app.root.join(app.config.opal.spec_location).to_s
         Opal.paths.each do |path|
           app.assets.append_path path
         end
+
+        app.config.assets.precompile += %w[opal_spec_runner.js]
       end
 
       config.after_initialize do |app|

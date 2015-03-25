@@ -1,13 +1,14 @@
 require 'opal/rails/spec_builder'
+require 'fileutils'
+require 'pathname'
 
 class OpalSpecController < ActionController::Base
   helper_method :spec_files, :pattern, :clean_spec_path
 
   def run
-    respond_to do |format|
-      format.html
-      format.js { render js: builder.to_s }
-    end
+    runner = Rails.root.join('tmp/opal_spec/opal_spec_runner.js.rb')
+    runner.dirname.mkpath
+    runner.open('w') { |f| f << builder.main_code }
   end
 
 
