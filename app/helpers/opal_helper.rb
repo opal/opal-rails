@@ -13,7 +13,7 @@ module OpalHelper
 
     sources_copy.map do |source|
       loading_code = Opal::Processor.load_asset_code(sprockets, source)
-      script_tags << javascript_tag(loading_code)
+      script_tags << javascript_tag(loading_code) if loading_code.present?
     end
     script_tags
   end
