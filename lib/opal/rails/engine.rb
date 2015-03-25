@@ -10,6 +10,7 @@ module Opal
       config.opal = ActiveSupport::OrderedOptions.new
       # new default location, override-able in a Rails initializer
       config.opal.spec_location = "spec-opal"
+      config.opal.dynamic_require_severity = :ignore
 
       # Cache eager_load_paths now, otherwise the assets dir is added
       # and its .rb files are eagerly loaded.
