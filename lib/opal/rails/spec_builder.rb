@@ -1,3 +1,5 @@
+require 'digest'
+
 module Opal
   module Rails
     class SpecBuilder
@@ -28,15 +30,36 @@ module Opal
       end
 
       def paths
-        [spec_location] + Opal.paths + sprockets.paths
+        [
+          root.join(spec_location).to_s,
+          runner_dir.to_s,
+          *Opal.paths,
+          *sprockets.paths,
+        ]
+      end
+
+      def self.runner_dir(root)
+        root.join('tmp/opal_spec')
+      end
+
+      def runner_dir
+        self.class.runner_dir(root)
       end
 
       def main_code
-        requires(spec_files).map { |file| "require #{file.inspect}\n" }.join + boot_code
+        requires.map { |file| "require #{file.inspect}\n" }.join + boot_code
       end
 
-      def requires(files)
-        ['opal', 'opal-rspec', *files.map{|f| clean_spec_path(f)}]
+      def runner_pathname
+        @runner_pathname ||= runner_dir.join("opal_spec_runner_#{digest}.js.rb")
+      end
+
+      def digest
+        Digest::SHA1.new.update(requires.join).to_s
+      end
+
+      def requires
+        ['opal', 'opal-rspec', *spec_files.map{|f| clean_spec_path(f)}]
       end
 
       def boot_code
@@ -48,7 +71,7 @@ module Opal
       end
 
       def spec_files_for_glob(glob)
-        Dir[root.join("#{spec_location}/#{glob}{,.js}.{rb,opal}")]
+        Dir[root.join("#{spec_location}/#{glob}{,.js}.{rb,opal}").to_s]
       end
 
       def clean_spec_path(path)

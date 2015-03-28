@@ -1,5 +1,7 @@
 require 'opal/rspec/rake_task'
 
+Thread.abort_on_exception = true
+
 Opal::RSpec::RakeTask.new('opal:spec' => :environment) do |server|
   require 'opal/rails/spec_builder'
   pattern = ENV['PATTERN'] || nil
@@ -10,19 +12,12 @@ Opal::RSpec::RakeTask.new('opal:spec' => :environment) do |server|
     pattern: pattern,
   )
 
+  runner = builder.runner_pathname
+  runner.dirname.mkpath
+  runner.open('w') { |f| f << builder.main_code }
+
   server.sprockets.clear_paths
   builder.paths.each { |path| server.append_path path }
 
-  # require 'tempfile'
-  # tempfile = Tempfile.new(['opal-rspec', '.js.rb'])
-  # tempfile.puts builder.main_code
-  # tempfile.close
-  # server.main = File.basename(tempfile.path, '.js.rb')
-  # server.append_path File.dirname(tempfile.path)
-
-  spec_file = Rails.root.join('tmp/opal_spec.rb')
-  server.append_path spec_file.dirname.to_s
-  spec_file.open('w') { |f| f << builder.main_code }
-  main = spec_file.basename.to_s.gsub(/\.rb$/, '')
-  server.main = main
+  server.main = runner.basename.to_s.gsub(/(\.js)?\.rb$/, '')
 end

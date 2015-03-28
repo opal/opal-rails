@@ -1,6 +1,7 @@
 require 'rails'
 require 'opal/sprockets/server'
 require 'opal/sprockets/processor'
+require 'opal/rails/spec_builder'
 
 module Opal
   module Rails
@@ -22,7 +23,7 @@ module Opal
 
       initializer 'opal.asset_paths', :after => 'sprockets.environment', :group => :all do |app|
         spec_location = app.root.join(app.config.opal.spec_location).to_s
-        runner_dir = app.root.join('tmp/opal_spec')
+        runner_dir = ::Opal::Rails::SpecBuilder.runner_dir(app.root)
         runner_dir.mkpath
 
         app.assets.append_path runner_dir.to_s
