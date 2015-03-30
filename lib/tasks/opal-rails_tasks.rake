@@ -1,7 +1,5 @@
 require 'opal/rspec/rake_task'
 
-Thread.abort_on_exception = true
-
 Opal::RSpec::RakeTask.new('opal:spec' => :environment) do |server|
   require 'opal/rails/spec_builder'
   pattern = ENV['PATTERN'] || nil
