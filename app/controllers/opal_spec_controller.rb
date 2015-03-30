@@ -6,9 +6,13 @@ class OpalSpecController < ActionController::Base
   helper_method :spec_files, :pattern, :clean_spec_path, :runner_name
 
   def run
+    logical_path = builder.runner_logical_path+'.js'
+    sprockets = Rails.application.config.assets
     runner = builder.runner_pathname
+
     runner.open('w') { |f| f << builder.main_code }
-    Rails.application.config.assets.precompile += [builder.runner_logical_path+'.js']
+    sprockets.precompile += [logical_path]
+    sleep 0.1 unless sprockets[logical_path]
   end
 
 
