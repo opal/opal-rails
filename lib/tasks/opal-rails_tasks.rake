@@ -17,5 +17,10 @@ Opal::RSpec::RakeTask.new('opal:spec' => :environment) do |server|
   server.sprockets.clear_paths
   builder.paths.each { |path| server.append_path path }
 
-  server.main = runner.basename.to_s.gsub(/(\.js)?\.rb$/, '')
+  main_name = runner.basename.to_s.gsub(/(\.js)?\.rb$/, '')
+
+  # Sometimes seems that sprockets will need a moment to pickup the new file
+  sleep 0.1 unless server.sprockets[main_name]
+
+  server.main = main_name
 end
