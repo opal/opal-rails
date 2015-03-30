@@ -32,7 +32,7 @@ module Opal
           app.assets.append_path path
         end
 
-        app.config.assets.precompile += %w[opal_spec_runner.js]
+        app.config.assets.precompile << "#{runner_dir}/*.js"
       end
 
       config.after_initialize do |app|
