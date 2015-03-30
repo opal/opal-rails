@@ -51,11 +51,17 @@ module Opal
       end
 
       def runner_pathname
-        @runner_pathname ||= runner_dir.join("opal_spec_runner_#{digest}.js.rb")
+        runner_dir.join("#{runner_logical_path}.js.rb")
+      end
+
+      def runner_logical_path
+        "opal_spec_runner_#{digest}"
       end
 
       def digest
-        Digest::SHA1.new.update(requires.join).to_s
+        # The digest is cached as it shouldn't change
+        # for a given builder instance
+        @digest ||= Digest::SHA1.new.update(requires.join).to_s
       end
 
       def requires

@@ -7,8 +7,8 @@ class OpalSpecController < ActionController::Base
 
   def run
     runner = builder.runner_pathname
-    runner.dirname.mkpath
     runner.open('w') { |f| f << builder.main_code }
+    Rails.application.config.assets.precompile += [builder.runner_logical_path+'.js']
   end
 
 
