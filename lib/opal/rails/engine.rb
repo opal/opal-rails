@@ -31,8 +31,6 @@ module Opal
         Opal.paths.each do |path|
           app.assets.append_path path
         end
-
-        app.config.assets.precompile << %r{#{Regexp.escape runner_dir.to_s}/.*\.js}
       end
 
       config.after_initialize do |app|

@@ -4,6 +4,7 @@ require 'pathname'
 
 class OpalSpecController < ActionController::Base
   helper_method :spec_files, :pattern, :clean_spec_path, :runner_name
+  helper_method :check_errors_for
 
   def run
     logical_path = builder.runner_logical_path+'.js'
@@ -17,6 +18,12 @@ class OpalSpecController < ActionController::Base
 
 
   private
+
+  # This will deactivate the requirement to precompile assets in this controller
+  # as specs shouldn't go to production anyway.
+  def check_errors_for(*)
+    #noop
+  end
 
   def pattern
     params[:pattern]
