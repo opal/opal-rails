@@ -12,7 +12,6 @@ class OpalSpecController < ActionController::Base
     runner = builder.runner_pathname
 
     runner.open('w') { |f| f << builder.main_code }
-    sprockets.precompile += [logical_path]
     sleep 0.1 unless sprockets[logical_path]
   end
 
