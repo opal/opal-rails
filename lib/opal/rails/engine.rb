@@ -9,6 +9,9 @@ module Opal
       config.app_generators.javascript_engine :opal
 
       config.opal = ActiveSupport::OrderedOptions.new
+
+      config.opal.enable_specs = true
+
       # new default location, override-able in a Rails initializer
       config.opal.spec_location = "spec-opal"
       config.opal.dynamic_require_severity = :ignore
@@ -22,12 +25,15 @@ module Opal
       end
 
       initializer 'opal.asset_paths', :after => 'sprockets.environment', :group => :all do |app|
-        spec_location = app.root.join(app.config.opal.spec_location).to_s
-        runner_dir = ::Opal::Rails::SpecBuilder.runner_dir(app.root)
-        runner_dir.mkpath
+        if app.config.opal.enable_specs
+          spec_location = app.root.join(app.config.opal.spec_location).to_s
+          runner_dir = ::Opal::Rails::SpecBuilder.runner_dir(app.root)
+          runner_dir.mkpath
 
-        app.assets.append_path runner_dir.to_s
-        app.assets.append_path spec_location
+          app.assets.append_path runner_dir.to_s
+          app.assets.append_path spec_location
+        end
+
         Opal.paths.each do |path|
           app.assets.append_path path
         end
@@ -53,7 +59,9 @@ module Opal
             mount maps_app => maps_prefix
           end
 
-          get '/opal_spec' => 'opal_spec#run', as: :opal_spec
+          if app.config.opal.enable_specs
+            get '/opal_spec' => 'opal_spec#run', as: :opal_spec
+          end
         end
       end
 
