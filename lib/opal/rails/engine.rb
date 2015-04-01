@@ -40,8 +40,7 @@ module Opal
             maps_app = Opal::SourceMapServer.new(app.assets, prefix)
             mount Rack::Cascade.new([maps_app, app.assets]) => prefix
           end
-
-          get '/opal_spec' => 'opal_spec#run'
+          get '/opal_spec' => 'opal_spec#run' unless ::Rails.env.production?
         end
       end
 
