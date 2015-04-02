@@ -1,45 +1,44 @@
+require 'opal/rails/spec_builder'
+require 'fileutils'
+require 'pathname'
+
 class OpalSpecController < ActionController::Base
-  helper_method :spec_files
+  helper_method :spec_files, :pattern, :clean_spec_path, :runner_name
+  helper_method :check_errors_for
 
   def run
+    logical_path = builder.runner_logical_path+'.js'
+    sprockets = Rails.application.config.assets
+    runner = builder.runner_pathname
+
+    runner.open('w') { |f| f << builder.main_code }
+    sleep 0.1 unless sprockets[logical_path]
   end
 
-  def file
-    spec_file = Dir["#{spec_location}/#{params[:path]}*.{rb,opal}"].first
-    Opal.paths.concat Rails.application.config.assets.paths
-    builder = Opal::Builder.new
-    file = File.new spec_file
-    builder.build_str file.read, spec_file
-
-    render js: builder.to_s
-  end
 
   private
 
-  def spec_files
-    @spec_files ||= some_spec_files || all_spec_files
+  # This will deactivate the requirement to precompile assets in this controller
+  # as specs shouldn't go to production anyway.
+  def check_errors_for(*)
+    #noop
   end
 
-  def specs_param
+  def pattern
     params[:pattern]
   end
 
-  def some_spec_files
-    return if specs_param.blank?
-    specs_param.split(':').map { |path| spec_files_for_glob(path) }.flatten
+  def builder
+    @builder ||= Opal::Rails::SpecBuilder.new(
+      spec_location: Rails.application.config.opal.spec_location,
+      sprockets: Rails.application.config.assets,
+      pattern: pattern,
+    )
   end
 
-  def all_spec_files
-    spec_files_for_glob '**/*_spec{.js,}'
+  def runner_name
+    builder.runner_pathname.basename.to_s.gsub(/(\.js)?\.rb$/, '')
   end
 
-  def spec_files_for_glob glob = '**'
-    Dir[Rails.root.join("#{spec_location}/#{glob}.{rb,opal}")].map do |path|
-      path.split("#{spec_location}/").flatten.last.gsub(/(\.rb|\.opal)/, '')
-    end.uniq
-  end
-
-  def spec_location
-    Rails.application.config.opal.spec_location
-  end
+  delegate :spec_files, :clean_spec_path, to: :builder
 end
