@@ -1,7 +1,9 @@
 module OpalHelper
-  def opal_tag(&block)
-    opal_code = capture(&block)
-    js_code = Opal.compile(opal_code)
+  def opal_tag(opal_code = nil, &block)
+    opal_code ||= capture(&block)
+    compiler_options = Opal::Processor.compiler_options.merge(requirable: false)
+    compiler = Opal::Compiler.new(opal_code, compiler_options)
+    js_code = compiler.compile
     javascript_tag js_code
   end
 
