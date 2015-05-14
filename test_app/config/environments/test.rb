@@ -34,4 +34,9 @@ TestApp::Application.configure do
   config.active_support.deprecation = :stderr
 
   config.eager_load = false if Rails.version.to_i == 4
+
+
+  # Allow sourcemaps to be compiled in test mode
+  config.assets.debug = true
+  config.assets.compile = true
 end
