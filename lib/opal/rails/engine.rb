@@ -51,7 +51,7 @@ module Opal
         end
 
         app.routes.prepend do
-          if Opal::Processor.source_map_enabled && config.assets.compile
+          if Opal::Processor.source_map_enabled && config.assets.compile && config.assets.debug
             maps_prefix = '/__OPAL_SOURCE_MAPS__'
             maps_app    = Opal::SourceMapServer.new(app.assets, maps_prefix)
 
