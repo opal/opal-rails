@@ -7,12 +7,11 @@ class OpalSpecController < ActionController::Base
   helper_method :check_errors_for
 
   def run
-    logical_path = builder.runner_logical_path+'.js'
+    logical_path = builder.runner_logical_path
     sprockets = Rails.application.config.assets
     runner = builder.runner_pathname
-
-    runner.open('w') { |f| f << builder.main_code }
-    sleep 0.1 unless sprockets[logical_path]
+    runner.open('w') { |f| f << builder.main_code; f.fsync }
+    sprockets[logical_path]
   end
 
 
