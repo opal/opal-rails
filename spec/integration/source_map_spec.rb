@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'opal/source_map'
 
 describe Opal::SourceMap do
-  let(:js_asset_path) { '/assets/source_map_example.js' }
+  let(:js_asset_path) { '/assets/source_map_example.self.js' }
 
   before do
     expect(Rails.application.config.opal.source_map_enabled).to be_truthy
@@ -32,8 +32,8 @@ describe Opal::SourceMap do
 
   def extract_map_path response
     source_map_regexp = %r{^//[@#] sourceMappingURL=([^\n]+)}
-    header_map_path = response.headers['X-SourceMap']
-    comment_map_path = response.body.scan(source_map_regexp).flatten.first.to_s.strip
+    header_map_path = response.headers['X-SourceMap'].presence
+    comment_map_path = response.body.scan(source_map_regexp).flatten.first.to_s.strip.presence
 
     header_map_path or comment_map_path
   end
