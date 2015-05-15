@@ -8,7 +8,7 @@ class OpalSpecController < ActionController::Base
 
   def run
     logical_path = builder.runner_logical_path
-    sprockets = Rails.application.config.assets
+    sprockets = Rails.application.assets
     runner = builder.runner_pathname
     runner.open('w') do |file|
       file << builder.main_code
