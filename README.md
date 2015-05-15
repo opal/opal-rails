@@ -1,7 +1,7 @@
 # Opal Rails
 
-[![Build Status](https://secure.travis-ci.org/elia/opal-rails.svg)](http://travis-ci.org/elia/opal-rails)
-[![Code Climate](https://img.shields.io/codeclimate/github/elia/opal-rails.svg)](https://codeclimate.com/github/elia/opal-rails)
+[![Build Status](https://secure.travis-ci.org/opal/opal-rails.svg)](http://travis-ci.org/opal/opal-rails)
+[![Code Climate](https://img.shields.io/codeclimate/github/opal/opal-rails.svg)](https://codeclimate.com/github/opal/opal-rails)
 [![Gem Version](https://badge.fury.io/rb/opal-rails.svg)](http://badge.fury.io/rb/opal-rails)
 ![fun guaranteed](https://img.shields.io/badge/fun-guaranteed-brightgreen.svg)
 ![web scale](http://img.shields.io/badge/webscale-over%209000-green.svg)
