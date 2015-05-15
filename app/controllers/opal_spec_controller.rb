@@ -10,8 +10,14 @@ class OpalSpecController < ActionController::Base
     logical_path = builder.runner_logical_path
     sprockets = Rails.application.config.assets
     runner = builder.runner_pathname
-    runner.open('w') { |f| f << builder.main_code; f.fsync }
-    sprockets[logical_path]
+    runner.open('w') do |file|
+      file << builder.main_code
+      file.fsync
+    end
+    written_to_disk = runner.read
+    unless written_to_disk == builder.main_code
+      raise "Something's wrong: written_to_disk: #{written_to_disk.inspect}"
+    end
   end
 
 
