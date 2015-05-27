@@ -66,7 +66,7 @@ Sprockets' `//= require` statements won't be known by the opal builder and there
 
 For Opal 0.7 and below, the following example should work:
 
-```js
+```ruby
 # app/assets/javascripts/application.js.rb
 
 #= require opal
