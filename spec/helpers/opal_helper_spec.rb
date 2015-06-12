@@ -4,7 +4,7 @@ describe OpalHelper do
   subject(:helper) { double.extend described_class }
 
   describe '#opal_tag' do
-    it 'does something' do
+    it 'compiles to js' do
       allow(helper).to receive(:javascript_tag) { |code| code }
       ruby_code = 'puts 5'
 
