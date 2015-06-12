@@ -12,4 +12,29 @@
   <% end %>
 </ul>
 
-<%= javascript_include_tag runner_name, debug: true %>
+<%# The list of all asset dependency %>
+<% all_specs = [] %>
+
+<%# Track root assets that will need to be bootstrapped %>
+<% root_assets = {} %>
+
+<%# Collect all assets with their dependencies %>
+<% builder.clean_spec_files.each do |require_path| %>
+  <% asset = lookup_asset_for_path(require_path, type: :javascript) %>
+  <% dependency_paths = asset.to_a.map { |a| a.logical_path } %>
+  <% all_specs += dependency_paths  %>
+  <% root_assets[dependency_paths.last] = require_path %>
+<% end %>
+
+<%# We'll ececute the boot code all at once in the end %>
+<% load_code = [] %>
+
+<%# Add include tags and boot code, we use #uniq as we don't want to source the same asset twice %>
+<% all_specs.uniq.each do |asset_path| %>
+  <%- root_asset = root_assets[asset_path] -%>
+  <%= javascript_include_tag asset_path, skip_opal_loader: true %>
+  <%- load_code << javascript_tag(Opal::Processor.load_asset_code(Rails.application.assets, root_asset)) if root_asset -%>
+<% end %>
+
+<%# Boot! %>
+<%= load_code.join.html_safe %>
