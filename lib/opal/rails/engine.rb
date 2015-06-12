@@ -10,7 +10,7 @@ module Opal
 
       config.opal = ActiveSupport::OrderedOptions.new
 
-      config.opal.enable_specs = true
+      config.opal.enable_specs = ::Rails.env.development? || ::Rails.env.test?
 
       # new default location, override-able in a Rails initializer
       config.opal.spec_location = 'spec-opal'
