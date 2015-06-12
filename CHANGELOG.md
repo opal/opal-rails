@@ -1,5 +1,8 @@
 # edge
 
+* All specs now need to require "opal" and "opal-rspec" explicitly
+
+
 # 0.6.1 2013-11-05
 
 * Fix the rake task, now uses `opal-rspec` too

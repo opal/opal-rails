@@ -1,4 +1,5 @@
 require 'opal'
+require 'spec_helper'
 
 describe 'a running spec' do
   it 'runs successfully' do
