@@ -65,7 +65,11 @@ module Opal
       end
 
       def requires
-        ['opal', 'opal-rspec', *spec_files.map{|f| clean_spec_path(f)}]
+        ['opal', 'opal-rspec', *clean_spec_files]
+      end
+
+      def clean_spec_files
+        spec_files.map{|f| clean_spec_path(f)}
       end
 
       def boot_code
