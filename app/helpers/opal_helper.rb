@@ -8,15 +8,18 @@ module OpalHelper
   end
 
   def javascript_include_tag(*sources)
-    sources_copy = sources.dup.tap(&:extract_options!)
+    options = sources.extract_options!
     sprockets = Rails.application.assets
+    skip_loader = options.delete(:skip_opal_loader)
+    script_tags = super(*sources, options)
 
-    script_tags = super
+    return script_tags if skip_loader
 
-    sources_copy.map do |source|
+    sources.each do |source|
       loading_code = Opal::Processor.load_asset_code(sprockets, source)
       script_tags << javascript_tag(loading_code) if loading_code.present?
     end
+
     script_tags
   end
 end
