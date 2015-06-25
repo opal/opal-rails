@@ -1,7 +1,7 @@
 # edge
 
 * Opal 0.8
-* Default spec location is not `spec-opal`, this will allow opal specs to be "alphabetically" near other specs.
+* Default spec location is now `spec-opal`, this will allow opal specs to be "alphabetically" near other specs.
 * Don't run the sourcemap server unless sprockets is active and sourcemaps enabled and sprockets is in debug mode
 * Align spec compilation done via `rake opal:spec` vs. in the browser at `/opal_spec`
 * Dynamic require severity now defaults to `:ignore`
