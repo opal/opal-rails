@@ -38,6 +38,7 @@ module Opal
         Opal.paths.each do |path|
           app.assets.append_path path
         end
+        app.assets.append_path "#{app.root}/#{config.opal.spec_config}"
       end
 
       config.after_initialize do |app|
