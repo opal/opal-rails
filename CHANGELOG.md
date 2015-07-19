@@ -1,4 +1,4 @@
-# edge
+# 0.8.0 2015-07-20
 
 * Opal 0.8
 * Default spec location is now `spec-opal`, this will allow opal specs to be "alphabetically" near other specs.
