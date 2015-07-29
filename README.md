@@ -168,6 +168,8 @@ and then a spec folder with you specs!
 
 ```ruby
 # spec-opal/example_spec.js.rb
+require 'opal'
+require 'opal-rspec'
 
 describe 'a spec' do
   it 'has successful examples' do
@@ -177,6 +179,27 @@ end
 ```
 
 Then visit `/opal_spec` from your app and **reload at will** or use the command line with `rake opal:spec`.
+
+Note that `opal` and `opal-rspec` need to be required explicitly in the spec file or in a `spec_helper.rb` as follows:
+
+```ruby
+# spec_helper.rb
+require 'opal'
+require 'opal-rspec'
+```
+
+```ruby
+# spec-opal/example_spec.js.rb
+require 'spec_helper'
+
+describe 'a spec' do
+  it 'has successful examples' do
+    'I run'.should =~ /run/
+  end
+end
+```
+
+That is to allow having specs that make use of [`opal-minitest`](https://rubygems.org/gems/opal-minitest) or another testing library.
 
 #### CHANGE from versions pre 0.7.1
 
@@ -236,7 +259,7 @@ template.render(self)
 
 ## License
 
-© 2012-2014 Elia Schito
+© 2012-2015 Elia Schito
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal

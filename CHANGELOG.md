@@ -7,7 +7,7 @@
 * Dynamic require severity now defaults to `:ignore`
 * Make `#opal_tag` helper respect provided options + specs
 * Sprockets bootstrap code can be skipped from `javascript_include_tag` passing `skip_opal_loader: true`
-* All specs now need to require "opal" and "opal-rspec" explicitly
+* All specs now need to `require "opal"` and `require "opal-rspec"` explicitly
 
 
 # 0.7.0 2015-02-02
