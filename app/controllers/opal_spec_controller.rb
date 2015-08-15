@@ -12,7 +12,7 @@ class OpalSpecController < ActionController::Base
     end.flatten.uniq
     @spec_files = builder.spec_files
     @using_pattern = pattern != nil
-    @code = builder.main_code
+    @main_code = builder.main_code
   end
 
   private

@@ -14,6 +14,9 @@ module Opal
 
       # new default location, override-able in a Rails initializer
       config.opal.spec_location = 'spec-opal'
+      
+      # Could be overridden to use something else besides rspec
+      config.opal.test_runner = 'Opal::RSpec::Runner.autorun'
 
       config.opal.dynamic_require_severity = :ignore
 

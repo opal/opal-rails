@@ -55,7 +55,7 @@ module Opal
       end
 
       def runner_logical_path
-        "opal_spec_runner_#{digest}"
+        Rails.application.config.opal.test_runner
       end
 
       def digest
@@ -65,7 +65,7 @@ module Opal
       end
 
       def requires
-        ['opal', 'opal-rspec', *clean_spec_files]
+        clean_spec_files
       end
 
       def clean_spec_files
