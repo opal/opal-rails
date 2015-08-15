@@ -55,7 +55,7 @@ module Opal
       end
 
       def runner_logical_path
-        Rails.application.config.opal.test_runner
+        "opal_spec_runner_#{digest}"
       end
 
       def digest
@@ -73,7 +73,7 @@ module Opal
       end
 
       def boot_code
-        'Opal::RSpec::Runner.autorun'
+        ::Rails.configuration.opal.test_runner
       end
 
       def spec_files
