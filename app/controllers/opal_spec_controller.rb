@@ -6,8 +6,9 @@ class OpalSpecController < ActionController::Base
   helper_method :clean_spec_path
   
   def run
+    rails_assets = Rails.application.assets
     @assets = builder.clean_spec_files.map do |require_path|
-      asset = get_asset require_path
+      asset = rails_assets[require_path]
       asset.to_a.map { |a| a.logical_path }      
     end.flatten.uniq
     @spec_files = builder.spec_files
@@ -15,11 +16,7 @@ class OpalSpecController < ActionController::Base
     @main_code = builder.main_code
   end
 
-  private
-  
-  def get_asset(path)
-    Rails.application.assets[path]
-  end
+  private 
   
   def pattern
     params[:pattern]
