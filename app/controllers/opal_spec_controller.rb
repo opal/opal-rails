@@ -2,22 +2,25 @@ require 'opal/rails/spec_builder'
 require 'fileutils'
 require 'pathname'
 
-class OpalSpecController < ActionController::Base
-  helper_method :spec_files, :pattern, :clean_spec_path, :runner_name
-  helper_method :check_errors_for, :builder
-
+class OpalSpecController < ActionController::Base  
+  helper_method :clean_spec_path
+  
   def run
+    @assets = builder.clean_spec_files.map do |require_path|
+      asset = get_asset require_path
+      asset.to_a.map { |a| a.logical_path }      
+    end.flatten.uniq
+    @spec_files = builder.spec_files
+    @using_pattern = pattern != nil
+    @code = builder.main_code
   end
-
 
   private
-
-  # This will deactivate the requirement to precompile assets in this controller
-  # as specs shouldn't go to production anyway.
-  def check_errors_for(*)
-    #noop
+  
+  def get_asset(path)
+    Rails.application.assets[path]
   end
-
+  
   def pattern
     params[:pattern]
   end
@@ -29,10 +32,6 @@ class OpalSpecController < ActionController::Base
       pattern: pattern,
     )
   end
-
-  def runner_name
-    builder.runner_pathname.basename.to_s.gsub(/(\.js)?\.rb$/, '')
-  end
-
-  delegate :spec_files, :clean_spec_path, to: :builder
+  
+  delegate :clean_spec_path, to: :builder
 end
