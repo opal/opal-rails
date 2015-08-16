@@ -7,16 +7,31 @@ class OpalSpecController < ActionController::Base
   
   def run
     rails_assets = Rails.application.assets
-    @assets = builder.clean_spec_files.map do |require_path|
-      asset = rails_assets[require_path]
-      asset.to_a.map { |a| a.logical_path }      
-    end.flatten.uniq
+    if rollup_assets?
+      assets = ['opal'] + builder.clean_spec_files
+      @rolled_up = assets.map do |spec_file|
+        Rails.application.assets[spec_file].to_s
+      end.join("\n").html_safe
+    else
+      @assets = builder.clean_spec_files.map do |require_path|
+        asset = rails_assets[require_path]
+        asset.to_a.map { |a| a.logical_path }      
+      end.flatten.uniq      
+    end
     @spec_files = builder.spec_files
-    @using_pattern = pattern != nil
+    @pattern = pattern
     @main_code = builder.main_code
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
-  private 
+  private
+  
+  def rollup_assets?
+    Rails.configuration.assets.debug == false
+  end
   
   def pattern
     params[:pattern]

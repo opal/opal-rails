@@ -12,9 +12,13 @@
   <% end %>
 </ul>
 
-<% @assets.each do |asset| %>	
-	<%= javascript_include_tag asset, skip_opal_loader: true %>	
-<% end %>
+<% if @rolled_up %>
+	<%= javascript_include_tag opal_spec_path(pattern: @pattern), type: 'application/javascript' %>
+<% else
+		@assets.each do |asset| %>
+			<%= javascript_include_tag asset, skip_opal_loader: true %>	
+<%  end
+	 end %>
 
 <%# Boot! %>
 <%= opal_tag @main_code %>
