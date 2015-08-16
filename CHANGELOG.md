@@ -1,4 +1,4 @@
-# Edge
+# Edge (0.8.1)
 * Works with opal-rspec 0.4.3 and with >= 0.5.0beta2
 * Fixes autorun issue with 0.8.0
 * Put groundwork in place for other testing frameworks besides RSpec
