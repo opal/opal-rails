@@ -1,10 +1,11 @@
 require 'spec_helper'
 require 'opal/source_map'
 
-describe Opal::SourceMap do
+describe Opal::SourceMap do  
   let(:js_asset_path) { '/assets/source_map_example.self.js' }
 
   before do
+    skip 'Source maps currently not supported without asset debug' unless Rails.configuration.assets.debug
     expect(Rails.application.config.opal.source_map_enabled).to be_truthy
     expect(Rails.application.config.assets.compile).to be_truthy
     expect(Rails.application.config.assets.debug).to be_truthy unless Rails.env == 'test_asset_dbg_off'
