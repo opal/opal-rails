@@ -12,10 +12,11 @@ class OpalSpecController < ActionController::Base
       asset.to_a.map { |a| a.logical_path }      
     end.flatten.uniq
     
-    if rollup_assets?
+    if rollup_assets?      
       @rolled_up = @assets.map do |spec_file|
         Rails.application.assets[spec_file].to_s
-      end.join("\n").html_safe      
+      end.join("\n").html_safe
+      @digest = Digest::SHA1.new.update(@rolled_up).to_s
     end
     @spec_files = builder.spec_files
     @pattern = pattern
