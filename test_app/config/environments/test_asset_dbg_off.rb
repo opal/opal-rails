@@ -35,8 +35,10 @@ TestApp::Application.configure do
 
   config.eager_load = false if Rails.version.to_i == 4
 
-
   # Allow sourcemaps to be compiled in test mode
   config.assets.debug = false
   config.assets.compile = true
+  
+  # Turn this on explicitly since this environment is not called 'test'
+  config.opal.enable_specs = true
 end
