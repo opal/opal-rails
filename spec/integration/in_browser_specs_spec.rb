@@ -18,7 +18,8 @@ describe 'In-browser specs runner', js: true, type: :feature do
     expect(page).to have_content('1 examples, 0 failures')
     expect(page).to_not have_content('example_spec ')
     expect(page).to_not have_content('requires_opal_spec ')
-    expect(page).to have_content('subdirectory/other_spec ')    
+    expect(page).to have_content('subdirectory/other_spec ')
+    expect(page).to have_link 'All specs'
   end
 end
 
