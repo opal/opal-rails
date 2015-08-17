@@ -8,7 +8,7 @@ describe Opal::SourceMap do
     skip 'Source maps currently not supported without asset debug' unless Rails.configuration.assets.debug
     expect(Rails.application.config.opal.source_map_enabled).to be_truthy
     expect(Rails.application.config.assets.compile).to be_truthy
-    expect(Rails.application.config.assets.debug).to be_truthy unless Rails.env == 'test_asset_dbg_off'
+    expect(Rails.application.config.assets.debug).to be_truthy
     get js_asset_path
   end
 
