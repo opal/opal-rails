@@ -75,7 +75,7 @@ For Opal 0.7 and below, the following example should work:
 #= require_tree .
 ```
 
-For Opal 0.8 and above, you should be able to use the following syntax:
+For Opal 0.8 and above, you have to use `application.js.rb` with the following syntax:
 
 ```ruby
 # app/assets/javascripts/application.js.rb
@@ -84,6 +84,16 @@ require 'opal'
 require 'opal_ujs'
 require 'turbolinks'
 require_tree '.'
+```
+
+If you want to use `application.js`, you need to `load` the Opal modules(files) manually, e.g.:
+
+```
+// application.js
+//= require opal
+//= require greeter
+//= require_self
+Opal.load('greeter');
 ```
 
 As you see in the example above, Opal also gives you a Ruby equivalent of `//= require_tree`.
