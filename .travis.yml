@@ -11,10 +11,6 @@ rvm:
   - 2.0.0
   - 1.9.3
 
-gemfile:
-  - Gemfile
-  - gemfiles/rspec.0.5.gemfile
-
 before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
