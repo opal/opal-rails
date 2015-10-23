@@ -71,5 +71,7 @@ module TestApp
 
     # Disabled by default, we need it for tests
     config.opal.source_map_enabled = true
+    # since we're executing this from the parent directory (as in opal-rails) Rakefile, help opal-rspec find the root directory
+    config.opal.spec_location = File.expand_path('../../spec-opal', __FILE__)
   end
 end

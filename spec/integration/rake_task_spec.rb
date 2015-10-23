@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 describe 'Rake task' do
   around do |ex|
     Dir.chdir 'test_app' do
