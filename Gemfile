@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 gemspec
 
-gem 'capybara-webkit'
+gem 'capybara'
+gem 'selenium-webdriver'
 
 # gem 'opal',        path: '../opal'
 # gem 'opal-rspec',  path: '../opal-rspec'

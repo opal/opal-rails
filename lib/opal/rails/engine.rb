@@ -15,6 +15,9 @@ module Opal
       # new default location, override-able in a Rails initializer
       config.opal.spec_location = 'spec-opal'
 
+      # Could be overridden to use something else besides rspec
+      config.opal.test_runner = 'RSpec::Core::Runner.autorun'
+
       config.opal.dynamic_require_severity = :ignore
 
       # Cache eager_load_paths now, otherwise the assets dir is added
@@ -53,7 +56,7 @@ module Opal
         app.routes.prepend do
           if Opal::Processor.source_map_enabled && config.assets.compile && config.assets.debug
             maps_prefix = '/__OPAL_SOURCE_MAPS__'
-            maps_app    = Opal::SourceMapServer.new(app.assets, maps_prefix)
+            maps_app = Opal::SourceMapServer.new(app.assets, maps_prefix)
 
             ::Opal::Sprockets::SourceMapHeaderPatch.inject!(maps_prefix)
 

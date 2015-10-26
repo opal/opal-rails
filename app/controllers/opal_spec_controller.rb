@@ -2,22 +2,37 @@ require 'opal/rails/spec_builder'
 require 'fileutils'
 require 'pathname'
 
-class OpalSpecController < ActionController::Base
-  helper_method :spec_files, :pattern, :clean_spec_path, :runner_name
-  helper_method :check_errors_for, :builder
-
+class OpalSpecController < ActionController::Base  
+  helper_method :clean_spec_path
+  
   def run
+    rails_assets = Rails.application.assets
+    @assets = builder.clean_spec_files.map do |require_path|
+      asset = rails_assets[require_path]
+      asset.to_a.map { |a| a.logical_path }      
+    end.flatten.uniq
+    
+    if rollup_assets?      
+      @rolled_up = @assets.map do |spec_file|
+        Rails.application.assets[spec_file].to_s
+      end.join("\n").html_safe
+      @digest = Digest::SHA1.new.update(@rolled_up).to_s
+    end
+    @spec_files = builder.spec_files
+    @pattern = pattern
+    @main_code = builder.main_code
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
-
 
   private
-
-  # This will deactivate the requirement to precompile assets in this controller
-  # as specs shouldn't go to production anyway.
-  def check_errors_for(*)
-    #noop
+  
+  def rollup_assets?
+    Rails.configuration.assets.debug == false
   end
-
+  
   def pattern
     params[:pattern]
   end
@@ -29,10 +44,6 @@ class OpalSpecController < ActionController::Base
       pattern: pattern,
     )
   end
-
-  def runner_name
-    builder.runner_pathname.basename.to_s.gsub(/(\.js)?\.rb$/, '')
-  end
-
-  delegate :spec_files, :clean_spec_path, to: :builder
+  
+  delegate :clean_spec_path, to: :builder
 end

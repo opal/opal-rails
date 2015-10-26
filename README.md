@@ -43,6 +43,9 @@ module MyApp
     config.opal.enable_specs        = true
 
     config.opal.spec_location = 'spec-opal'
+		
+    # This is the default. At some point in the future, using another test_runner besides RSpec will be supported
+    config.opal.test_runner = 'Opal::RSpec::Runner.autorun'
   end
 end
 ```

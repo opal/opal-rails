@@ -1,3 +1,9 @@
+# Edge (0.8.1)
+* Works with opal-rspec 0.4.3 and with >= 0.5.0beta2
+* Fixes autorun issue with 0.8.0
+* Put groundwork in place for other testing frameworks besides RSpec
+* config.assets.debug = false, although source maps are not supported in this case, opal-rails will roll up source + test assets into 1 file when this setting is enabled (just like Rails+Sprockets will roll everything up into 'application.js')
+
 # 0.8.0 2015-07-20
 
 * Opal 0.8

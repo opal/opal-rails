@@ -65,7 +65,7 @@ module Opal
       end
 
       def requires
-        ['opal', 'opal-rspec', *clean_spec_files]
+        clean_spec_files
       end
 
       def clean_spec_files
@@ -73,7 +73,7 @@ module Opal
       end
 
       def boot_code
-        'Opal::RSpec::Runner.autorun'
+        ::Rails.configuration.opal.test_runner
       end
 
       def spec_files

@@ -10,7 +10,7 @@ require 'opal-rails'
 # RAILS
 
 # Configure Rails Environment
-ENV['RAILS_ENV'] = 'test'
+puts "rails env is #{ENV['RAILS_ENV']}"
 
 require File.expand_path('test_app/config/environment.rb', root_dir)
 
