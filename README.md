@@ -32,7 +32,9 @@ Add your configuration in `config/application.rb` with the following contents:
 ```ruby
 module MyApp
   class Application < Rails::Application
-    # These are the available options with their default value:
+    # These are the available options with their default values
+
+    # Compiler options
     config.opal.method_missing      = true
     config.opal.optimized_operators = true
     config.opal.arity_check         = false
@@ -40,20 +42,13 @@ module MyApp
     config.opal.dynamic_require_severity = :ignore
 
     # Enable/disable /opal_specs route
-    config.opal.enable_specs        = true
+    config.opal.enable_specs = true
 
+    # The path to opal specs from Rails.root
     config.opal.spec_location = 'spec-opal'
   end
 end
 ```
-
-
-### Gotchas
-
-<del>After changing the version of the `opal` gem (e.g. via `bundle update opal`) or any configuration flag **you should trash the `#{Rails.root}/tmp/cache/assets` folder**, otherwise you could see a cached source compiled before the change.</del>
-
-Now ships with a patch to sprockets cache key to include processor version that is also in this [pull request](https://github.com/sstephenson/sprockets/pull/508).
-
 
 
 ## Usage
@@ -63,17 +58,6 @@ Now ships with a patch to sprockets cache key to include processor version that 
 
 You can rename `app/assets/javascripts/application.js` to `application.js.rb`. Even if not necessary, it is recommended to change Sprockets' `//= require` statements to Ruby' `require` methods.
 Sprockets' `//= require` statements won't be known by the opal builder and therefore you can end up adding something twice.
-
-For Opal 0.7 and below, the following example should work:
-
-```ruby
-# app/assets/javascripts/application.js.rb
-
-#= require opal
-#= require opal_ujs
-#= require turbolinks
-#= require_tree .
-```
 
 For Opal 0.8 and above, you have to use `application.js.rb` with the following syntax:
 
