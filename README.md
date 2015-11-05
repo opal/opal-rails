@@ -170,7 +170,7 @@ Of course you need to require `haml-rails` separately since its presence is not 
 ```
 
 
-### Spec!
+### RSpec support
 
 Add specs into `/spec-opal`:
 
@@ -180,6 +180,7 @@ and then a spec folder with you specs!
 # spec-opal/example_spec.js.rb
 require 'opal'
 require 'opal-rspec'
+at_exit { ::RSpec::Core::Runner.run(ARGV, $sdtin, $stdout) }
 
 describe 'a spec' do
   it 'has successful examples' do

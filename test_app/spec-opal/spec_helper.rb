@@ -1,3 +1,3 @@
 require 'opal'
 require 'opal-rspec'
-Opal::RSpec::Runner.autorun
+at_exit { ::RSpec::Core::Runner.run(ARGV, $sdtin, $stdout) }
