@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'opal-rspec',          '~> 0.4.3'
   s.add_dependency 'jquery-rails'
   s.add_dependency 'opal-activesupport',  '>= 0.0.5'
+  s.add_dependency 'sprockets-rails',     '< 3.0'
 
   s.add_development_dependency 'execjs'
   s.add_development_dependency 'launchy'
