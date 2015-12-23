@@ -1,6 +1,11 @@
+# 0.8.1 2015-12-18
+
+* Restrict the version requirement for `sprockets-rails` to `< 3.0` as v3 bears chages incompatible with `opal-rails`
+
+
 # 0.8.0 2015-07-20
 
-* Opal 0.8
+* Opal v0.8
 * Default spec location is now `spec-opal`, this will allow opal specs to be "alphabetically" near other specs.
 * Don't run the sourcemap server unless sprockets is active and sourcemaps enabled and sprockets is in debug mode
 * Align spec compilation done via `rake opal:spec` vs. in the browser at `/opal_spec`
@@ -12,11 +17,12 @@
 
 # 0.7.0 2015-02-02
 
-* Opal 0.7
+* Opal v0.7
 * Added an `opal` Slim filter
 * WebScale!
 * Drop Ruby 1.8.7 support
 * Add a view rails generator `rails g opal:assets` to generate example view classes.
+
 
 # 0.6.3 2014-03-07
 
@@ -24,11 +30,13 @@
 * Allow specs inside subdirectories
 * Updated to Opal v0.6
 
+
 # 0.6.2 2013-12-13
 
 * Added fun
 * Expire Sprockets cache (by means of using different cache keys) when the opal version changes (monkeypatch)
 * Rely on `Opal::Processor` to know if source maps are enabled
+
 
 # 0.6.1 2013-11-05
 
