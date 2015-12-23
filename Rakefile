@@ -16,4 +16,4 @@ RSpec::Core::RakeTask.new :rspec
 require File.expand_path('../test_app/config/application', __FILE__)
 TestApp::Application.load_tasks
 
-task :default => [:rspec, 'opal:spec']
+task :default => [:rspec]
