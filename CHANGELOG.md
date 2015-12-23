@@ -1,3 +1,6 @@
+# 0.9.0 (edge)
+
+
 # 0.8.1 2015-12-18
 
 * Restrict the version requirement for `sprockets-rails` to `< 3.0` as v3 bears chages incompatible with `opal-rails`
