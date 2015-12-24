@@ -22,11 +22,11 @@ Gem::Specification.new do |s|
   required_ruby_version = '>= 1.9.3'
 
   s.add_dependency 'rails',               '>= 4.0', '< 6.0'
-  s.add_dependency 'opal',                '> 0.8.0', '< 0.10.0'
+  s.add_dependency 'sprockets-rails',     '< 3.0'
+  s.add_dependency 'opal',                '>= 0.9.0', '< 0.10'
   s.add_dependency 'opal-jquery',         '~> 0.4.0'
   s.add_dependency 'jquery-rails'
   s.add_dependency 'opal-activesupport',  '>= 0.0.5'
-  s.add_dependency 'sprockets-rails',     '< 3.0'
 
   s.add_development_dependency 'execjs'
   s.add_development_dependency 'launchy'
