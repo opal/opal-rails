@@ -5,19 +5,18 @@ sudo: false
 cache:
   bundler: true
 
-# gemfile:
-#   - gemfiles/rails_4.gemfile
-
 rvm:
-  - 2.2.4
-  # - 2.1.6
-  # - 2.0.0
+  - '2.2'
+  - 2.1.6
+  - 2.0.0
 
 before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
+  - "gem install appraisal"
+  - "appraisal install"
 
-script: "bundle exec rake"
+script: "appraisal rake"
 
 notifications:
   irc: "irc.freenode.org#opal"
