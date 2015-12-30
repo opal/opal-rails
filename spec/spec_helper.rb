@@ -1,19 +1,6 @@
 root_dir = File.expand_path('../../', __FILE__)
 
-
-# OPAL-RAILS
-
-$:.unshift File.expand_path('lib', root_dir)
-require 'opal-rails'
-
-
-# RAILS
-
-# Configure Rails Environment
-ENV['RAILS_ENV'] = 'test'
-
-require File.expand_path('test_app/config/environment.rb', root_dir)
-
+require 'support/test_app'
 require 'rspec/rails'
 require 'support/capybara'
 require 'support/reset_assets_cache'

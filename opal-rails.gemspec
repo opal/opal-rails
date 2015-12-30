@@ -11,6 +11,10 @@ Gem::Specification.new do |s|
   s.summary     = %q{Rails bindings for opal JS engine}
   s.description = %q{Rails bindings for opal JS engine}
   s.license     = 'MIT-LICENSE'
+  s.post_install_message = [
+   "BEWARE: Spec support is being extracted from `opal-rails` into `opal-rspec-rails`",
+   "        Please use `opal-rspec-rails` or the 0-8-stable branch."
+  ].join("\n")
 
   s.rubyforge_project = 'opal-rails'
 
@@ -21,16 +25,18 @@ Gem::Specification.new do |s|
 
   required_ruby_version = '>= 1.9.3'
 
-  s.add_dependency 'rails',               '>= 3.2', '< 5.0'
-  s.add_dependency 'opal',                '> 0.8.0', '< 0.10.0'
+  s.add_dependency 'rails',               '>= 4.0', '< 6.0'
+  s.add_dependency 'sprockets-rails',     '< 3.0'
+  s.add_dependency 'opal',                '>= 0.9.0', '< 0.10'
   s.add_dependency 'opal-jquery',         '~> 0.4.0'
-  s.add_dependency 'opal-rspec',          '~> 0.5.0.beta3'
   s.add_dependency 'jquery-rails'
   s.add_dependency 'opal-activesupport',  '>= 0.0.5'
-  s.add_dependency 'sprockets-rails',     '< 3.0'
 
   s.add_development_dependency 'execjs'
   s.add_development_dependency 'launchy'
-  s.add_development_dependency 'capybara',    '~> 2.3'
+  s.add_development_dependency 'capybara', '~> 2.3'
   s.add_development_dependency 'rspec-rails', '~> 3.0'
+  s.add_development_dependency 'appraisal', '~> 2.1'
+  s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'capybara-webkit'
 end
