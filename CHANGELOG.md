@@ -1,9 +1,12 @@
 # 0.9.0 (edge)
 
+…
+
 
 # 0.8.1 2015-12-18
 
 * Restrict the version requirement for `sprockets-rails` to `< 3.0` as v3 bears chages incompatible with `opal-rails`
+
 
 # 0.8.0 2015-07-20
 
@@ -14,7 +17,7 @@
 * Dynamic require severity now defaults to `:ignore`
 * Make `#opal_tag` helper respect provided options + specs
 * Sprockets bootstrap code can be skipped from `javascript_include_tag` passing `skip_opal_loader: true`
-* All specs now need to require "opal" and "opal-rspec" explicitly
+* All specs now need to `require "opal"` and `require "opal-rspec"` explicitly
 
 
 # 0.7.0 2015-02-02
@@ -25,17 +28,20 @@
 * Drop Ruby 1.8.7 support
 * Add a view rails generator `rails g opal:assets` to generate example view classes.
 
+
 # 0.6.3 2014-03-07
 
 * Add `opal_tag` helper, similar to `javascript_tag`
 * Allow specs inside subdirectories
 * Updated to Opal v0.6
 
+
 # 0.6.2 2013-12-13
 
 * Added fun
 * Expire Sprockets cache (by means of using different cache keys) when the opal version changes (monkeypatch)
 * Rely on `Opal::Processor` to know if source maps are enabled
+
 
 # 0.6.1 2013-11-05
 

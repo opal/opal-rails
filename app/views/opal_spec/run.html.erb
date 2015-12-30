@@ -38,3 +38,6 @@
 
 <%# Boot! %>
 <%= load_code.join.html_safe %>
+
+<%# Trigger at_exit procs for rspec/autorun and minitest/autorun %>
+<%= opal_tag 'exit' %>

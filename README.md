@@ -32,7 +32,9 @@ Add your configuration in `config/application.rb` with the following contents:
 ```ruby
 module MyApp
   class Application < Rails::Application
-    # These are the available options with their default value:
+    # These are the available options with their default values
+
+    # Compiler options
     config.opal.method_missing      = true
     config.opal.optimized_operators = true
     config.opal.arity_check         = false
@@ -40,20 +42,13 @@ module MyApp
     config.opal.dynamic_require_severity = :ignore
 
     # Enable/disable /opal_specs route
-    config.opal.enable_specs        = true
+    config.opal.enable_specs = true
 
+    # The path to opal specs from Rails.root
     config.opal.spec_location = 'spec-opal'
   end
 end
 ```
-
-
-### Gotchas
-
-<del>After changing the version of the `opal` gem (e.g. via `bundle update opal`) or any configuration flag **you should trash the `#{Rails.root}/tmp/cache/assets` folder**, otherwise you could see a cached source compiled before the change.</del>
-
-Now ships with a patch to sprockets cache key to include processor version that is also in this [pull request](https://github.com/sstephenson/sprockets/pull/508).
-
 
 
 ## Usage
@@ -64,18 +59,7 @@ Now ships with a patch to sprockets cache key to include processor version that 
 You can rename `app/assets/javascripts/application.js` to `application.js.rb`. Even if not necessary, it is recommended to change Sprockets' `//= require` statements to Ruby' `require` methods.
 Sprockets' `//= require` statements won't be known by the opal builder and therefore you can end up adding something twice.
 
-For Opal 0.7 and below, the following example should work:
-
-```ruby
-# app/assets/javascripts/application.js.rb
-
-#= require opal
-#= require opal_ujs
-#= require turbolinks
-#= require_tree .
-```
-
-For Opal 0.8 and above, you should be able to use the following syntax:
+For Opal 0.8 and above, you have to use `application.js.rb` with the following syntax:
 
 ```ruby
 # app/assets/javascripts/application.js.rb
@@ -84,6 +68,16 @@ require 'opal'
 require 'opal_ujs'
 require 'turbolinks'
 require_tree '.'
+```
+
+If you want to use `application.js`, you need to `load` the Opal modules(files) manually, e.g.:
+
+```
+// application.js
+//= require opal
+//= require greeter
+//= require_self
+Opal.load('greeter');
 ```
 
 As you see in the example above, Opal also gives you a Ruby equivalent of `//= require_tree`.
@@ -160,7 +154,7 @@ Of course you need to require `haml-rails` separately since its presence is not 
 ```
 
 
-### Spec!
+### RSpec support
 
 Add specs into `/spec-opal`:
 
@@ -168,6 +162,9 @@ and then a spec folder with you specs!
 
 ```ruby
 # spec-opal/example_spec.js.rb
+require 'opal'
+require 'opal-rspec'
+at_exit { ::RSpec::Core::Runner.run(ARGV, $sdtin, $stdout) }
 
 describe 'a spec' do
   it 'has successful examples' do
@@ -177,6 +174,27 @@ end
 ```
 
 Then visit `/opal_spec` from your app and **reload at will** or use the command line with `rake opal:spec`.
+
+Note that `opal` and `opal-rspec` need to be required explicitly in the spec file or in a `spec_helper.rb` as follows:
+
+```ruby
+# spec_helper.rb
+require 'opal'
+require 'opal-rspec'
+```
+
+```ruby
+# spec-opal/example_spec.js.rb
+require 'spec_helper'
+
+describe 'a spec' do
+  it 'has successful examples' do
+    'I run'.should =~ /run/
+  end
+end
+```
+
+That is to allow having specs that make use of [`opal-minitest`](https://rubygems.org/gems/opal-minitest) or another testing library.
 
 #### CHANGE from versions pre 0.7.1
 
@@ -236,7 +254,7 @@ template.render(self)
 
 ## License
 
-© 2012-2014 Elia Schito
+© 2012-2015 Elia Schito
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
