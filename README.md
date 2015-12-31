@@ -204,6 +204,18 @@ template.render(self)
 ```
 
 
+### Using Ruby gems from Opal
+
+Just use `Opal.use_gem` in your asset initializer (in `config/initializers`).
+
+Example:
+
+```ruby
+Opal.use_gem 'cannonbol'
+```
+
+
+
 ## License
 
 © 2012-2015 Elia Schito
