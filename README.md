@@ -156,64 +156,17 @@ Of course you need to require `haml-rails` separately since its presence is not 
 
 ### RSpec support
 
-Add specs into `/spec-opal`:
+_Extracted to [`opal-rspec-rails`](https://github.com/opal/opal-rspec-rails)_
 
-and then a spec folder with you specs!
-
-```ruby
-# spec-opal/example_spec.js.rb
-require 'opal'
-require 'opal-rspec'
-at_exit { ::RSpec::Core::Runner.run(ARGV, $sdtin, $stdout) }
-
-describe 'a spec' do
-  it 'has successful examples' do
-    'I run'.should =~ /run/
-  end
-end
-```
-
-Then visit `/opal_spec` from your app and **reload at will** or use the command line with `rake opal:spec`.
-
-Note that `opal` and `opal-rspec` need to be required explicitly in the spec file or in a `spec_helper.rb` as follows:
+Add this line to your `Gemfile`
 
 ```ruby
-# spec_helper.rb
-require 'opal'
-require 'opal-rspec'
+gem 'opal-rspec-rails', github: 'opal/opal-rspec-rails'
 ```
 
-```ruby
-# spec-opal/example_spec.js.rb
-require 'spec_helper'
+### Minitest support
 
-describe 'a spec' do
-  it 'has successful examples' do
-    'I run'.should =~ /run/
-  end
-end
-```
-
-That is to allow having specs that make use of [`opal-minitest`](https://rubygems.org/gems/opal-minitest) or another testing library.
-
-#### CHANGE from versions pre 0.7.1
-
-Specs used to run out of app/assets/javascripts/spec which was problematic because require_tree . would cause opal/sprockets to compile the specs for non spec running.  This could result in bad specs that prevent your application Opal code from compiling, and even if it compiles you'll get exceptions about the test framework methods not being defined.  To address this, specs have been moved out of the app/assets/javascripts to Rails.root/spec-opal.  The name spec-opal was chosen to put it close to the spec directory.  We don't want to put specs in spec directory because we don't want the "backend" rspec to run those.
-
-The location of specs is configurable. To restore the old location of app/assets/javascripts/spec add an initializer file like the below.
-
-```ruby
-# config/initializers/opal.rb
-Rails.application.config.opal.spec_location = "app/assets/javascripts/spec"
-
-```
-
-Similarly, you can put the opal specs in another location via a similar initializer call.
-
-
-
-
-![1 examples, 0 failures](http://f.cl.ly/items/001n0V0g0u0v14160W2G/Schermata%2007-2456110%20alle%201.06.29%20am.png)
+_Upcoming as `opal-minitest-rails`_
 
 
 ### Shared templates
@@ -249,7 +202,6 @@ template = Template['test']
 template.render(self)
 # =>  '<div class="row"><div class="col-sm-12">hello world</div></div>'
 ```
-
 
 
 ## License
