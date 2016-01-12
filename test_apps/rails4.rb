@@ -32,6 +32,7 @@ module RailsApp
 
     config.assets.paths << File.join(__dir__, 'assets/javascripts')
     config.assets.debug = true
+    config.assets.digest = true
 
     # Opal specific:
     config.opal.source_map_enabled = true
