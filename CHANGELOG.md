@@ -14,6 +14,20 @@ Changes are grouped as follows:
 
 ## [0.9.0] - Unreleased
 
+### Added
+
+- Support for Opal 0.9
+- Preparative work for Rails 5.0
+
+### Removed
+
+- Removed support for Opal 0.8
+- Extracted support for running spec to `opal-rspec-rails`, this is done to make its development independent of `opal-rails` and also to make room for the (yet to be implemented) `opal-minitest-rails`. In addition the extracted gem should address a number of issues like:
+  - faster rake runs
+  - allowing to use any sprockets processor (e.g. `opal-haml` templates were previously not supported)
+  - nicer integration and customizability
+
+
 ## [0.8.1] - 2015-12-18
 
 - Restrict the version requirement for `sprockets-rails` to `< 3.0` as v3 bears chages incompatible with `opal-rails`
@@ -107,6 +121,7 @@ Changes are grouped as follows:
 - Add `opal_ujs`, now it's possible to use Opal for new Rails apps: `rails new <app-name> -j opal`
 - Updated README examples
 
+[0.9.0]: https://github.com/opal/opal-rails/compare/v0.8.1...HEAD
 [0.8.1]: https://github.com/opal/opal-rails/compare/v0.8.0...v0.8.1
 [0.8.0]: https://github.com/opal/opal-rails/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/opal/opal-rails/compare/v0.6.3...v0.7.0
