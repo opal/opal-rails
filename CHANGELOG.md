@@ -17,7 +17,7 @@ Changes are grouped as follows:
 ### Added
 
 - Support for Opal 0.9
-- Preparative work for Rails 5.0
+- Support for Rails 5.0
 
 ### Removed
 
