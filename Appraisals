@@ -8,4 +8,4 @@ end
 
 appraise "rails-5" do
   gem "rails", "~> 5.0.0.beta1"
-end
+end if RUBY_VERSION.split('.').map(&:to_i) >= [2,2,2]
