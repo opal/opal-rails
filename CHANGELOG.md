@@ -134,3 +134,4 @@ Changes are grouped as follows:
 [0.5.0]: https://github.com/opal/opal-rails/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/opal/opal-rails/compare/v0.3.8...v0.4.0
 [0.3.8]: https://github.com/opal/opal-rails/compare/v0.3.7...v0.3.8
+[0.3.7]: https://github.com/opal/opal-rails/compare/v0.3.6...v0.3.7
