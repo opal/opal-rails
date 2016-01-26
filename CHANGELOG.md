@@ -11,13 +11,25 @@ Changes are grouped as follows:
 - **Fixed** for any bug fixes.
 - **Security** to invite users to upgrade in case of vulnerabilities.
 
+<!--
+Whitespace conventions:
+- 4 spaces before ## titles
+- 2 spaces before ### titles
+- 2 spaces before ### titles
+- 1 spaces before normal text
+ -->
+
+
+
 
 ## [0.9.0] - Unreleased
+
 
 ### Added
 
 - Support for Opal 0.9
 - Support for Rails 5.0
+
 
 ### Removed
 
@@ -26,6 +38,8 @@ Changes are grouped as follows:
   - faster rake runs
   - allowing to use any sprockets processor (e.g. `opal-haml` templates were previously not supported)
   - nicer integration and customizability
+
+
 
 
 ## [0.8.1] - 2015-12-18
