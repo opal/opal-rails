@@ -1,6 +1,7 @@
 require 'rails'
 require 'opal/sprockets/server'
 require 'opal/sprockets/processor'
+require 'opal/rails/controller_configuration'
 
 module Opal
   module Rails
@@ -45,8 +46,8 @@ module Opal
             mount maps_app => maps_prefix
           end
         end
-      end
 
+      end
     end
   end
 end

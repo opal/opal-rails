@@ -10,6 +10,7 @@ module Opal
       def call(template)
         escaped = template.source.gsub(':', '\:')
         string = '%q:' + escaped + ':'
+
         "Opal.compile('Object.new.instance_eval {' << #{assigns} << #{local_assigns} << #{string} << '}')"
       end
 
@@ -17,7 +18,10 @@ module Opal
 
       def local_assigns
         <<-'RUBY'.strip
-          JSON.parse(local_assigns.to_json).map { |key, val| "#{key} = #{val.inspect};" }.join
+          unless Rails.configuration.opal.auto_assign_instance_variables == false ||
+            controller.class.opal_renderer_config.auto_assign_instance_variables == false
+            JSON.parse(local_assigns.to_json).map { |key, val| "#{key} = #{val.inspect};" }.join
+          end
         RUBY
       end
 

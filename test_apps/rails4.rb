@@ -65,6 +65,7 @@ return {
 RUBY
 
 class ApplicationController < ActionController::Base
+
   include Rails.application.routes.url_helpers
   layout 'application'
   self.view_paths = [ActionView::FixtureResolver.new(
