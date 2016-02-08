@@ -30,13 +30,19 @@ class PrimaryController < ApplicationController
 
     render type: :js, locals: { local_var: 'i am local' }
   end
+
+  def without_assignments
+    @number_var = 1234
+    @string_var = 'hello'
+    @array_var  = [1,'a']
+    @hash_var   = {a: 1, b: 2}
+
+    render type: :js, locals: { local_var: 'i am local' }
+  end
+
 end
 
 class SecondaryController < ApplicationController
-
-  configure_opal_renderer do |config|
-    config.auto_assign_instance_variables = false
-  end
 
   def without_assignments
     @number_var = 1234

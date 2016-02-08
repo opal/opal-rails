@@ -124,6 +124,24 @@ post.find('.body').html     = @post[:body]
 post.find('.comments').html = comments_html
 ```
 
+The auto inheritance of instance and local variables can be disabled globally or on a per controller basis:
+
+```ruby
+
+  # Globally disable:
+  config.opal.auto_assign_instance_variables = false
+
+  # Disable specific controllers (secondary) or specific actions (primary#without_assignments)
+  config.opal.auto_assign_instance_variables = {
+    except: ['primary#without_assignments', 'secondary']
+  }
+
+  # Enable specific controllers (secondary) or specific actions (primary#without_assignments)
+  config.opal.auto_assign_instance_variables = {
+    except: ['primary#without_assignments', 'secondary']
+  }
+
+```
 
 ### As a Haml filter (optional)
 

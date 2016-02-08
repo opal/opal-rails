@@ -30,11 +30,11 @@ describe 'controller assignments' do
         :string_var => 'hello',
         :array_var  => [1,'a'],
         :hash_var   => {:a => 1, :b => 2}.stringify_keys,
-        :object_var => {:contents => 'json representation'}.stringify_keys,
-        :local_var  => 'i am local',
       }.each_pair do |ivar, assignment|
-        assignments[ivar.to_s].should eq(assignment)
+        assignments[ivar.to_s].should be(nil)
       end
+
+      assignments['local_var'].should eq('i am local')
 
     end
   end

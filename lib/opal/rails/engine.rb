@@ -1,14 +1,14 @@
 require 'rails'
 require 'opal/sprockets/server'
 require 'opal/sprockets/processor'
-require 'opal/rails/controller_configuration'
+require 'opal/rails/configuration'
 
 module Opal
   module Rails
     class Engine < ::Rails::Engine
       config.app_generators.javascript_engine :opal
 
-      config.opal = ActiveSupport::OrderedOptions.new
+      config.opal = Opal::Rails::Configuration.new
 
       config.opal.dynamic_require_severity = :ignore
 
@@ -31,10 +31,7 @@ module Opal
         require 'opal/rails/slim_filter' if defined?(Slim)
 
         config = app.config
-        config.opal.each_pair do |key, value|
-          key = "#{key}="
-          Opal::Processor.send(key, value) if Opal::Processor.respond_to? key
-        end
+        config.opal.configure_processor
 
         app.routes.prepend do
           if Opal::Processor.source_map_enabled && config.assets.compile && config.assets.debug

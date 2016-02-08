@@ -37,6 +37,9 @@ module RailsApp
 
     # Opal specific:
     config.opal.source_map_enabled = true
+    config.opal.auto_assign_instance_variables = {
+      except: ['primary#without_assignments', 'secondary']
+    }
   end
 end
 
