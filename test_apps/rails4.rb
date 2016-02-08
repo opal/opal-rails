@@ -28,6 +28,7 @@ module RailsApp
     routes.append do
       get '/' => 'application#index'
       get '/primary/with_assignments' => 'primary#with_assignments'
+      get '/primary/without_assignments' => 'primary#without_assignments'
       get '/secondary/without_assignments' => 'secondary#without_assignments'
     end
 

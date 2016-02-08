@@ -6,7 +6,8 @@ class ApplicationController < ActionController::Base
     'layouts/application.html.erb' => LAYOUT,
     'primary/index.html.erb' => INDEX,
     'primary/with_assignments.js.opal' => WITH_ASSIGNMENTS,
-    'secondary/without_assignments.js.opal' => WITH_ASSIGNMENTS,
+    'primary/without_assignments.js.opal' => WITH_ASSIGNMENTS,
+    'secondary/without_assignments.js.opal' => WITH_ASSIGNMENTS
   )]
 
 end
