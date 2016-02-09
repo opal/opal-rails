@@ -43,7 +43,7 @@ module Opal
       end
 
       def normalize_action_matcher matchers
-        Array(matchers).map{|it| %i[controller action].zip(it.split('#')).to_h }
+        Array(matchers).map{|it| Hash[[:controller, :action].zip(it.split('#'))] }
       end
 
       def match_action_params matcher, target
