@@ -9,7 +9,7 @@ require 'opal-rails' # our gem
 
 module RailsApp
   class Application < Rails::Application
-    config.root                                       = __dir__
+    config.root                                       = File.dirname(__FILE__)
     config.cache_classes                              = true
     config.eager_load                                 = false
     config.serve_static_files                         = true
@@ -31,7 +31,7 @@ module RailsApp
       get '/secondary/without_assignments' => 'secondary#without_assignments'
     end
 
-    config.assets.paths << File.join(__dir__, 'assets/javascripts')
+    config.assets.paths << File.join(File.dirname(__FILE__), 'assets/javascripts')
     config.assets.debug = true
     config.assets.digest = true
 
