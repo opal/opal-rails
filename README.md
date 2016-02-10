@@ -138,7 +138,7 @@ The auto inheritance of instance and local variables can be disabled globally or
 
   # Enable specific controllers (secondary) or specific actions (primary#without_assignments)
   config.opal.auto_assign_instance_variables = {
-    except: ['primary#without_assignments', 'secondary']
+    only: ['primary#without_assignments', 'secondary']
   }
 
 ```
