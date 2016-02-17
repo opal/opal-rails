@@ -23,7 +23,7 @@ module Opal
 
       def assigns
         <<-'RUBY'.strip
-          if Rails.application.config.opal.auto_assign_instance_variables?(params.slice(:controller, :action))
+          if ! controller.respond_to?(:assign_opal_instance_variables?) || controller.assign_opal_instance_variables?
             JSON.parse(@_assigns.to_json).map { |key, val| "@#{key} = #{val.inspect};" }.join
           else
             ''

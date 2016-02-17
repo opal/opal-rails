@@ -14,6 +14,10 @@ end
 
 class PrimaryController < ApplicationController
 
+  def assign_opal_instance_variables?
+    params[:action] != 'without_assignments'
+  end
+
   def index
   end
 
@@ -44,6 +48,10 @@ class PrimaryController < ApplicationController
 end
 
 class SecondaryController < ApplicationController
+
+  def assign_opal_instance_variables?
+    false
+  end
 
   def without_assignments
     @number_var = 1234
