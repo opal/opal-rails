@@ -6,10 +6,10 @@ module Opal
         new.call(template)
       end
 
-
       def call(template)
         escaped = template.source.gsub(':', '\:')
         string = '%q:' + escaped + ':'
+
         "Opal.compile('Object.new.instance_eval {' << #{assigns} << #{local_assigns} << #{string} << '}')"
       end
 
@@ -23,7 +23,11 @@ module Opal
 
       def assigns
         <<-'RUBY'.strip
-          JSON.parse(@_assigns.to_json).map { |key, val| "@#{key} = #{val.inspect};" }.join
+          if ! controller.respond_to?(:assign_opal_instance_variables?) || controller.assign_opal_instance_variables?
+            JSON.parse(@_assigns.to_json).map { |key, val| "@#{key} = #{val.inspect};" }.join
+          else
+            ''
+          end
         RUBY
       end
     end

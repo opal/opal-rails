@@ -124,6 +124,19 @@ post.find('.body').html     = @post[:body]
 post.find('.comments').html = comments_html
 ```
 
+The auto inheritance of instance and local variables can be disabled by defining a controller method `assign_opal_instance_variables?`
+
+```ruby
+class ApplicationController < ActionController::Base
+
+  def assign_opal_instance_variables?
+    action_name =~ /foo/
+  end
+
+  # ...
+
+end
+```
 
 ### As a Haml filter (optional)
 

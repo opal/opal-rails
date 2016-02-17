@@ -9,7 +9,7 @@ require 'opal-rails' # our gem
 
 module RailsApp
   class Application < Rails::Application
-    config.root                                       = __dir__
+    config.root                                       = File.dirname(__FILE__)
     config.cache_classes                              = true
     config.eager_load                                 = false
     config.serve_static_files                         = true
@@ -27,10 +27,12 @@ module RailsApp
 
     routes.append do
       get '/' => 'application#index'
-      get '/application/with_assignments' => 'application#with_assignments'
+      get '/primary/with_assignments' => 'primary#with_assignments'
+      get '/primary/without_assignments' => 'primary#without_assignments'
+      get '/secondary/without_assignments' => 'secondary#without_assignments'
     end
 
-    config.assets.paths << File.join(__dir__, 'assets/javascripts')
+    config.assets.paths << File.join(File.dirname(__FILE__), 'assets/javascripts')
     config.assets.debug = true
     config.assets.digest = true
 
@@ -39,57 +41,7 @@ module RailsApp
   end
 end
 
-LAYOUT = <<-HTML
-<!DOCTYPE html>
-<html>
-<head><%= javascript_include_tag "application" %></head>
-<body><%= yield %></body>
-</html>
-HTML
-
-INDEX = <<-HTML
-<script type="text/ruby">
-raise 'pippo'
-</script>
-HTML
-
-WITH_ASSIGNMENTS = <<-RUBY
-return {
-  number_var: @number_var,
-  string_var: @string_var,
-  array_var:  @array_var,
-  hash_var:   @hash_var,
-  object_var: @object_var,
-  local_var:  local_var
-}.to_n
-RUBY
-
-class ApplicationController < ActionController::Base
-  include Rails.application.routes.url_helpers
-  layout 'application'
-  self.view_paths = [ActionView::FixtureResolver.new(
-    'layouts/application.html.erb'         => LAYOUT,
-    'application/index.html.erb'           => INDEX,
-    'application/with_assignments.js.opal' => WITH_ASSIGNMENTS,
-  )]
-
-  def index
-  end
-
-  def with_assignments
-    object = Object.new
-    def object.as_json options = {}
-      {contents: 'json representation'}
-    end
-
-    @number_var = 1234
-    @string_var = 'hello'
-    @array_var  = [1,'a']
-    @hash_var   = {a: 1, b: 2}
-    @object_var = object
-
-    render type: :js, locals: { local_var: 'i am local' }
-  end
-end
+require_relative './templates'
+require_relative './controllers'
 
 RailsApp::Application.initialize!

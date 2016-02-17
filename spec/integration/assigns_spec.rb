@@ -3,7 +3,7 @@ require 'execjs'
 
 describe 'controller assignments' do
   it 'are in the template' do
-    source = get_source_of '/application/with_assignments.js'
+    source = get_source_of '/primary/with_assignments.js'
     source.gsub!(/;\s*\Z/,'') # execjs eval doesn't like the trailing semicolon
     assignments = opal_eval(source)
 
@@ -16,6 +16,46 @@ describe 'controller assignments' do
       :local_var  => 'i am local',
     }.each_pair do |ivar, assignment|
       assignments[ivar.to_s].should eq(assignment)
+    end
+  end
+
+  context 'are disabled at controller level' do
+    it 'is not available in template' do
+      source = get_source_of '/secondary/without_assignments.js'
+      source.gsub!(/;\s*\Z/,'') # execjs eval doesn't like the trailing semicolon
+      assignments = opal_eval(source)
+
+      {
+        :number_var => 1234,
+        :string_var => 'hello',
+        :array_var  => [1,'a'],
+        :hash_var   => {:a => 1, :b => 2}.stringify_keys,
+      }.each_pair do |ivar, assignment|
+        assignments[ivar.to_s].should be(nil)
+      end
+
+      assignments['local_var'].should eq('i am local')
+
+    end
+  end
+
+  context 'are disabled at action level' do
+    it 'is not available in template' do
+      source = get_source_of '/primary/without_assignments.js'
+      source.gsub!(/;\s*\Z/,'') # execjs eval doesn't like the trailing semicolon
+      assignments = opal_eval(source)
+
+      {
+        :number_var => 1234,
+        :string_var => 'hello',
+        :array_var  => [1,'a'],
+        :hash_var   => {:a => 1, :b => 2}.stringify_keys,
+      }.each_pair do |ivar, assignment|
+        assignments[ivar.to_s].should be(nil)
+      end
+
+      assignments['local_var'].should eq('i am local')
+
     end
   end
 
