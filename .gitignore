@@ -13,3 +13,9 @@ Gemfile.lock
 /lib/assets/javascripts/specs.js
 /lib/assets/javascripts/opal-rails.js
 /gemfiles
+
+# old test app dir
+/test_app/db/*.sqlite3
+/test_app/log/*.log
+/test_app/tmp/
+/test_app/.sass-cache
