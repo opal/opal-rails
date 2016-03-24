@@ -16,7 +16,7 @@ module OpalHelper
     return script_tags if skip_loader
 
     sources.each do |source|
-      loading_code = Opal::Sprockets.load_asset(sprockets, source)
+      loading_code = Opal::Sprockets.load_asset(source, sprockets)
       script_tags << javascript_tag(loading_code) if loading_code.present?
     end
 
