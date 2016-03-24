@@ -1,7 +1,7 @@
 module OpalHelper
   def opal_tag(opal_code = nil, &block)
     opal_code ||= capture(&block)
-    compiler_options = Opal::Processor.compiler_options.merge(requirable: false)
+    compiler_options = Opal::Config.compiler_options.merge(requirable: false)
     compiler = Opal::Compiler.new(opal_code, compiler_options)
     js_code = compiler.compile
     javascript_tag js_code
@@ -16,7 +16,7 @@ module OpalHelper
     return script_tags if skip_loader
 
     sources.each do |source|
-      loading_code = Opal::Processor.load_asset_code(sprockets, source)
+      loading_code = Opal::Sprockets.load_asset(sprockets, source)
       script_tags << javascript_tag(loading_code) if loading_code.present?
     end
 

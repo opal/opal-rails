@@ -32,11 +32,11 @@ module Opal
         config = app.config
         config.opal.each_pair do |key, value|
           key = "#{key}="
-          Opal::Processor.send(key, value) if Opal::Processor.respond_to? key
+          Opal::Config.send(key, value) if Opal::Config.respond_to? key
         end
 
         app.routes.prepend do
-          if Opal::Processor.source_map_enabled && config.assets.compile && config.assets.debug
+          if Opal::Config.source_map_enabled && config.assets.compile && config.assets.debug
             maps_prefix = '/__OPAL_SOURCE_MAPS__'
             maps_app    = Opal::SourceMapServer.new(app.assets, maps_prefix)
 
