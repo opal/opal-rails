@@ -38,6 +38,7 @@ Whitespace conventions:
   - faster rake runs
   - allowing to use any sprockets processor (e.g. `opal-haml` templates were previously not supported)
   - nicer integration and customizability
+- Drop support for Ruby 1.9.3
 
 
 
