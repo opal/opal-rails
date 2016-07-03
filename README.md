@@ -32,8 +32,6 @@ Add your configuration in `config/application.rb` with the following contents:
 ```ruby
 module MyApp
   class Application < Rails::Application
-    # These are the available options with their default values
-
     # Compiler options
     config.opal.method_missing      = true
     config.opal.optimized_operators = true
@@ -49,27 +47,31 @@ module MyApp
   end
 end
 ```
-
+Better look here [lib/opal/config.rb](https://github.com/opal/opal/blob/master/lib/opal/config.rb) config options can changes in future
 
 ## Usage
 
 
 ### Asset Pipeline
 
-You can rename `app/assets/javascripts/application.js` to `application.js.rb`. Even if not necessary, it is recommended to change Sprockets' `//= require` statements to Ruby' `require` methods.
-Sprockets' `//= require` statements won't be known by the opal builder and therefore you can end up adding something twice.
-
+Rename `app/assets/javascripts/application.js` to `application.js.rb`.
 For Opal 0.8 and above, you have to use `application.js.rb` with the following syntax:
 
 ```ruby
 # app/assets/javascripts/application.js.rb
 
-require 'opal'
-require 'opal_ujs'
-require 'turbolinks'
+require 'opal_ujs' # include 'jquery', 'jquery_ujs', 'opal', 'opal-jquery'
+require 'select2'  # vendor https://rails-assets.org/#/components/select2
 require_tree '.'
+require 'turbolinks'
+
+Document.on 'turbolinks:load' do |evt|
+  Element.find('select').JS.select2
+end
 ```
 
+Even if not necessary, it is recommended to change Sprockets' `//= require` statements to Ruby' `require` methods.
+Sprockets' `//= require` statements won't be known by the opal builder and therefore you can end up adding something twice.
 If you want to use `application.js`, you need to `load` the Opal modules(files) manually, e.g.:
 
 ```
