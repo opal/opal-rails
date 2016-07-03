@@ -11,8 +11,10 @@
 
 <% end -%>
 <% module_namespacing do -%>
-class <%= controller_class_name %>View
-  def initialize(selector = 'body.controller-<%= controller_class_name.underscore %>', parent = Element)
+class <%= class_name %>View
+  # TODO opal controllerView features
+  # We should have <body class="controller-<%%= controller_name %>"> in layouts
+  def initialize(selector = 'body.controller-<%= class_name.underscore %>', parent = Element)
     @element = parent.find(selector)
     setup
   end
