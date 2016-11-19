@@ -7,5 +7,5 @@ appraise "rails-4-2" do
 end
 
 appraise "rails-5" do
-  gem "rails", "~> 5.0.0.beta1"
+  gem "rails", "~> 5.0.0"
 end if  Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('2.2.2')
