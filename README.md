@@ -27,84 +27,78 @@ rails new <app-name> --javascript=opal
 
 ### Configuration
 
-Add your configuration in `config/application.rb` with the following contents:
+Add your configuration in `config/initializers/assets.rb` with the following contents:
 
 ```ruby
-module MyApp
-  class Application < Rails::Application
-    # Compiler options
-    config.opal.method_missing      = true
-    config.opal.optimized_operators = true
-    config.opal.arity_check         = false
-    config.opal.const_missing       = true
-    config.opal.dynamic_require_severity = :ignore
-
-    # Enable/disable /opal_specs route
-    config.opal.enable_specs = true
-
-    # The path to opal specs from Rails.root
-    config.opal.spec_location = 'spec-opal'
-  end
-end
+# Compiler options
+Rails.application.config.opal.method_missing           = true
+Rails.application.config.opal.optimized_operators      = true
+Rails.application.config.opal.arity_check              = !Rails.env.production?
+Rails.application.config.opal.const_missing            = true
+Rails.application.config.opal.dynamic_require_severity = :ignore
 ```
-Better look here [lib/opal/config.rb](https://github.com/opal/opal/blob/master/lib/opal/config.rb) config options can changes in future
+
+For a full list of the available configuration options please refer to: [lib/opal/config.rb](https://github.com/opal/opal/blob/master/lib/opal/config.rb).
+
+
 
 ## Usage
 
-
-### Asset Pipeline
-
-Rename `app/assets/javascripts/application.js` to `application.js.rb`.
-For Opal 0.8 and above, you have to use `application.js.rb` with the following syntax:
+Rename `app/assets/javascripts/application.js` to `app/assets/javascripts/application.js.rb` and 
+replace the Sprockets directives with plain requires as follows:
 
 ```ruby
-# app/assets/javascripts/application.js.rb
-
-require 'opal_ujs' # include 'jquery', 'jquery_ujs', 'opal', 'opal-jquery'
-require 'select2'  # vendor https://rails-assets.org/#/components/select2
-require_tree '.'
+require 'opal'
+require 'opal_ujs'
 require 'turbolinks'
+require_tree '.' # a Ruby equivalent of the require_tree Sprockets directive is available
 
-Document.on 'turbolinks:load' do |evt|
-  Element.find('select').JS.select2
-end
-```
+# ---- YOUR FANCY RUBY CODE HERE ----
+# 
+# Examples:
 
-Even if not necessary, it is recommended to change Sprockets' `//= require` statements to Ruby' `require` methods.
-Sprockets' `//= require` statements won't be known by the opal builder and therefore you can end up adding something twice.
-If you want to use `application.js`, you need to `load` the Opal modules(files) manually, e.g.:
+# == Print something in the browser's console
+puts "Hello world!" 
+pp hello: :world
+require 'console'
+$console.log %w[Hello world!]
 
-```
-// application.js
-//= require opal
-//= require greeter
-//= require_self
-Opal.load('greeter');
-```
+# == Use Native to wrap native JS objects, $$ is preconfigured to wrap `window`
+require 'native'
+$$.alert "Hello world!" 
 
-As you see in the example above, Opal also gives you a Ruby equivalent of `//= require_tree`.
-
-Opal requires are forwarded to the Asset Pipeline at compile time (similarly to what happens for RubyMotion). You can use either the `.rb` or `.opal` extension:
-
-```ruby
-# app/assets/javascripts/greeter.js.rb
-
-puts "G'day world!" # check the console!
-
-# Dom manipulation
+# == Do some DOM manipulation with jQuery
 require 'opal-jquery'
-
 Document.ready? do
-  Element.find('body > header').html = '<h1>Hi there!</h1>'
+  Element.find('body').html = '<h1>Hello world!</h1>'
 end
+
+# == Or access the DOM api directly
+$$[:document].addEventListener(:DOMContentLoaded, -> {
+  $$[:document].querySelector('body')[:innerHTML] = '<h1>Hello world!</h1>'
+})
+
 ```
 
 
+### Using Sprockets directives
+
+If you want to use `application.js` (instead of `application.js.rb`) and keep Sprockets directives, you'll need to load the Opal files you require via Sprockets manually, e.g.:
+
+```
+//= require opal
+//= require opal_ujs
+//= require turbolinks
+//= require_tree .
+//= require foobar
+
+Opal.load('foobar');
+```
 
 
 ### As a template
 
-You can use it for your views too, it even inherits instance and local variables from actions:
+You can use it for your views too:
 
 ```ruby
 # app/controllers/posts_controller.rb
@@ -115,7 +109,7 @@ def create
 end
 ```
 
-Each assign is filtered through JSON so it's reduced to basic types:
+Assigned instance that would normally be available in your views are converted to JSON objects first.
 
 ```ruby
 # app/views/posts/create.js.opal
@@ -158,13 +152,14 @@ Of course you need to require `haml-rails` separately since its presence is not 
 
 ### RSpec support
 
-_Extracted to [`opal-rspec-rails`](https://github.com/opal/opal-rspec-rails)_
+_Extracted to (unreleased) [`opal-rspec-rails`](https://github.com/opal/opal-rspec-rails)_
 
-Add this line to your `Gemfile`
+Add this line to your `Gemfile`:
 
 ```ruby
 gem 'opal-rspec-rails', github: 'opal/opal-rspec-rails'
 ```
+
 
 ### Minitest support
 
@@ -173,7 +168,7 @@ _Upcoming as `opal-minitest-rails`_
 
 ### Shared templates
 
-As long as the templates are inside the sprockets/opal load path, then you should be able to just require them.
+As long as the templates are inside the Sprockets/Opal load path, then you should be able to just require them.
 
 Let's say we have this template `app/views/shared/test.haml`:
 
@@ -208,7 +203,7 @@ template.render(self)
 
 ### Using Ruby gems from Opal
 
-Just use `Opal.use_gem` in your asset initializer (in `config/initializers`).
+Just use `Opal.use_gem` in your asset initializer (`config/initializers/assets.rb`).
 
 Example:
 
@@ -220,7 +215,7 @@ Opal.use_gem 'cannonbol'
 
 ## License
 
-© 2012-2015 Elia Schito
+© 2012-2016 Elia Schito
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
