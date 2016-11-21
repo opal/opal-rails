@@ -85,7 +85,7 @@ $$[:document].addEventListener(:DOMContentLoaded, -> {
 
 If you want to use `application.js` (instead of `application.js.rb`) and keep Sprockets directives, you'll need to load the Opal files you require via Sprockets manually, e.g.:
 
-```
+```js
 //= require opal
 //= require opal_ujs
 //= require turbolinks
