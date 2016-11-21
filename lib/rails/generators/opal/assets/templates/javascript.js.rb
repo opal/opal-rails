@@ -6,39 +6,40 @@
 # Here's an example view class for your controller:
 #
 <% if namespaced? -%>
-#= require opal
-#= require <%= namespaced_file_path %>
+require <%= namespaced_file_path.to_s.inspect %>
 
 <% end -%>
 <% module_namespacing do -%>
 class <%= class_name %>View
-  # TODO opal controllerView features
   # We should have <body class="controller-<%%= controller_name %>"> in layouts
-  def initialize(selector = 'body.controller-<%= class_name.underscore %>', parent = Element)
-    @element = parent.find(selector)
-    setup
+  def initialize(selector = 'body.controller-<%= class_name.underscore %>')
+    @selector = selector
   end
-  attr_reader :element
 
   def setup
-    # Put here the setup for the view behavior
-    say_hello_when_a_link_is_clicked
+    on(:click, 'a', &method(:link_clicked))
   end
 
-  def say_hello_when_a_link_is_clicked
-    all_links.on :click do |event|
-      # Use prevent_default to stop default behavior (as you would do in jQuery)
-      # event.prevent_default
-
-      puts "Hello! (You just clicked on a link: #{event.current_target.text})"
-    end
+  def link_clicked(event)
+    event.prevent
+    puts "Hello! (You just clicked on a link: #{event.current_target.text})"
   end
 
 
   private
 
-  def all_links
-    @all_links ||= element.find('a')
+  attr_reader :selector, :element
+
+  # Look for elements in the scope of the base selector
+  def find(selector)
+    Element.find("#{@selector} #{selector}")
+  end
+
+  # Register events on document to save memory and be friends to Turbolinks
+  def on(event, selector = nil, &block)
+    Element[`document`].on(event, selector, &block)
   end
 end
+
+<%= class_name %>View.new.setup
 <% end -%>
