@@ -6,11 +6,19 @@ module Opal
         new.call(template)
       end
 
-
       def call(template)
         escaped = template.source.gsub(':', '\:')
         string = '%q:' + escaped + ':'
-        "Opal.compile('Object.new.instance_eval {' << #{assigns} << #{local_assigns} << #{string} << '}')"
+
+        code = []
+
+        if ::Rails.application.config.opal.assigns_in_templates
+          code << assigns
+          code << local_assigns
+        end
+
+        code << string
+        "Opal.compile('Object.new.instance_eval {' << #{code.join(' << ')} << '}')"
       end
 
       private

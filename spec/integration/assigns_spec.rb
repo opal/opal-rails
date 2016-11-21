@@ -2,20 +2,50 @@ require 'spec_helper'
 require 'execjs'
 
 describe 'controller assignments' do
-  it 'are in the template' do
-    source = get_source_of '/application/with_assignments.js'
-    source.gsub!(/;\s*\Z/,'') # execjs eval doesn't like the trailing semicolon
-    assignments = opal_eval(source)
+  context 'by default' do
+    before do
+      expect(::Rails.application.config.opal.assigns_in_templates).to eq(true)
+    end
 
-    {
-      :number_var => 1234,
-      :string_var => 'hello',
-      :array_var  => [1,'a'],
-      :hash_var   => {:a => 1, :b => 2}.stringify_keys,
-      :object_var => {:contents => 'json representation'}.stringify_keys,
-      :local_var  => 'i am local',
-    }.each_pair do |ivar, assignment|
-      assignments[ivar.to_s].should eq(assignment)
+    it 'are in the template' do
+      source = get_source_of '/application/with_assignments.js'
+      source.gsub!(/;\s*\Z/,'') # execjs eval doesn't like the trailing semicolon
+      assignments = opal_eval(source)
+
+      {
+        :number_var => 1234,
+        :string_var => 'hello',
+        :array_var  => [1,'a'],
+        :hash_var   => {:a => 1, :b => 2}.stringify_keys,
+        :object_var => {:contents => 'json representation'}.stringify_keys,
+        :local_var  => 'i am local',
+      }.each_pair do |ivar, assignment|
+        assignments[ivar.to_s].should eq(assignment)
+      end
+    end
+  end
+
+  context 'when disabled' do
+    before do
+      Rails.application.config.opal.assigns_in_templates = false
+    end
+
+    it 'are not in the template' do
+
+      source = get_source_of '/application/with_assignments.js'
+      source.gsub!(/;\s*\Z/,'') # execjs eval doesn't like the trailing semicolon
+      assignments = opal_eval(source)
+
+      {
+        :number_var => 1234,
+        :string_var => 'hello',
+        :array_var  => [1,'a'],
+        :hash_var   => {:a => 1, :b => 2}.stringify_keys,
+        :object_var => {:contents => 'json representation'}.stringify_keys,
+        :local_var  => 'i am local',
+      }.each_pair do |ivar, assignment|
+        assignments[ivar.to_s].should_not eq(assignment)
+      end
     end
   end
 

@@ -10,6 +10,7 @@ module Opal
       config.opal = ActiveSupport::OrderedOptions.new
 
       config.opal.dynamic_require_severity = :ignore
+      config.opal.assigns_in_templates = true
 
       # Cache eager_load_paths now, otherwise the assets dir is added
       # and its .rb files are eagerly loaded.
