@@ -4,7 +4,7 @@ require 'execjs'
 describe 'controller assignments' do
   context 'when enabled' do
     before do
-      Rails.application.config.opal.assigns_in_templates = false
+      Rails.application.config.opal.assigns_in_templates = true
     end
 
     it 'are in the template' do
