@@ -2,9 +2,9 @@ require 'spec_helper'
 require 'execjs'
 
 describe 'controller assignments' do
-  context 'by default' do
+  context 'when enabled' do
     before do
-      expect(::Rails.application.config.opal.assigns_in_templates).to eq(true)
+      Rails.application.config.opal.assigns_in_templates = false
     end
 
     it 'are in the template' do
