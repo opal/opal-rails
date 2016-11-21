@@ -22,7 +22,22 @@ Whitespace conventions:
 
 
 
-## [0.9.0] - Unreleased
+## [0.10.0] - 2016-11-19
+
+
+### Added
+
+- Added ability to disable passing local and instance variables to the Opal template handler by setting `Rails.application.config.opal.assigns_in_templates = false` in `config/initializers/assets.rb`
+- Added dependency to `opal-sprockets` in preparation for Opal 0.11
+
+
+### Changed
+
+- Simplified the Opal file generated for a controller
+
+
+
+## [0.9.0] - 2016-06-16
 
 
 ### Added
@@ -136,7 +151,11 @@ Whitespace conventions:
 - Add `opal_ujs`, now it's possible to use Opal for new Rails apps: `rails new <app-name> -j opal`
 - Updated README examples
 
-[0.9.0]: https://github.com/opal/opal-rails/compare/v0.8.1...HEAD
+
+
+
+[0.10.0]: https://github.com/opal/opal-rails/compare/v0.9.0...HEAD
+[0.9.0]: https://github.com/opal/opal-rails/compare/v0.8.1...v0.9.0
 [0.8.1]: https://github.com/opal/opal-rails/compare/v0.8.0...v0.8.1
 [0.8.0]: https://github.com/opal/opal-rails/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/opal/opal-rails/compare/v0.6.3...v0.7.0
