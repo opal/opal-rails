@@ -44,7 +44,7 @@ For a full list of the available configuration options please refer to: [lib/opa
 
 ## Usage
 
-Rename `app/assets/javascripts/application.js` to `app/assets/javascripts/application.js.rb` and 
+Rename `app/assets/javascripts/application.js` to `app/assets/javascripts/application.js.rb` and
 replace the Sprockets directives with plain requires as follows:
 
 ```ruby
@@ -54,18 +54,18 @@ require 'turbolinks'
 require_tree '.' # a Ruby equivalent of the require_tree Sprockets directive is available
 
 # ---- YOUR FANCY RUBY CODE HERE ----
-# 
+#
 # Examples:
 
 # == Print something in the browser's console
-puts "Hello world!" 
+puts "Hello world!"
 pp hello: :world
 require 'console'
 $console.log %w[Hello world!]
 
 # == Use Native to wrap native JS objects, $$ is preconfigured to wrap `window`
 require 'native'
-$$.alert "Hello world!" 
+$$.alert "Hello world!"
 
 # == Do some DOM manipulation with jQuery
 require 'opal-jquery'
@@ -119,6 +119,17 @@ post.find('.title').html    = @post[:title]
 post.find('.body').html     = @post[:body]
 post.find('.comments').html = comments_html
 ```
+
+#### Instance and local variables in templates
+
+By default `opal-rails` will forward any instance and local variable you'll pass to the template.
+
+This behavior can be disabled by setting `Rails.application.config.opal.assigns_in_templates` to `false` in `config/initializers/assets.rb`:
+
+```ruby
+Rails.application.config.opal.assigns_in_templates = false
+```
+
 
 
 ### As a Haml filter (optional)
