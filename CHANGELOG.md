@@ -27,7 +27,7 @@ Whitespace conventions:
 
 ### Added
 
-- Added ability to disable passing local and instance variables to the Opal template handler by setting `Rails.application.config.opal.assigns_in_templates = false` in `config/initializers/assets.rb`
+- Added ability to disable passing local and instance variables to the Opal template handler by setting `Rails.application.config.opal.assigns_in_templates = false` in `config/initializers/assets.rb` (thanks to @lorefnon)
 - Added dependency to `opal-sprockets` in preparation for Opal 0.11
 
 
