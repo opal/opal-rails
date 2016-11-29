@@ -10,28 +10,16 @@ module Opal
         escaped = template.source.gsub(':', '\:')
         string = '%q:' + escaped + ':'
 
-        code = []
-
-        if ::Rails.application.config.opal.assigns_in_templates
-          code << assigns
-          code << local_assigns
-        end
-
-        code << string
-        "Opal.compile('Object.new.instance_eval {' << #{code.join(' << ')} << '}')"
-      end
-
-      private
-
-      def local_assigns
-        <<-'RUBY'.strip
-          JSON.parse(local_assigns.to_json).map { |key, val| "#{key} = #{val.inspect};" }.join
-        RUBY
-      end
-
-      def assigns
-        <<-'RUBY'.strip
-          JSON.parse(@_assigns.to_json).map { |key, val| "@#{key} = #{val.inspect};" }.join
+        <<-RUBY
+          code = []
+          code << 'Object.new.instance_eval {'
+          if ::Rails.application.config.opal.assigns_in_templates
+            code << JSON.parse(local_assigns.to_json).map { |key, val| "\#{key} = \#{val.inspect};" }.join
+            code << JSON.parse(@_assigns.to_json).map { |key, val| "@\#{key} = \#{val.inspect};" }.join
+          end
+          code << #{string}
+          code << '}'
+          Opal.compile(code.join("\n"))
         RUBY
       end
     end
