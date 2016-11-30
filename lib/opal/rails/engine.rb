@@ -20,10 +20,8 @@ module Opal
         app.config.eager_load_paths = app.config.eager_load_paths.dup - Dir["#{app.root}/app/{assets,views}"]
       end
 
-      initializer 'opal.asset_paths', :after => 'sprockets.environment', :group => :all do |app|
-        Opal.paths.each do |path|
-          app.assets.append_path path
-        end
+      initializer 'opal.append_assets_path', :after => :append_assets_path, :group => :all do |app|
+        app.config.assets.paths.unshift(*Opal.paths)
       end
 
       config.after_initialize do |app|
