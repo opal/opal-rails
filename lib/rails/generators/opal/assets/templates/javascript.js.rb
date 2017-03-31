@@ -30,10 +30,12 @@ class <%= class_name %>View
 
   attr_reader :selector, :element
 
-  # Look for elements in the scope of the base selector
-  def find(selector)
-    Element.find("#{@selector} #{selector}")
-  end
+  # Uncomment the following method to look for elements in the scope of the
+  # base selector:
+  #
+  # def find(selector)
+  #   Element.find("#{@selector} #{selector}")
+  # end
 
   # Register events on document to save memory and be friends to Turbolinks
   def on(event, selector = nil, &block)
