@@ -6,10 +6,10 @@ cache:
   bundler: true
 
 rvm:
+  - 2.4.0
   - 2.3.3
   - 2.2.4
   - 2.1.10
-  - 2.0.0
 
 before_script:
   - "export DISPLAY=:99.0"
