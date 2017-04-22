@@ -22,6 +22,16 @@ Whitespace conventions:
 
 
 
+## [Unreleased]
+
+
+### Added
+
+- Added support for `sprockets-rails` v3
+
+
+
+
 ## [0.9.1] - 2016-11-30
 
 
@@ -34,6 +44,7 @@ Whitespace conventions:
 ### Changed
 
 - Simplified the Opal file generated for a controller
+
 
 
 
@@ -75,6 +86,8 @@ Whitespace conventions:
 - All specs now need to `require "opal"` and `require "opal-rspec"` explicitly
 
 
+
+
 ## [0.7.0] - 2015-02-02
 
 - Opal v0.7
@@ -84,11 +97,15 @@ Whitespace conventions:
 - Add a view rails generator `rails g opal:assets` to generate example view classes.
 
 
+
+
 ## [0.6.3] - 2014-03-07
 
 - Add `opal_tag` helper, similar to `javascript_tag`
 - Allow specs inside subdirectories
 - Updated to Opal v0.6
+
+
 
 
 ## [0.6.2] - 2013-12-13
@@ -98,9 +115,13 @@ Whitespace conventions:
 - Rely on `Opal::Processor` to know if source maps are enabled
 
 
+
+
 ## [0.6.1] - 2013-11-05
 
 - Fix the rake task, now uses `opal-rspec` too
+
+
 
 
 ## [0.6.0] - 2013-11-05
@@ -110,6 +131,8 @@ Whitespace conventions:
 - Run in-browser specs with `opal-rspec`
 
 
+
+
 ## [0.5.2] - 2013-09-05
 
 - Add `opal-activesupport` as a dependency
@@ -117,9 +140,13 @@ Whitespace conventions:
 - Add the `rake opal:spec` task to run browser specs from the terminal (requires phantomjs)
 
 
+
+
 ## [0.5.1] - 2013-07-02
 
 - `.js` suffix is now optional for in-browser specs
+
+
 
 
 ## [0.5.0] - 2013-06-30
@@ -127,6 +154,8 @@ Whitespace conventions:
 - Add support for source-maps
 - `opal` can now be used in the rails app generator: `rails new -j opal`
 - migrate `#to_native` to the new signature: `#to_n`
+
+
 
 
 ## [0.4.0] - 2013-06-03
@@ -140,9 +169,13 @@ Whitespace conventions:
 - Add the Changelog
 
 
+
+
 ## [0.3.8] - 2013-05-07
 
 - Add `opal/rails` alongside to `opal-rails` for older bundlers autorequire
+
+
 
 
 ## [0.3.7] - 2013-05-04
