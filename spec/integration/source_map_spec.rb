@@ -7,6 +7,7 @@ describe Opal::SourceMap do
   before do
     expect(Rails.application.config.opal.source_map_enabled).to be_truthy
     expect(Rails.application.config.assets.compile).to be_truthy
+    expect(Rails.application.assets).to be_present
     expect(Rails.application.config.assets.debug).to be_truthy
     get js_asset_path
   end
