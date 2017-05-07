@@ -15,15 +15,28 @@ Changes are grouped as follows:
 Whitespace conventions:
 - 4 spaces before ## titles
 - 2 spaces before ### titles
-- 2 spaces before ### titles
 - 1 spaces before normal text
  -->
 
 
 
+## [0.9.3] - 2017-05-08
 
-## [0.9.2] - 2017-04-22
 
+### Added
+
+- Support for async in `javascript_include_tag` by attaching Opal bootstrap code in the `onload` attribute instead of using a separate tag (the previous behaviour is still available by passing `force_opal_loader_tag: true` to `javascript_include_tag`).
+
+
+### Changed
+
+- `javascript_include_tag` no longer adds an extra javascript tag for the Opal bootstrapping code by default (See *Added* above).
+
+
+
+## ~~[0.9.2] - 2017-04-22~~
+
+*yanked: due to an error that prevented the generation of the loading code only in production*
 
 ### Added
 
