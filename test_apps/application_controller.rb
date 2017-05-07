@@ -8,7 +8,7 @@ HTML
 
 INDEX = <<-HTML
 <script type="text/ruby">
-raise 'pippo'
+puts 'hello from a script tag!'
 </script>
 HTML
 

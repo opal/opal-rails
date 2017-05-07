@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ['lib']
 
-  required_ruby_version = '>= 1.9.3'
+  required_ruby_version = '>= 2.1'
 
   s.add_dependency 'rails',               '>= 4.1', '< 6.0'
   s.add_dependency 'sprockets-rails',     '>= 2.3.3', '< 4.0'
@@ -37,8 +37,10 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'execjs'
   s.add_development_dependency 'launchy'
   s.add_development_dependency 'capybara', '~> 2.3'
+  s.add_development_dependency 'poltergeist', '~> 1.15.0'
   s.add_development_dependency 'rspec-rails', '~> 3.0'
   s.add_development_dependency 'appraisal', '~> 2.1'
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'capybara-webkit'
+  s.add_development_dependency 'puma'
 end
