@@ -20,7 +20,7 @@ module Opal
         app.config.eager_load_paths = app.config.eager_load_paths.dup - Dir["#{app.root}/app/{assets,views}"]
       end
 
-      initializer 'opal.append_assets_path', :after => :append_assets_path, :group => :all do |app|
+      initializer 'opal.append_assets_path', after: :append_assets_path, group: :all do |app|
         app.config.assets.paths.unshift(*Opal.paths)
       end
 
