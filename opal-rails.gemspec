@@ -11,10 +11,10 @@ Gem::Specification.new do |s|
   s.summary     = %q{Rails bindings for opal JS engine}
   s.description = %q{Rails bindings for opal JS engine}
   s.license     = 'MIT-LICENSE'
-  s.post_install_message = [
-   "BEWARE: Spec support is being extracted from `opal-rails` into `opal-rspec-rails`",
-   "        Please use `opal-rspec-rails` or the 0-8-stable branch."
-  ].join("\n")
+  # s.post_install_message = [
+  #  "BEWARE: Spec support is being extracted from `opal-rails` into `opal-rspec-rails`",
+  #  "        Please use `opal-rspec-rails` or the 0-8-stable branch."
+  # ].join("\n")
 
   s.rubyforge_project = 'opal-rails'
 
