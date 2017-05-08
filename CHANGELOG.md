@@ -20,6 +20,7 @@ Whitespace conventions:
 
 
 
+
 ## [0.9.3] - 2017-05-08
 
 
@@ -31,6 +32,7 @@ Whitespace conventions:
 ### Changed
 
 - `javascript_include_tag` no longer adds an extra javascript tag for the Opal bootstrapping code by default (See *Added* above).
+
 
 
 
