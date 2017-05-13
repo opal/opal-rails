@@ -44,8 +44,28 @@ For a full list of the available configuration options please refer to: [lib/opa
 
 ## Usage
 
-Rename `app/assets/javascripts/application.js` to `app/assets/javascripts/application.js.rb` and
-replace the Sprockets directives with plain requires as follows:
+### Basic example
+
+1. Rename `app/assets/javascripts/application.js` to `app/assets/javascripts/application.js.rb`
+2. Replace the Sprockets directives with plain requires
+
+```ruby
+# Require the opal runtime and core library
+require 'opal'
+
+# For Rails 5.1 and above, otherwise use 'opal_ujs'
+require 'rails_ujs'
+
+# Require of JS libraries will be forwarded to sprockets as is
+require 'turbolinks'
+
+# a Ruby equivalent of the require_tree Sprockets directive is available
+require_tree '.'
+
+puts "hello world!"
+```
+
+### A more extensive example
 
 ```ruby
 require 'opal'
@@ -81,18 +101,19 @@ $$[:document].addEventListener(:DOMContentLoaded, -> {
 ```
 
 
-### Using Sprockets directives
+### Using Sprockets directives and `application.js`
 
-If you want to use `application.js` (instead of `application.js.rb`) and keep Sprockets directives, you'll need to load the Opal files you require via Sprockets manually, e.g.:
+If you want to use `application.js` (instead of `application.js.rb`) and keep using Sprockets directives, you'll need to load the Opal files you require via Sprockets manually, e.g.:
 
 ```js
 //= require opal
-//= require opal_ujs
+//= require rails_ujs
 //= require turbolinks
 //= require_tree .
-//= require foobar
+//= require app
 
-Opal.load('foobar');
+Opal.load('opal');
+Opal.load('app');
 ```
 
 
