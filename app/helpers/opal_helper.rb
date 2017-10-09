@@ -1,3 +1,5 @@
+require 'opal/sprockets'
+
 module OpalHelper
   def opal_tag(opal_code = nil, &block)
     opal_code ||= capture(&block)

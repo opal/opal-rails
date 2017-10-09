@@ -15,9 +15,9 @@ before_script:
   # - "export DISPLAY=:99.0"
   # - "sh -e /etc/init.d/xvfb start"
   - "gem install appraisal"
-  - "appraisal install"
+  - "bundle exec appraisal install"
 
-script: "appraisal rake"
+script: "bundle exec appraisal rake"
 
 notifications:
   irc: "irc.freenode.org#opal"
