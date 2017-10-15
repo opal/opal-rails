@@ -19,8 +19,8 @@ before_script:
 
 script: "bundle exec appraisal rake"
 
-notifications:
-  irc: "irc.freenode.org#opal"
+# notifications:
+#   irc: "irc.freenode.org#opal"
 
 before_install:
   - "export PATH=$PWD/travis_phantomjs/phantomjs-2.1.1-linux-x86_64/bin:$PATH"
