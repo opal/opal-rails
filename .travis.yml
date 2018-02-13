@@ -12,16 +12,16 @@ rvm:
   - 2.2.8
   - 2.1.10
 
-before_script:
-  # - "export DISPLAY=:99.0"
-  # - "sh -e /etc/init.d/xvfb start"
-  - "gem install appraisal"
-  - "bundle exec appraisal install"
+gemfile:
+  - gemfiles/rails_4_2_opal_master.gemfile
+  - gemfiles/rails_5_0_opal_master.gemfile
+  - gemfiles/rails_5_1_opal_master.gemfile
+  - gemfiles/rails_4_2_opal_0_10.gemfile
+  - gemfiles/rails_5_0_opal_0_10.gemfile
+  - gemfiles/rails_5_1_opal_0_10.gemfile
 
-script: "bundle exec appraisal rake"
-
-# notifications:
-#   irc: "irc.freenode.org#opal"
+before_script: bundle install
+script: "bundle exec rake"
 
 before_install:
   - "export PATH=$PWD/travis_phantomjs/phantomjs-2.1.1-linux-x86_64/bin:$PATH"
