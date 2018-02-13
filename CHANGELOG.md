@@ -21,7 +21,19 @@ Whitespace conventions:
 
 
 
-## [0.9.3] - 2017-05-08
+## [0.9.4](https://github.com/opal/opal-rails/compare/v0.9.3...HEAD) - 2018-02-13
+
+
+### Changed
+
+- Improved documentation simplifying the basic usage example
+- Allow Opal v0.11
+- Improved testing
+
+
+
+
+## [0.9.3](https://github.com/opal/opal-rails/compare/v0.9.2...v0.9.3) - 2017-05-08
 
 
 ### Added
@@ -202,7 +214,6 @@ Whitespace conventions:
 
 
 
-[Unreleased]: https://github.com/opal/opal-rails/compare/v0.9.2...HEAD
 [0.9.2]: https://github.com/opal/opal-rails/compare/v0.9.1...v0.9.2
 [0.9.1]: https://github.com/opal/opal-rails/compare/v0.9.0...v0.9.1
 [0.9.0]: https://github.com/opal/opal-rails/compare/v0.8.1...v0.9.0
