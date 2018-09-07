@@ -27,6 +27,12 @@ Whitespace conventions:
 ### Added
 
 - Added support for inline source-maps provided by opal-sprockets 0.4.2+
+- Added Rails 5.2 to the test matrix
+
+
+### Removed
+
+- Removed support for Opal v0.10
 
 
 

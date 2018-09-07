@@ -1,3 +1,4 @@
+require 'base64'
 require 'spec_helper'
 require 'opal/source_map'
 
@@ -9,35 +10,33 @@ describe Opal::SourceMap do
     expect(Rails.application.config.assets.compile).to be_truthy
     expect(Rails.application.assets).to be_present
     expect(Rails.application.config.assets.debug).to be_truthy
-    get js_asset_path
   end
-
-  let(:map_path) { extract_map_path(response) }
 
   let(:map_body) do
-    get map_path
-    expect(response).to be_success, "url: #{map_path}\nstatus: #{response.status}"
-    response.body
-  end
+    get js_asset_path
 
-  let(:map) { JSON.parse(map_body) }
+    inline_map_prefix = '//# sourceMappingURL=data:application/json;base64,'
 
-  it 'has the source map header or magic comment' do
-    expect(extract_map_path(response)).to be_present
-  end
+    if response.body.lines.last.start_with? inline_map_prefix
+      Base64.decode64(response.body.lines.last.split(inline_map_prefix, 2)[1])
+    else
+      source_map_regexp = %r{^//[@#] sourceMappingURL=([^\n]+)}
+      header_map_path = response.headers['X-SourceMap'].presence
+      comment_map_path = response.body.scan(source_map_regexp).flatten.first.to_s.strip.presence
 
-  it "the map is a valid json" do
-    get map_path
-    %w[sources mappings].each do |key|
-      expect(map_body[key]).to be_present
+      map_path = header_map_path || comment_map_path
+
+      get map_path
+      expect(response).to be_successful, "url: #{map_path}\nstatus: #{response.status}"
+      response.body
     end
   end
 
-  def extract_map_path response
-    source_map_regexp = %r{^//[@#] sourceMappingURL=([^\n]+)}
-    header_map_path = response.headers['X-SourceMap'].presence
-    comment_map_path = response.body.scan(source_map_regexp).flatten.first.to_s.strip.presence
+  let(:map) { JSON.parse(map_body, symbolize_names: true) }
 
-    header_map_path or comment_map_path
+  it 'has the source map be there' do
+    expect(map).to be_present
+    expect(map[:sources]).to be_present
+    expect(map[:mappings]).to be_present
   end
 end
