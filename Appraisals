@@ -7,7 +7,7 @@ ENV['OPAL_VERSION'] = nil # ensure the env is clean
 {
   opal_master: -> gemfile do
     gemfile.gem 'opal', github: 'opal', branch: :master
-    gemfile.gem 'opal-rspec', github: 'opal/opal-rspec', branch: 'elia/opal-master'
+    gemfile.gem 'opal-rspec', github: 'opal/opal-rspec', branch: :master
     gemfile.gem 'opal-sprockets', github: 'opal/opal-sprockets', branch: :master
   end,
   opal_0_10: -> gemfile do
