@@ -44,3 +44,9 @@ class ApplicationController < ActionController::Base
     render type: :js, locals: { local_var: 'i am local' }
   end
 end
+
+Rails.logger = Logger.new(STDOUT) if $DEBUG
+
+require 'opal/sprockets/version'
+p rails: Rails.version, opal: Opal::VERSION, ruby: RUBY_VERSION, opal_sprockets: Opal::Sprockets::VERSION
+
