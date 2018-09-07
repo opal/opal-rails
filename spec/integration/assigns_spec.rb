@@ -47,7 +47,7 @@ describe 'controller assignments' do
 
   def get_source_of path
     get path
-    response.should be_success
+    response.should be_successful
     source = response.body
   end
 

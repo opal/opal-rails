@@ -20,6 +20,7 @@ module RailsApp
     config.action_controller.allow_forgery_protection = false
     config.active_support.deprecation                 = :stderr
     config.secret_key_base                            = '49837489qkuweoiuoqwe'
+    config.active_record.sqlite3.represent_boolean_as_integer = true
 
     config.middleware.delete Rack::Lock
     config.middleware.delete ActionDispatch::Flash
