@@ -5,28 +5,37 @@ sudo: false
 cache:
   bundler: true
 
-rvm:
-  - 2.5.0
-  - 2.4.2
-  - 2.3.5
-  - 2.2.8
-  - 2.1.10
+matrix:
+  fast_finish: true
 
-gemfile:
-  - gemfiles/rails_4_2_opal_master.gemfile
-  - gemfiles/rails_5_0_opal_master.gemfile
-  - gemfiles/rails_5_1_opal_master.gemfile
-  - gemfiles/rails_5_2_opal_master.gemfile
-  - gemfiles/rails_4_2_opal_0_11.gemfile
-  - gemfiles/rails_5_0_opal_0_11.gemfile
-  - gemfiles/rails_5_1_opal_0_11.gemfile
-  - gemfiles/rails_5_2_opal_0_11.gemfile
+  include:
+    - gemfile: gemfiles/rails_4_2_opal_master.gemfile
+      rvm: 2.3.7
+    - gemfile: gemfiles/rails_5_0_opal_master.gemfile
+      rvm: 2.4.4
+    - gemfile: gemfiles/rails_5_1_opal_master.gemfile
+      rvm: 2.5.1
+    - gemfile: gemfiles/rails_5_2_opal_master.gemfile
+      rvm: 2.5.1
 
-allow_failures:
-  - gemfile: gemfiles/rails_4_2_opal_master.gemfile
-  - gemfile: gemfiles/rails_5_0_opal_master.gemfile
-  - gemfile: gemfiles/rails_5_1_opal_master.gemfile
-  - gemfile: gemfiles/rails_5_2_opal_master.gemfile
+    - gemfile: gemfiles/rails_4_2_opal_0_11.gemfile
+      rvm: 2.3.7
+    - gemfile: gemfiles/rails_5_0_opal_0_11.gemfile
+      rvm: 2.4.4
+    - gemfile: gemfiles/rails_5_1_opal_0_11.gemfile
+      rvm: 2.5.1
+    - gemfile: gemfiles/rails_5_2_opal_0_11.gemfile
+      rvm: 2.5.1
+
+  allow_failures:
+    - gemfile: gemfiles/rails_4_2_opal_master.gemfile
+      rvm: 2.3.7
+    - gemfile: gemfiles/rails_5_0_opal_master.gemfile
+      rvm: 2.4.4
+    - gemfile: gemfiles/rails_5_1_opal_master.gemfile
+      rvm: 2.5.1
+    - gemfile: gemfiles/rails_5_2_opal_master.gemfile
+      rvm: 2.5.1
 
 before_script: bundle install
 script: "bundle exec rake"
