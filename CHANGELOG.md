@@ -21,7 +21,17 @@ Whitespace conventions:
 
 
 
-## [0.9.4](https://github.com/opal/opal-rails/compare/v0.9.3...HEAD) - 2018-02-13
+## [0.9.5](https://github.com/opal/opal-rails/compare/v0.9.4...v0.9.5) - 2018-09-07
+
+
+### Added
+
+- Added support for inline source-maps provided by opal-sprockets 0.4.2+
+
+
+
+
+## [0.9.4](https://github.com/opal/opal-rails/compare/v0.9.3...v0.9.4) - 2018-02-13
 
 
 ### Changed
