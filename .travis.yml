@@ -16,9 +16,17 @@ gemfile:
   - gemfiles/rails_4_2_opal_master.gemfile
   - gemfiles/rails_5_0_opal_master.gemfile
   - gemfiles/rails_5_1_opal_master.gemfile
-  - gemfiles/rails_4_2_opal_0_10.gemfile
-  - gemfiles/rails_5_0_opal_0_10.gemfile
-  - gemfiles/rails_5_1_opal_0_10.gemfile
+  - gemfiles/rails_5_2_opal_master.gemfile
+  - gemfiles/rails_4_2_opal_0_11.gemfile
+  - gemfiles/rails_5_0_opal_0_11.gemfile
+  - gemfiles/rails_5_1_opal_0_11.gemfile
+  - gemfiles/rails_5_2_opal_0_11.gemfile
+
+allow_failures:
+  - gemfile: gemfiles/rails_4_2_opal_master.gemfile
+  - gemfile: gemfiles/rails_5_0_opal_master.gemfile
+  - gemfile: gemfiles/rails_5_1_opal_master.gemfile
+  - gemfile: gemfiles/rails_5_2_opal_master.gemfile
 
 before_script: bundle install
 script: "bundle exec rake"
