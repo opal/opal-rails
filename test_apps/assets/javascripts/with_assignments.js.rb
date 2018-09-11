@@ -1,4 +1,3 @@
-require 'json'
 return {
   number_var: @number_var,
   string_var: @string_var,
