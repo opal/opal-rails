@@ -18,28 +18,28 @@ github = -> repo_name { "https://github.com/#{repo_name}.git" }
     gemfile.gem 'opal-sprockets'
   end,
 }.each do |opal_version, gem_opal|
-  appraise "rails-4-1-#{opal_version}" do
+  appraise "rails_4_1_#{opal_version}" do
     gem "rails", "~> 4.1.16"
     gem "sprockets-rails", "< 3"
     gem_opal[self]
   end if current_ruby < ruby_2_4_0
 
-  appraise "rails-4-2-#{opal_version}" do
+  appraise "rails_4_2_#{opal_version}" do
     gem "rails", "~> 4.2.7"
     gem_opal[self]
   end
 
-  appraise "rails-5-0-#{opal_version}" do
+  appraise "rails_5_0_#{opal_version}" do
     gem "rails", "~> 5.0.0"
     gem_opal[self]
   end if current_ruby >= ruby_2_2_2
 
-  appraise "rails-5-1-#{opal_version}" do
+  appraise "rails_5_1_#{opal_version}" do
     gem "rails", "~> 5.1.0"
     gem_opal[self]
   end if current_ruby >= ruby_2_2_2
 
-  appraise "rails-5-2-#{opal_version}" do
+  appraise "rails_5_2_#{opal_version}" do
     gem "rails", "~> 5.2.0"
     gem_opal[self]
   end if current_ruby >= ruby_2_2_2
