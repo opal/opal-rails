@@ -1,6 +1,6 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
-# You can use Opal in this file: http://opalrb.org/
+# You can use Opal in this file: http://opalrb.com/
 #
 #
 # Here's an example view class for your controller:
