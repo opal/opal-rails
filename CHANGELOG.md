@@ -21,6 +21,18 @@ Whitespace conventions:
 
 
 
+## [1.0.0](https://github.com/opal/opal-rails/compare/v0.9.5...v1.0.0) - 2019-07-03
+
+### Added
+
+- Added support for Opal v1.0.0
+
+### Removed
+
+- Removed support for Opal v0.11
+- Removed support for Rails v4.2 and v5.0
+
+
 ## [0.9.5](https://github.com/opal/opal-rails/compare/v0.9.4...v0.9.5) - 2018-09-07
 
 

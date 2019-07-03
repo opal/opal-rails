@@ -14,35 +14,29 @@ matrix:
   fast_finish: true
 
   include:
-    - gemfile: gemfiles/rails_4_2_opal_master.gemfile
-      rvm: 2.3.7
-    - gemfile: gemfiles/rails_5_0_opal_master.gemfile
-      rvm: 2.4.4
     - gemfile: gemfiles/rails_5_1_opal_master.gemfile
-      rvm: 2.5.1
+      rvm: 2.5.5
     - gemfile: gemfiles/rails_5_2_opal_master.gemfile
-      rvm: 2.5.1
+      rvm: 2.6.3
 
-    - gemfile: gemfiles/rails_4_2_opal_0_11.gemfile
-      rvm: 2.3.7
-    - gemfile: gemfiles/rails_5_0_opal_0_11.gemfile
-      rvm: 2.4.4
-    - gemfile: gemfiles/rails_5_1_opal_0_11.gemfile
-      rvm: 2.5.1
-    - gemfile: gemfiles/rails_5_2_opal_0_11.gemfile
-      rvm: 2.5.1
+    - gemfile: gemfiles/rails_5_1_opal_1_0.gemfile
+      rvm: 2.5.5
+    - gemfile: gemfiles/rails_5_2_opal_1_0.gemfile
+      rvm: 2.6.3
 
   allow_failures:
-    - gemfile: gemfiles/rails_4_2_opal_master.gemfile
-      rvm: 2.3.7
-    - gemfile: gemfiles/rails_5_0_opal_master.gemfile
-      rvm: 2.4.4
     - gemfile: gemfiles/rails_5_1_opal_master.gemfile
-      rvm: 2.5.1
+      rvm: 2.5.5
     - gemfile: gemfiles/rails_5_2_opal_master.gemfile
-      rvm: 2.5.1
+      rvm: 2.6.3
 
 before_script: bundle install
 script: "bundle exec rake"
 
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
 

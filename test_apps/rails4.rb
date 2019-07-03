@@ -28,6 +28,10 @@ module RailsApp
     routes.append do
       get '/' => 'application#index'
       get '/application/with_assignments' => 'application#with_assignments'
+
+      # just to reduce noise
+      get '/apple-touch-icon-precomposed.png' => -> { [404,{},[]] }
+      get '/favicon.ico' => -> { [404,{},[]] }
     end
 
     config.assets.paths << File.join(__dir__, 'assets/javascripts')
