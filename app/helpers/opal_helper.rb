@@ -19,7 +19,8 @@ module OpalHelper
 
     script_tags = "".html_safe
     sources.each do |source|
-      loading_code = Opal::Sprockets.load_asset(source)
+      load_asset_code = Opal::Sprockets.load_asset(source)
+      loading_code = "if(Opal.modules[#{source.to_json}]){#{load_asset_code}}"
 
       if skip_onload
         script_tags << super(source, options)
