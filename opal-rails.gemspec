@@ -11,10 +11,6 @@ Gem::Specification.new do |s|
   s.summary     = %q{Rails bindings for opal JS engine}
   s.description = %q{Rails bindings for opal JS engine}
   s.license     = 'MIT-LICENSE'
-  # s.post_install_message = [
-  #  "BEWARE: Spec support is being extracted from `opal-rails` into `opal-rspec-rails`",
-  #  "        Please use `opal-rspec-rails` or the 0-8-stable branch."
-  # ].join("\n")
 
   s.rubyforge_project = 'opal-rails'
 
@@ -23,22 +19,21 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ['lib']
 
-  required_ruby_version = '>= 2.1'
+  required_ruby_version = '>= 2.3'
 
-  s.add_dependency 'rails',               '>= 4.1', '< 6.0'
+  s.add_dependency 'rails',               '>= 5.1', '< 6.0'
   s.add_dependency 'sprockets-rails',     '>= 2.3.3', '< 4.0'
   s.add_dependency 'jquery-rails'
 
-  s.add_dependency 'opal',                '>= 0.11.0', '< 0.12'
-  s.add_dependency 'opal-jquery',         '~> 0.4.0'
-  s.add_dependency 'opal-sprockets',      '~> 0.4.2'
+  s.add_dependency 'opal',                '~> 1.0.0'
+  s.add_dependency 'opal-jquery',         '~> 0.4.4'
+  s.add_dependency 'opal-sprockets',      '~> 0.4.5'
   s.add_dependency 'opal-activesupport',  '>= 0.0.5'
 
   s.add_development_dependency 'execjs'
   s.add_development_dependency 'launchy'
-  s.add_development_dependency 'capybara', '~> 2.3'
-  s.add_development_dependency 'chromedriver-helper'
-  s.add_development_dependency 'selenium-webdriver'
+  s.add_development_dependency 'capybara', '~> 3.25'
+  s.add_development_dependency 'apparition'
   s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'appraisal', '~> 2.1'
   s.add_development_dependency 'sqlite3'
