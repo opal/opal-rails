@@ -33,19 +33,6 @@ module Opal
           key = "#{key}="
           Opal::Config.send(key, value) if Opal::Config.respond_to? key
         end
-
-        if defined?(Opa::SourceMapServer)
-          app.routes.prepend do
-            if Opal::Config.source_map_enabled && config.assets.compile && config.assets.debug
-              maps_prefix = '/__OPAL_SOURCE_MAPS__'
-              maps_app    = Opal::SourceMapServer.new(app.assets, maps_prefix)
-
-              ::Opal::Sprockets::SourceMapHeaderPatch.inject!(maps_prefix)
-
-              mount maps_app => maps_prefix
-            end
-          end
-        end
       end
 
     end
