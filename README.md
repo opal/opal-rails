@@ -112,8 +112,8 @@ If you want to use `application.js` (instead of `application.js.rb`) and keep us
 //= require_tree .
 //= require app
 
-Opal.load('opal');
-Opal.load('app');
+Opal.require('opal');
+Opal.require('app');
 ```
 
 
