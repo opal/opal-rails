@@ -21,7 +21,9 @@ Whitespace conventions:
 
 
 
-## [1.0.1](https://github.com/opal/opal-rails/compare/v1.0.0...v1.0.1) - unreleased
+### Removed
+
+- Remove now unused code supporting the source-maps server which has been removed since Opal::Sprockets v0.4.2
 
 
 ### Fixed
@@ -33,9 +35,11 @@ Whitespace conventions:
 
 ## [1.0.0](https://github.com/opal/opal-rails/compare/v0.9.5...v1.0.0) - 2019-07-03
 
+
 ### Added
 
 - Added support for Opal v1.0.0
+
 
 ### Removed
 
