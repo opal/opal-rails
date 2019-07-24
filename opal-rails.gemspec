@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'opal',                '~> 1.0.0'
   s.add_dependency 'opal-jquery',         '~> 0.4.4'
-  s.add_dependency 'opal-sprockets',      '~> 0.4.5'
+  s.add_dependency 'opal-sprockets',      '~> 0.4.6'
   s.add_dependency 'opal-activesupport',  '>= 0.0.5'
 
   s.add_development_dependency 'execjs'

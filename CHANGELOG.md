@@ -21,6 +21,16 @@ Whitespace conventions:
 
 
 
+## [1.0.1](https://github.com/opal/opal-rails/compare/v1.0.0...v1.0.1) - unreleased
+
+
+### Fixed
+
+- Allow Opal loading to run before the runtime, where previously would have ended up in an error
+
+
+
+
 ## [1.0.0](https://github.com/opal/opal-rails/compare/v0.9.5...v1.0.0) - 2019-07-03
 
 ### Added
@@ -31,6 +41,8 @@ Whitespace conventions:
 
 - Removed support for Opal v0.11
 - Removed support for Rails v4.2 and v5.0
+
+
 
 
 ## [0.9.5](https://github.com/opal/opal-rails/compare/v0.9.4...v0.9.5) - 2018-09-07

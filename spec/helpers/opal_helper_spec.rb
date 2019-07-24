@@ -20,7 +20,7 @@ describe OpalHelper, type: :helper do
     # sprockets-rails v3 sets Rails.application.assets to nil in production mode
     allow(Rails.application).to receive(:assets).and_return(nil)
 
-    loading_code = %Q{Opal.load("application");}
+    loading_code = %Q{Opal.require("application");}
     escaped_loading_code = ERB::Util.h loading_code
 
     expect(helper.javascript_include_tag('application', debug: true)).to  include(escaped_loading_code)
