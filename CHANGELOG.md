@@ -21,19 +21,7 @@ Whitespace conventions:
 
 
 
-### Removed
-
-- Remove now unused code supporting the source-maps server which has been removed since Opal::Sprockets v0.4.2
-
-
-### Fixed
-
-- Allow Opal loading to run before the runtime, where previously would have ended up in an error
-
-
-
-
-## [1.0.0](https://github.com/opal/opal-rails/compare/v0.9.5...v1.0.0) - 2019-07-03
+## [1.0.0](https://github.com/opal/opal-rails/compare/v0.9.5...v1.0.0) - 2019-07-31
 
 
 ### Added
@@ -45,7 +33,13 @@ Whitespace conventions:
 
 - Removed support for Opal v0.11
 - Removed support for Rails v4.2 and v5.0
+- Remove now unused code supporting the source-maps server which has been removed since Opal::Sprockets v0.4.2
 
+
+### Fixed
+
+- Allow Opal loading to run before the runtime, where previously would have ended up in an error
+- A typo was preventing source-maps from being served on older versions of Opal
 
 
 
