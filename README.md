@@ -6,9 +6,13 @@
 ![fun guaranteed](https://img.shields.io/badge/fun-guaranteed-brightgreen.svg)
 ![web scale](http://img.shields.io/badge/webscale-over%209000-green.svg)
 
-_Rails bindings for [Opal Ruby](http://opalrb.com) engine. ([Changelog](https://github.com/opal/opal-rails/blob/master/CHANGELOG.md))_
+_Rails bindings for [Opal](http://opalrb.com). ([Changelog](https://github.com/opal/opal-rails/blob/master/CHANGELOG.md))_
 
+### Looking for Rails 6 / Webpack support?
 
+If you want to integrate Opal via Webpack please refer to [opal-webpack-loader](https://github.com/isomorfeus/opal-webpack-loader#installation) installation instructions. 
+
+ℹ️ Webpack and ES6 modules are not yet officially supported, but we're working on it thanks to the awesome work done in _opal-webpack-loader_.
 
 ## Installation
 
