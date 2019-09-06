@@ -8,6 +8,8 @@ Capybara.register_server :puma do |app, port, host|
   Rack::Handler::Puma.run(app, Host: host, Port: port, Threads: "0:4", Silent: true)
 end
 
+Capybara.default_max_wait_time = 5
+
 module OpalHelper
   def compile_opal(code)
     Opal.compile(code, requireable: false)
