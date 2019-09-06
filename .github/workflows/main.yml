@@ -1,0 +1,25 @@
+name: CI
+on: [push]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - ruby: ['2.5.x', '2.6.x']
+            rails: ['5_1', '5_2']
+            opal: ['1_0', 'master']
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Ruby ${{ matrix.ruby }}
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+    - name: Build and test with Rake
+      run: |
+        export BUNDLE_GEMFILE="gemfiles/rails_${{ matrix.rails }}_opal_${{ matrix.opal }}.gemfile"
+        gem install bundler
+        bundle install --jobs 4 --retry 3
+        bundle exec rake
