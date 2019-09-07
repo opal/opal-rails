@@ -21,6 +21,16 @@ Whitespace conventions:
 
 
 
+## [1.0.1](https://github.com/opal/opal-rails/compare/v1.0.0...v1.0.1) - 2019-09-07
+
+
+### Added
+
+- Added support for Rails v6.0 (Sprockets)
+
+
+
+
 ## [1.0.0](https://github.com/opal/opal-rails/compare/v0.9.5...v1.0.0) - 2019-07-31
 
 
@@ -40,6 +50,7 @@ Whitespace conventions:
 
 - Allow Opal loading to run before the runtime, where previously would have ended up in an error
 - A typo was preventing source-maps from being served on older versions of Opal
+
 
 
 
