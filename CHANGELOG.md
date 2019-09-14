@@ -21,6 +21,21 @@ Whitespace conventions:
 
 
 
+## [1.1.0](https://github.com/opal/opal-rails/compare/v1.0.1...v1.1.0) - unreleased
+
+
+### Added
+
+- Added the ability to pass only locals or only ivars when reproducing assigns in Opal templates, `Rails.application.config.opal.assigns_in_templates` can now be set to `:locals` or `:ivars` in addition to the already possible `true`.
+
+
+### Changed
+
+- The template handler now allows for the new Rails 6 api taking in both the template object and a source argument, but still allows the old behavior
+
+
+
+
 ## [1.0.1](https://github.com/opal/opal-rails/compare/v1.0.0...v1.0.1) - 2019-09-07
 
 

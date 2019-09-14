@@ -40,9 +40,17 @@ Rails.application.config.opal.optimized_operators      = true
 Rails.application.config.opal.arity_check              = !Rails.env.production?
 Rails.application.config.opal.const_missing            = true
 Rails.application.config.opal.dynamic_require_severity = :ignore
+
+# Other options
+
+# Send local and instance variables down to the view after converting
+# thier value with `.to_json`
+Rails.application.config.opal.assigns_in_templates = true
+Rails.application.config.opal.assigns_in_templates = :locals # only locals
+Rails.application.config.opal.assigns_in_templates = :ivars # only instance variables
 ```
 
-For a full list of the available configuration options please refer to: [lib/opal/config.rb](https://github.com/opal/opal/blob/master/lib/opal/config.rb).
+For a full list of the available configuration options for the compiler please refer to: [lib/opal/config.rb](https://github.com/opal/opal/blob/master/lib/opal/config.rb).
 
 
 

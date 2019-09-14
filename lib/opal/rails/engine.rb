@@ -12,6 +12,14 @@ module Opal
       config.opal.dynamic_require_severity = :ignore
       config.opal.assigns_in_templates = true
 
+      def (config.opal).assign_locals_in_templates?
+        assigns_in_templates == true || assigns_in_templates == :locals
+      end
+
+      def (config.opal).assign_instance_variables_in_templates?
+        assigns_in_templates == true || assigns_in_templates == :ivars
+      end
+
       # Cache eager_load_paths now, otherwise the assets dir is added
       # and its .rb files are eagerly loaded.
       config.eager_load_paths
