@@ -21,7 +21,7 @@ Whitespace conventions:
 
 
 
-## [1.1.0](https://github.com/opal/opal-rails/compare/v1.0.1...v1.1.0) - unreleased
+## [1.1.0](https://github.com/opal/opal-rails/compare/v1.0.1...v1.1.0) - 2019-09-14
 
 
 ### Added
