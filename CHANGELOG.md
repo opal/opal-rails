@@ -21,6 +21,16 @@ Whitespace conventions:
 
 
 
+## [1.1.1](https://github.com/opal/opal-rails/compare/v1.1.0...v1.1.1) - 2019-09-14
+
+
+### Fixed
+
+- Fix a problem with require order with regards to `opal-sprockets`.
+
+
+
+
 ## [1.1.0](https://github.com/opal/opal-rails/compare/v1.0.1...v1.1.0) - 2019-09-14
 
 
