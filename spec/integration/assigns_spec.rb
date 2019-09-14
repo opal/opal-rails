@@ -7,7 +7,7 @@ describe 'controller assignments' do
       Rails.application.config.opal.assigns_in_templates = true
     end
 
-    it 'are in the template' do
+    it 'has them in the template' do
       source = get_source_of '/application/with_assignments.js'
       assignments = opal_eval(source)
 
@@ -29,7 +29,7 @@ describe 'controller assignments' do
       Rails.application.config.opal.assigns_in_templates = false
     end
 
-    it 'are not in the template' do
+    it 'has not them in the template' do
       source = get_source_of '/application/with_assignments.js'
       assignments = opal_eval(source)
       {
@@ -43,6 +43,12 @@ describe 'controller assignments' do
         expect(assignments[ivar]).not_to eq(assignment)
       end
     end
+  end
+
+  it 'has the correct content type' do
+    get '/application/with_assignments.js'
+    expect(response).to be_successful
+    expect(response.headers['Content-Type']).to eq('text/javascript; charset=utf-8')
   end
 
   def get_source_of path
