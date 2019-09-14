@@ -21,6 +21,16 @@ Whitespace conventions:
 
 
 
+## [1.1.0](https://github.com/opal/opal-rails/compare/v1.0.1...v1.1.0) - unreleased
+
+
+### Changed
+
+- The template handler now allows for the new Rails 6 api taking in both the template object and a source argument, but still allows the old behavior
+
+
+
+
 ## [1.0.1](https://github.com/opal/opal-rails/compare/v1.0.0...v1.0.1) - 2019-09-07
 
 

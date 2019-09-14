@@ -2,12 +2,12 @@ module Opal
   module Rails
     class TemplateHandler
 
-      def self.call(template)
-        new.call(template)
+      def self.call(template, source = template.source)
+        new.call(template, source)
       end
 
-      def call(template)
-        escaped = template.source.gsub(':', '\:')
+      def call(template, source = template.source)
+        escaped = source.gsub(':', '\:')
         string = '%q:' + escaped + ':'
 
         <<-RUBY
