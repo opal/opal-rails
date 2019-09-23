@@ -20,17 +20,29 @@ describe OpalHelper, type: :helper do
     # sprockets-rails v3 sets Rails.application.assets to nil in production mode
     allow(Rails.application).to receive(:assets).and_return(nil)
 
-    loading_code = %Q{Opal.require("application");}
+    loading_code = [
+      %<if(window.Opal && Opal.modules["application"]){Opal.loaded(OpalLoaded || []);>,
+      %<Opal.require("application");}>,
+    ].join("\n")
+
     escaped_loading_code = ERB::Util.h loading_code
+    loading_code_in_script_tag = [
+      %(<script>), %(//<![CDATA[), loading_code, %(//]]>), %(</script>),
+    ].join("\n")
 
-    expect(helper.javascript_include_tag('application', debug: true)).to  include(escaped_loading_code)
+    expect(helper.javascript_include_tag('application', debug: true)).to include(loading_code_in_script_tag)
+    expect(helper.javascript_include_tag('application', debug: true)).not_to include(escaped_loading_code)
+
     expect(helper.javascript_include_tag('application', debug: false)).to include(escaped_loading_code)
-    expect(helper.javascript_include_tag('application', skip_opal_loader: true)).not_to include(escaped_loading_code)
-    expect(helper.javascript_include_tag('application', skip_opal_loader: true)).not_to include(escaped_loading_code)
+    expect(helper.javascript_include_tag('application', debug: false)).not_to include(loading_code_in_script_tag)
 
-    expect(helper.javascript_include_tag('application', force_opal_loader_tag: true, debug: true)).to  include(loading_code)
-    expect(helper.javascript_include_tag('application', force_opal_loader_tag: true, debug: false)).to include(loading_code)
-    expect(helper.javascript_include_tag('application', force_opal_loader_tag: true, skip_opal_loader: true)).not_to include(loading_code)
-    expect(helper.javascript_include_tag('application', force_opal_loader_tag: true, skip_opal_loader: true)).not_to include(loading_code)
+    expect(helper.javascript_include_tag('application', skip_opal_loader: true)).not_to include(escaped_loading_code)
+    expect(helper.javascript_include_tag('application', skip_opal_loader: false)).to include(loading_code_in_script_tag)
+
+    expect(helper.javascript_include_tag('application', force_opal_loader_tag: true, debug: true)).to include(loading_code_in_script_tag)
+    expect(helper.javascript_include_tag('application', force_opal_loader_tag: true, debug: false)).to include(loading_code_in_script_tag)
+
+    expect(helper.javascript_include_tag('application', force_opal_loader_tag: true, skip_opal_loader: true)).not_to include(escaped_loading_code)
+    expect(helper.javascript_include_tag('application', force_opal_loader_tag: true, skip_opal_loader: true)).to include(loading_code_in_script_tag)
   end
 end
