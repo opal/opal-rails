@@ -21,6 +21,16 @@ Whitespace conventions:
 
 
 
+## [1.1.2](https://github.com/opal/opal-rails/compare/v1.1.1...v1.1.2) - 2019-09-26
+
+
+### Fixed
+
+- Default `skip_onload` to `true` when `javascript_asset_tag` is in debug mode, otherwise some assets may be loaded in the browser after the main source, thus being never loading by the Opal runtime.
+
+
+
+
 ## [1.1.1](https://github.com/opal/opal-rails/compare/v1.1.0...v1.1.1) - 2019-09-14
 
 
