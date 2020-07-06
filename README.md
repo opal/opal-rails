@@ -8,7 +8,7 @@
 
 _Rails bindings for [Opal](http://opalrb.com). ([Changelog](https://github.com/opal/opal-rails/blob/master/CHANGELOG.md))_
 
-### Looking Webpack support? 👀
+### Looking for Webpack support? 👀
 
 If you want to integrate Opal via Webpack please refer to [opal-webpack-loader](https://github.com/isomorfeus/opal-webpack-loader#installation) installation instructions.
 
