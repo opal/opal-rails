@@ -20,11 +20,20 @@ jobs:
       uses: actions/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
+    - name: Download bundle cache
+      uses: actions/download-artifact@v1
+      with:
+        name: bundle-${{ matrix.rails }}_${{ matrix.opal }}"
     - name: Install Dependencies
       run: |
         export BUNDLE_GEMFILE="gemfiles/${{ matrix.rails }}_${{ matrix.opal }}.gemfile"
         gem install bundler
-        bundle install --jobs 4 --retry 3
+        bundle install --jobs 4 --retry 3 --path .local-bundle
+    - name: Upload bundle cache
+      uses: actions/upload-artifact@v1
+      with:
+        name: bundle-${{ matrix.rails }}_${{ matrix.opal }}"
+        path: .local-bundle
     - name: Test with Rake
       run: |
         export BUNDLE_GEMFILE="gemfiles/${{ matrix.rails }}_${{ matrix.opal }}.gemfile"
