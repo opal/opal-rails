@@ -21,7 +21,7 @@ describe OpalHelper, type: :helper do
     allow(Rails.application).to receive(:assets).and_return(nil)
 
     loading_code = [
-      %<if(window.Opal && Opal.modules["application"]){Opal.loaded(OpalLoaded || []);>,
+      %<if(window.Opal && Opal.modules["application"]){Opal.loaded(typeof(OpalLoaded) === "undefined" ? [] : OpalLoaded);>,
       %<Opal.require("application");}>,
     ].join("\n")
 

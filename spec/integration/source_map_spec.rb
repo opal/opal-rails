@@ -3,7 +3,7 @@ require 'spec_helper'
 require 'opal/source_map'
 
 describe Opal::SourceMap do
-  let(:js_asset_path) { '/assets/source_map_example.self.js' }
+  let(:js_asset_path) { '/assets/source_map_example.debug.js' }
 
   before do
     expect(Rails.application.config.opal.source_map_enabled).to be_truthy
@@ -26,7 +26,7 @@ describe Opal::SourceMap do
 
       map_path = header_map_path || comment_map_path
 
-      get map_path
+      get URI.join("http://example.com/", js_asset_path, map_path).path
       expect(response).to be_successful, "url: #{map_path}\nstatus: #{response.status}"
       response.body
     end
@@ -36,7 +36,7 @@ describe Opal::SourceMap do
 
   it 'has the source map be there' do
     expect(map).to be_present
-    expect(map[:sources]).to be_present
-    expect(map[:mappings]).to be_present
+    expect(map[:sections].last[:map][:sources]).to be_present
+    expect(map[:sections].last[:map][:mappings]).to be_present
   end
 end

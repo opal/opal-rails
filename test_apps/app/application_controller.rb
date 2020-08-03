@@ -14,7 +14,7 @@ HTML
 
 WITH_ASSIGNMENTS = File.read "#{__dir__}/assets/javascripts/with_assignments.js.rb"
 
-require_relative '../app/helpers/opal_helper'
+require_relative '../../app/helpers/opal_helper'
 
 class ApplicationController < ActionController::Base
   include Rails.application.routes.url_helpers
