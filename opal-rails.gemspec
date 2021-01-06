@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
 
   required_ruby_version = '>= 2.3'
 
-  s.add_dependency 'rails',               '>= 5.1', '< 6.1'
+  s.add_dependency 'rails',               '>= 5.1', '< 6.2'
   s.add_dependency 'sprockets-rails',     '>= 2.3.3', '< 4.0'
   s.add_dependency 'jquery-rails'
 

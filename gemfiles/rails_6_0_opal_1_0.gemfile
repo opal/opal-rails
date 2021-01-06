@@ -2,7 +2,6 @@
 
 source "https://rubygems.org"
 
-gem "c_lexer"
 gem "rails", "~> 6.0.0"
 gem "opal", "~> 1.0.0"
 gem "opal-rspec", git: "https://github.com/opal/opal-rspec.git", branch: :master

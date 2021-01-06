@@ -1,13 +1,14 @@
-name: CI
-on: [push]
+on:
+  - push
+  - pull_request
 
 jobs:
   build:
     strategy:
       matrix:
-        ruby: ['2.5.x', '2.6.x']
-        rails: ['rails_5_1', 'rails_5_2', 'rails_6_0']
-        opal: ['opal_1_0', 'opal_master']
+        ruby: ['2.5.x', '2.6.x', '2.7.x']
+        rails: ['rails_5_2', 'rails_6_0', 'rails_6_1']
+        opal: ['opal_1_0']
     runs-on: ubuntu-latest
 
     steps:

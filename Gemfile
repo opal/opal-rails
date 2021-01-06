@@ -7,5 +7,3 @@ if ENV['OPAL_VERSION'] == 'master'
   gem 'opal-rspec', git: github['opal/opal-rspec'], branch: :master
   gem 'opal-sprockets', git: github['opal/opal-sprockets'], branch: :master
 end
-
-gem 'c_lexer'

@@ -18,7 +18,11 @@ Whitespace conventions:
 - 1 spaces before normal text
  -->
 
+## unreleased
 
+### Added
+
+- Added support for Rails v6.1
 
 
 ## [1.1.2](https://github.com/opal/opal-rails/compare/v1.1.1...v1.1.2) - 2019-09-26
