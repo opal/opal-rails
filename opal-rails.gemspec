@@ -1,41 +1,49 @@
-# coding: utf-8
-$:.push File.expand_path('../lib', __FILE__)
-require 'opal/rails/version'
+# frozen_string_literal: true
 
-Gem::Specification.new do |s|
-  s.name        = 'opal-rails'
-  s.version     = Opal::Rails::VERSION
-  s.authors     = ['Elia Schito']
-  s.email       = ['elia@schito.me']
-  s.homepage    = 'https://github.com/opal/opal-rails#readme'
-  s.summary     = %q{Rails bindings for opal JS engine}
-  s.description = %q{Rails bindings for opal JS engine}
-  s.license     = 'MIT-LICENSE'
+require_relative 'lib/opal/rails/version'
 
-  s.rubyforge_project = 'opal-rails'
+Gem::Specification.new do |spec|
+  spec.name        = 'opal-rails'
+  spec.version     = Opal::Rails::VERSION
+  spec.authors     = ['Elia Schito']
+  spec.email       = ['elia@schito.me']
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  s.require_paths = ['lib']
+  spec.summary     = %q{Rails bindings for opal JS engine}
+  spec.description = %q{Rails bindings for opal JS engine}
+  spec.homepage    = 'https://github.com/opal/opal-rails#readme'
+  spec.license     = 'MIT-LICENSE'
 
-  required_ruby_version = '>= 2.3'
+  spec.metadata['homepage_uri'] = spec.homepage
+  spec.metadata['source_code_uri'] = 'https://github.com/opal/opal-rails#readme'
+  spec.metadata['changelog_uri'] = 'https://github.com/opal/opal-rails/blob/master/CHANGELOG.md'
 
-  s.add_dependency 'rails',               '>= 5.1', '< 6.1'
-  s.add_dependency 'sprockets-rails',     '~> 3.2.1'
-  s.add_dependency 'jquery-rails'
+  spec.required_ruby_version = Gem::Requirement.new('~> 2.3')
 
-  s.add_dependency 'opal',                '~> 1.0.0'
-  s.add_dependency 'opal-jquery',         '~> 0.4.4'
-  s.add_dependency 'opal-sprockets',      '~> 0.5.0'
-  s.add_dependency 'opal-activesupport',  '>= 0.0.5'
+  # Specify which files should be added to the gem when it is released.
+  # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
+  files = Dir.chdir(__dir__) { `git ls-files -z`.split("\x0") }
 
-  s.add_development_dependency 'execjs'
-  s.add_development_dependency 'launchy'
-  s.add_development_dependency 'capybara', '~> 3.25'
-  s.add_development_dependency 'apparition'
-  s.add_development_dependency 'rspec-rails'
-  s.add_development_dependency 'appraisal', '~> 2.1'
-  s.add_development_dependency 'sqlite3'
-  s.add_development_dependency 'puma'
+  spec.files = files.grep_v(%r{^(test|spec|features)/})
+  spec.test_files = files.grep(%r{^(test|spec|features)/})
+  spec.bindir = "exe"
+  spec.executables = files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.require_paths = ["lib"]
+
+  spec.add_dependency 'rails',               '>= 5.1', '< 6.1'
+  spec.add_dependency 'sprockets-rails',     '~> 2.3.1'
+  spec.add_dependency 'jquery-rails'
+
+  spec.add_dependency 'opal',                '~> 1.0.0'
+  spec.add_dependency 'opal-jquery',         '~> 0.4.4'
+  spec.add_dependency 'opal-sprockets',      '~> 0.5.0'
+  spec.add_dependency 'opal-activesupport',  '>= 0.0.5'
+
+  spec.add_development_dependency 'execjs'
+  spec.add_development_dependency 'launchy'
+  spec.add_development_dependency 'capybara', '~> 3.25'
+  spec.add_development_dependency 'apparition'
+  spec.add_development_dependency 'rspec-rails'
+  spec.add_development_dependency 'appraisal', '~> 2.1'
+  spec.add_development_dependency 'sqlite3'
+  spec.add_development_dependency 'puma'
 end
