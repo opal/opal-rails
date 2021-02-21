@@ -261,14 +261,14 @@ Opal.use_gem 'cannonbol'
 Run the specs:
 
 ```
-bundle install
-bundle exec rake
+bin/setup
+bin/rake
 ```
 
 Inspect the test app:
 
 ```
-bundle exec rackup
+bin/rackup
 # visit localhost:9292
 ```
 
