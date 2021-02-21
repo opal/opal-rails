@@ -1,7 +1,9 @@
 require 'spec_helper'
 
-describe OpalHelper, type: :helper do
-  # subject(:helper) { double(javascript_include_tag: '<super>').extend described_class }
+# We need the view type because helpers specs are to are too minimalistic
+# and are missing some initialization stuff.
+describe OpalHelper, :js, type: :view do
+  let(:helper) { view }
 
   describe '#opal_tag' do
     it 'compiles to js' do
