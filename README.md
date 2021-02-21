@@ -14,18 +14,13 @@ If you want to integrate Opal via Webpack please refer to [opal-webpack-loader](
 
 ℹ️ Webpack and ES6 modules are not yet officially supported, but we're working on it thanks to the awesome work done in _opal-webpack-loader_.
 
+
 ## Installation
 
 In your `Gemfile`
 
 ```ruby
 gem 'opal-rails'
-```
-
-or when you build your new Rails app:
-
-```bash
-rails new <app-name> --javascript=opal
 ```
 
 
@@ -190,7 +185,6 @@ Of course you need to require `haml-rails` separately since its presence is not 
       Element.find('.comments').effect(:fade_in)
     end
   end
-
 ```
 
 

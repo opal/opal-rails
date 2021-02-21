@@ -1,6 +1,5 @@
 # FROM: http://www.rubytutorial.io/how-to-test-your-gem-against-multiple-rails/
 
-# test/apps/rails5.rb
 require 'rails'
 require 'rails/all'
 require 'action_view/testing/resolvers'

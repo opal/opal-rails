@@ -29,14 +29,11 @@ Gem::Specification.new do |spec|
   spec.executables = files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency 'rails',               '>= 5.1', '< 6.1'
-  spec.add_dependency 'sprockets-rails',     '~> 2.3.1'
-  spec.add_dependency 'jquery-rails'
+  spec.add_dependency 'rails',               '>= 6.0', '< 7'
+  spec.add_dependency 'sprockets-rails',     '>= 3.0'
 
-  spec.add_dependency 'opal',                '~> 1.0.0'
-  spec.add_dependency 'opal-jquery',         '~> 0.4.4'
-  spec.add_dependency 'opal-sprockets',      '~> 0.5.0'
-  spec.add_dependency 'opal-activesupport',  '>= 0.0.5'
+  spec.add_dependency 'opal',                '~> 1.0'
+  spec.add_dependency 'opal-sprockets',      '~> 1.0'
 
   spec.add_development_dependency 'execjs'
   spec.add_development_dependency 'launchy'

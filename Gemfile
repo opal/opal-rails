@@ -10,8 +10,5 @@ when 'local'
   gem 'pry'
 when 'master'
   gem 'opal', git: github['opal/opal'], branch: :master
-  gem 'opal-rspec', git: github['opal/opal-rspec'], branch: :master
   gem 'opal-sprockets', git: github['opal/opal-sprockets'], branch: :master
 end
-
-gem 'c_lexer'
