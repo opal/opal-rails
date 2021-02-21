@@ -23,6 +23,12 @@ In your `Gemfile`
 gem 'opal-rails'
 ```
 
+Add `app/assets/javascript` to your asset-pipeline manifest in `app/assets/config/manifest.js`:
+
+```
+bin/rails opal:install
+```
+
 
 ### Configuration
 
