@@ -283,7 +283,7 @@ bin/rails s # will start the sandbox app server
 
 ## License
 
-© 2012-2019 Elia Schito
+© 2012-2021 Elia Schito
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
