@@ -18,7 +18,23 @@ Whitespace conventions:
 - 1 spaces before normal text
  -->
 
+## [2.0](https://github.com/opal/opal-rails/compare/v1.1.2...HEAD) - unreleased
 
+*Bumping a major version, since this version will make a number of dependencies opt-in and drop older Rails and Sprockets versions*
+
+### Added
+
+- Added support for Rails v6.1
+- Added a generator for the initial setup (`bin/rails generate opal:install`) that will configure sprockets and create the main `application.js.rb`
+
+### Changed
+
+- Now the template handler will encode/decode local and instance variables with ActiveSupport::JSON
+
+### Removed
+
+- Removed support for Rails 5.x
+- opal-jquery and opal-activesupport are no longer dependencies of opal-rails, if you need them you'll need to require and setup them manually
 
 
 ## [1.1.2](https://github.com/opal/opal-rails/compare/v1.1.1...v1.1.2) - 2019-09-26
