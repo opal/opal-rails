@@ -256,6 +256,30 @@ Opal.use_gem 'cannonbol'
 ```
 
 
+## Contributing
+
+Run the specs:
+
+```
+bundle install
+bundle exec rake
+```
+
+Inspect the test app:
+
+```
+bundle exec rackup
+# visit localhost:9292
+```
+
+Tinker with a sandbox app:
+
+```
+bin/sandbox # will re-create the app
+bin/rails s # will start the sandbox app server
+# visit localhost:3000
+```
+
 
 ## License
 

@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require 'pathname'
+
+root = Pathname('sandbox')
+
+system 'bin/rails opal:install'
+system 'bin/rails g controller home index -f'
+
+root.join('config/routes.rb').write <<~RUBY
+  Rails.application.routes.draw do
+    root to: "home#index"
+  end
+RUBY
