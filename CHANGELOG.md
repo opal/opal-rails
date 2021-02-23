@@ -18,7 +18,7 @@ Whitespace conventions:
 - 1 spaces before normal text
  -->
 
-## [2.0](https://github.com/opal/opal-rails/compare/v1.1.2...v2.0.0) - unreleased
+## [2.0](https://github.com/opal/opal-rails/compare/v1.1.2...v2.0.0) - 2021-02-23
 
 *Bumping a major version, since this version will make a number of dependencies opt-in and drop older Rails and Sprockets versions*
 
