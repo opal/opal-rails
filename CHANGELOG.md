@@ -18,9 +18,24 @@ Whitespace conventions:
 - 1 spaces before normal text
  -->
 
-## [2.0](https://github.com/opal/opal-rails/compare/v1.1.2...v2.0.0) - unreleased
 
-*Bumping a major version, since this version will make a number of dependencies opt-in and drop older Rails and Sprockets versions*
+
+## [2.0.1](https://github.com/opal/opal-rails/compare/v2.0.0...v2.0.1) - 2021-03-03
+
+
+### Added
+
+- The install generator now will add an `opal.rb` initializer with a default compiler configuration and the template assign support disabled
+
+### Fixed
+
+- The install generator was missing a newline when changing the app layout
+
+
+## [2.0.0](https://github.com/opal/opal-rails/compare/v1.1.2...v2.0.0) - 2021-02-23
+
+*This is a major version, since a number of dependencies are going to be opt-in and support for older Rails
+and Sprockets versions is dropped*
 
 ### Added
 
