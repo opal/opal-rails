@@ -1,7 +1,9 @@
 require 'spec_helper'
 
-describe OpalHelper, type: :helper do
-  # subject(:helper) { double(javascript_include_tag: '<super>').extend described_class }
+# We need the view type because helpers specs are to are too minimalistic
+# and are missing some initialization stuff.
+describe OpalHelper, :js, type: :view do
+  let(:helper) { view }
 
   describe '#opal_tag' do
     it 'compiles to js' do
@@ -21,7 +23,7 @@ describe OpalHelper, type: :helper do
     allow(Rails.application).to receive(:assets).and_return(nil)
 
     loading_code = [
-      %<if(window.Opal && Opal.modules["application"]){Opal.loaded(OpalLoaded || []);>,
+      %<if(window.Opal && Opal.modules["application"]){Opal.loaded(typeof(OpalLoaded) === "undefined" ? [] : OpalLoaded);>,
       %<Opal.require("application");}>,
     ].join("\n")
 

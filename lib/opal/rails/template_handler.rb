@@ -1,3 +1,5 @@
+require 'active_support/json'
+
 module Opal
   module Rails
     class TemplateHandler
@@ -17,11 +19,11 @@ module Opal
           code << 'Object.new.instance_eval {'
 
           if config.assign_locals_in_templates?
-            code << JSON.parse(local_assigns.to_json).map { |key, val| "\#{key} = \#{val.inspect};" }.join
+            code << ActiveSupport::JSON.decode(ActiveSupport::JSON.encode(local_assigns)).map { |key, val| "\#{key} = \#{val.inspect};" }.join
           end
 
           if config.assign_instance_variables_in_templates?
-            code << JSON.parse(@_assigns.to_json).map { |key, val| "@\#{key} = \#{val.inspect};" }.join
+            code << ActiveSupport::JSON.decode(ActiveSupport::JSON.encode(@_assigns)).map { |key, val| "@\#{key} = \#{val.inspect};" }.join
           end
 
           code << #{string}

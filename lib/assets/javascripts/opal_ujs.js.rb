@@ -1,4 +1,1 @@
-require 'jquery'
-require 'jquery_ujs'
-require 'opal'
-require 'opal-jquery'
+warn "`opal_ujs` is deprecated and no longer works"

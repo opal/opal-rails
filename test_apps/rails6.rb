@@ -1,6 +1,5 @@
 # FROM: http://www.rubytutorial.io/how-to-test-your-gem-against-multiple-rails/
 
-# test/apps/rails5.rb
 require 'rails'
 require 'rails/all'
 require 'action_view/testing/resolvers'
@@ -37,7 +36,6 @@ module RailsApp
       get '/favicon.ico' => -> { [404,{},[]] }
     end
 
-    config.assets.paths << File.join(__dir__, 'assets/javascripts')
     config.assets.debug = true
     config.assets.digest = true
 
@@ -46,5 +44,5 @@ module RailsApp
   end
 end
 
-require_relative './application_controller'
+require_relative './app/application_controller'
 RailsApp::Application.initialize!

@@ -14,6 +14,7 @@ If you want to integrate Opal via Webpack please refer to [opal-webpack-loader](
 
 ℹ️ Webpack and ES6 modules are not yet officially supported, but we're working on it thanks to the awesome work done in _opal-webpack-loader_.
 
+
 ## Installation
 
 In your `Gemfile`
@@ -22,10 +23,10 @@ In your `Gemfile`
 gem 'opal-rails'
 ```
 
-or when you build your new Rails app:
+Add `app/assets/javascript` to your asset-pipeline manifest in `app/assets/config/manifest.js`:
 
-```bash
-rails new <app-name> --javascript=opal
+```
+bin/rails opal:install
 ```
 
 
@@ -190,7 +191,6 @@ Of course you need to require `haml-rails` separately since its presence is not 
       Element.find('.comments').effect(:fade_in)
     end
   end
-
 ```
 
 
@@ -256,10 +256,34 @@ Opal.use_gem 'cannonbol'
 ```
 
 
+## Contributing
+
+Run the specs:
+
+```
+bin/setup
+bin/rake
+```
+
+Inspect the test app:
+
+```
+bin/rackup
+# visit localhost:9292
+```
+
+Tinker with a sandbox app:
+
+```
+bin/sandbox # will re-create the app
+bin/rails s # will start the sandbox app server
+# visit localhost:3000
+```
+
 
 ## License
 
-© 2012-2019 Elia Schito
+© 2012-2021 Elia Schito
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal

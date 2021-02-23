@@ -3,7 +3,7 @@ require 'spec_helper'
 require 'opal/source_map'
 
 describe Opal::SourceMap do
-  let(:js_asset_path) { '/assets/source_map_example.self.js' }
+  let(:js_asset_path) { '/assets/source_map_example.debug.js' }
 
   before do
     expect(Rails.application.config.opal.source_map_enabled).to be_truthy
@@ -21,13 +21,16 @@ describe Opal::SourceMap do
       Base64.decode64(response.body.lines.last.split(inline_map_prefix, 2)[1])
     else
       source_map_regexp = %r{^//[@#] sourceMappingURL=([^\n]+)}
+
       header_map_path = response.headers['X-SourceMap'].presence
       comment_map_path = response.body.scan(source_map_regexp).flatten.first.to_s.strip.presence
 
-      map_path = header_map_path || comment_map_path
+      map_path = (header_map_path || comment_map_path)&.strip
 
-      get map_path
+      get URI.join("http://example.com/", js_asset_path, map_path).path
+
       expect(response).to be_successful, "url: #{map_path}\nstatus: #{response.status}"
+
       response.body
     end
   end
@@ -36,7 +39,8 @@ describe Opal::SourceMap do
 
   it 'has the source map be there' do
     expect(map).to be_present
-    expect(map[:sources]).to be_present
-    expect(map[:mappings]).to be_present
+    expect(map[:sections].size).to eq(1)
+    expect(map[:sections][0][:map][:sources]).to be_present
+    expect(map[:sections][0][:map][:mappings]).to be_present
   end
 end
