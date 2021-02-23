@@ -18,7 +18,7 @@ Whitespace conventions:
 - 1 spaces before normal text
  -->
 
-## [2.0](https://github.com/opal/opal-rails/compare/v1.1.2...HEAD) - unreleased
+## [2.0](https://github.com/opal/opal-rails/compare/v1.1.2...v2.0.0) - unreleased
 
 *Bumping a major version, since this version will make a number of dependencies opt-in and drop older Rails and Sprockets versions*
 
@@ -34,7 +34,7 @@ Whitespace conventions:
 ### Removed
 
 - Removed support for Rails 5.x
-- opal-jquery and opal-activesupport are no longer dependencies of opal-rails, if you need them you'll need to require and setup them manually
+- `opal-jquery` and `opal-activesupport` are no longer dependencies of `opal-rails`, if you need them you'll need to require and setup them manually
 
 
 ## [1.1.2](https://github.com/opal/opal-rails/compare/v1.1.1...v1.1.2) - 2019-09-26
