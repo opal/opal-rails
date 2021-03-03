@@ -38,9 +38,12 @@ Add your configuration in `config/initializers/assets.rb` with the following con
 # Compiler options
 Rails.application.config.opal.method_missing           = true
 Rails.application.config.opal.optimized_operators      = true
-Rails.application.config.opal.arity_check              = !Rails.env.production?
+Rails.application.config.opal.arity_check_enabled      = !Rails.env.production?
 Rails.application.config.opal.const_missing            = true
 Rails.application.config.opal.dynamic_require_severity = :ignore
+
+# Note that arity_check_enabled must be true to get a meaningful result
+# for Method#parameters
 
 # Other options
 
