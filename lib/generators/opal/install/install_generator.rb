@@ -4,6 +4,7 @@ class Opal::InstallGenerator < Rails::Generators::Base
   def configure_sprockets
     append_to_file 'app/assets/config/manifest.js', '//= link_directory ../javascript .js'
     template "application.js.rb", "app/assets/javascript/application.js.rb"
+    template "initializer.rb", "config/initializers/opal.rb"
 
     # Add the javascript tag to the application head tag
     gsub_file 'app/views/layouts/application.html.erb', %r{(\n *)</head>},
