@@ -1,6 +1,6 @@
 # Opal Rails
 
-[![Build Status](https://github.com/opal/opal-rails/workflows/CI/badge.svg)](https://github.com/opal/opal-rails/actions)
+[![Build Status](https://github.com/opal/opal-rails/actions/workflows/build.yml/badge.svg)](https://github.com/opal/opal-rails/actions/workflows/build.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/31dda24adcecb836348f/maintainability)](https://codeclimate.com/github/opal/opal-rails/maintainability)
 [![Gem Version](https://badge.fury.io/rb/opal-rails.svg)](http://badge.fury.io/rb/opal-rails)
 ![fun guaranteed](https://img.shields.io/badge/fun-guaranteed-brightgreen.svg)
