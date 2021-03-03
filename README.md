@@ -32,27 +32,37 @@ bin/rails opal:install
 
 ### Configuration
 
-Add your configuration in `config/initializers/assets.rb` with the following contents:
+#### For the compiler
+
+Add your configuration for the compiler:
+
+`config/initializers/opal.rb`
 
 ```ruby
 # Compiler options
-Rails.application.config.opal.method_missing           = true
-Rails.application.config.opal.optimized_operators      = true
-Rails.application.config.opal.arity_check_enabled      = !Rails.env.production?
-Rails.application.config.opal.const_missing            = true
+Rails.application.config.opal.method_missing_enabled   = true
+Rails.application.config.opal.const_missing_enabled    = true
+Rails.application.config.opal.arity_check_enabled      = true
+Rails.application.config.opal.freezing_stubs_enabled   = true
 Rails.application.config.opal.dynamic_require_severity = :ignore
+```
 
-# Other options
+Check out the full list of the available configuration options at: [lib/opal/config.rb](https://github.com/opal/opal/blob/master/lib/opal/config.rb).
 
-# Send local and instance variables down to the view after converting
-# thier value with `.to_json`
+#### For template assigns
+
+Add your configuration for rendering assigns when using the template handler from actions:
+
+`config/initializers/opal.rb`
+
+```ruby
 Rails.application.config.opal.assigns_in_templates = true
 Rails.application.config.opal.assigns_in_templates = :locals # only locals
 Rails.application.config.opal.assigns_in_templates = :ivars # only instance variables
 ```
 
-For a full list of the available configuration options for the compiler please refer to: [lib/opal/config.rb](https://github.com/opal/opal/blob/master/lib/opal/config.rb).
 
+Local and instance variables will be sent down to the view after converting their values to JSON.
 
 
 ## Usage
