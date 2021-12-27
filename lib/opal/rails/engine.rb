@@ -1,5 +1,6 @@
 require 'rails'
 require 'opal/sprockets'
+require 'sprockets/railtie'
 
 module Opal
   module Rails

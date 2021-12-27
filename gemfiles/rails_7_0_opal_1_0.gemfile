@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 
 gem "net-smtp"
-gem "rails", "~> 6.0.0"
+gem "rails", "~> 7.0.0"
 gem "opal", "~> 1.0.0"
 gem "opal-sprockets"
 

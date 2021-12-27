@@ -12,3 +12,5 @@ when 'master'
   gem 'opal', git: github['opal/opal'], branch: :master
   gem 'opal-sprockets', git: github['opal/opal-sprockets'], branch: :master
 end
+
+gem 'net-smtp'
