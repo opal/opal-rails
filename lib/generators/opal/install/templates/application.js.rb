@@ -8,5 +8,5 @@ require "opal"
 #
 #   require "native"
 #   $$[:document].addEventListener :DOMContentLoaded do
-#     $$[:document][:body][:innerHTML] += '<h2>Hello World!</h2>'
+#     $$[:document][:body][:innerHTML] = '<h2>Hello World!</h2>'
 #   end

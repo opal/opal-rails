@@ -23,10 +23,10 @@ In your `Gemfile`
 gem 'opal-rails'
 ```
 
-Add `app/assets/javascript` to your asset-pipeline manifest in `app/assets/config/manifest.js`:
+Run `opal:install` Rails generator to add `app/assets/javascript` to your asset-pipeline manifest in `app/assets/config/manifest.js`:
 
 ```
-bin/rails opal:install
+bin/rails g opal:install
 ```
 
 
@@ -34,31 +34,36 @@ bin/rails opal:install
 
 #### For the compiler
 
-Add your configuration for the compiler:
+The following automatically gets added to your configuration for the compiler when running the `opal:install` Rails generator:
 
 `config/initializers/opal.rb`
 
 ```ruby
 # Compiler options
-Rails.application.config.opal.method_missing_enabled   = true
-Rails.application.config.opal.const_missing_enabled    = true
-Rails.application.config.opal.arity_check_enabled      = true
-Rails.application.config.opal.freezing_stubs_enabled   = true
-Rails.application.config.opal.dynamic_require_severity = :ignore
+Rails.application.configure do
+  config.opal.method_missing_enabled   = true
+  config.opal.const_missing_enabled    = true
+  config.opal.arity_check_enabled      = true
+  config.opal.freezing_stubs_enabled   = true
+  config.opal.dynamic_require_severity = :ignore
+end
 ```
 
 Check out the full list of the available configuration options at: [lib/opal/config.rb](https://github.com/opal/opal/blob/master/lib/opal/config.rb).
 
 #### For template assigns
 
-Add your configuration for rendering assigns when using the template handler from actions:
+You may optionally add configuration for rendering assigns when using the template handler from actions:
 
 `config/initializers/opal.rb`
 
 ```ruby
-Rails.application.config.opal.assigns_in_templates = true
-Rails.application.config.opal.assigns_in_templates = :locals # only locals
-Rails.application.config.opal.assigns_in_templates = :ivars # only instance variables
+Rails.application.configure do
+  # ...
+  config.opal.assigns_in_templates = true
+  config.opal.assigns_in_templates = :locals # only locals
+  config.opal.assigns_in_templates = :ivars # only instance variables
+end
 ```
 
 
@@ -68,6 +73,42 @@ Local and instance variables will be sent down to the view after converting thei
 ## Usage
 
 ### Basic example
+
+#### Rails 7 example
+
+This example assumes Rails 7 and having followed the [Installation](#installation) instructions.
+
+1- Delete `app/javascript/application.js`
+
+2- Enable the following lines in the generated `app/assets/javascript/application.js.rb` below `require "opal"`:
+
+```ruby
+puts "hello world!"
+require "native"
+$$[:document].addEventListener :DOMContentLoaded do
+  $$[:document][:body][:innerHTML] = '<h2>Hello World!</h2>'
+end
+```
+
+3- Run `rails g scaffold welcome`
+
+4- Run `rails db:migrate`
+
+5- Clear `app/views/welcomes/index.html.erb` (empty its content)
+
+6- Run `rails s`
+
+7- Visit `http://localhost:3000/welcomes`
+
+In the browser webpage, you should see:
+
+<h2>Hello World!</h2>
+
+Also, you should see `hello world!` in the browser console.
+
+#### Rails 5 example
+
+This example assumes Rails 5.
 
 1. Rename `app/assets/javascripts/application.js` to `app/assets/javascripts/application.js.rb`
 2. Replace the Sprockets directives with plain requires
@@ -88,7 +129,7 @@ require_tree '.'
 puts "hello world!"
 ```
 
-### A more extensive example
+#### A more extensive Rails 5 example
 
 ```ruby
 require 'opal'
@@ -166,12 +207,16 @@ post.find('.comments').html = comments_html
 
 #### Instance and local variables in templates
 
-By default `opal-rails` will forward any instance and local variable you'll pass to the template.
+By default `opal-rails`, will NOT forward any instance and local variable you'll pass to the template.
 
-This behavior can be disabled by setting `Rails.application.config.opal.assigns_in_templates` to `false` in `config/initializers/assets.rb`:
+This behavior can be enabled by setting `Rails.application.config.opal.assigns_in_templates` to `true` in `config/initializers/assets.rb`:
 
 ```ruby
-Rails.application.config.opal.assigns_in_templates = false
+Rails.application.configure do
+  # ...
+  config.opal.assigns_in_templates = true
+  # ...
+end
 ```
 
 
@@ -293,7 +338,7 @@ bin/rails s # will start the sandbox app server
 
 ## License
 
-© 2012-2021 Elia Schito
+© 2012-2022 Elia Schito
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
