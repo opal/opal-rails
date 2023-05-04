@@ -1,4 +1,4 @@
-return {
+{
   number_var: @number_var,
   string_var: @string_var,
   array_var:  @array_var,
