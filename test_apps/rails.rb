@@ -32,8 +32,8 @@ module RailsApp
       get '/application/with_assignments' => 'application#with_assignments'
 
       # just to reduce noise
-      get '/apple-touch-icon-precomposed.png' => -> { [404,{},[]] }
-      get '/favicon.ico' => -> { [404,{},[]] }
+      get '/apple-touch-icon-precomposed.png' => proc { [404,{},[]] }
+      get '/favicon.ico' => proc { [404,{},[]] }
     end
 
     config.assets.debug = true
