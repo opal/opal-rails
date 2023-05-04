@@ -7,8 +7,8 @@ ENV['OPAL_VERSION'] = nil # ensure the env is clean
 github = -> repo_name { "https://github.com/#{repo_name}.git" }
 
 {
-  opal_1_4: -> gemfile do
-    gemfile.gem 'opal', '~> 1.4.0'
+  opal_1_7: -> gemfile do
+    gemfile.gem 'opal', '~> 1.7.0'
     gemfile.gem 'opal-sprockets'
   end,
 
