@@ -1,14 +1,5 @@
 require 'capybara/rspec'
-require 'capybara/apparition'
-
-Capybara.javascript_driver = :apparition
-
-Capybara.register_server :puma do |app, port, host|
-  require 'rack/handler/puma'
-  Rack::Handler::Puma.run(app, Host: host, Port: port, Threads: "0:4", Silent: true)
-end
-
-Capybara.default_max_wait_time = 5
+require 'capybara/cuprite'
 
 module OpalHelper
   def compile_opal(code)

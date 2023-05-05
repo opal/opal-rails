@@ -94,4 +94,24 @@ RSpec.configure do |config|
   # test failures related to randomization by passing the same `--seed` value
   # as the one that triggered the failure.
   Kernel.srand config.seed
+
+  # Configure Capybara
+  Capybara.javascript_driver = :cuprite
+  Capybara.register_driver(:cuprite) do |app|
+    Capybara::Cuprite::Driver.new(app,
+      window_size: [1200, 800],
+      browser_options: { 'no-sandbox': nil },
+      inspector: ENV['INSPECTOR'],
+      headless: !ENV['NO_HEADLESS'],
+      timeout: 20,
+      url_blacklist: [],
+    )
+  end
+
+  Capybara.register_server :puma do |app, port, host|
+    require 'rack/handler/puma'
+    Rack::Handler::Puma.run(app, Host: host, Port: port, Threads: "0:4", Silent: true)
+  end
+
+  Capybara.default_max_wait_time = 5
 end
