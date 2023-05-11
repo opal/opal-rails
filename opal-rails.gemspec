@@ -35,6 +35,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'opal',                '~> 1.0'
   spec.add_dependency 'opal-sprockets',      '~> 1.0'
 
+  spec.add_development_dependency 'haml'
+
   spec.add_development_dependency 'execjs'
   spec.add_development_dependency 'launchy'
   spec.add_development_dependency 'capybara', '~> 3.25'

@@ -5,6 +5,7 @@ require 'rails/all'
 require 'action_view/testing/resolvers'
 
 require 'opal-rails' # our gem
+require 'opal/rails/haml_filter'
 
 module RailsApp
   class Application < Rails::Application
@@ -30,6 +31,7 @@ module RailsApp
     routes.append do
       get '/' => 'application#index'
       get '/application/with_assignments' => 'application#with_assignments'
+      get '/application/haml_filter' => 'application#haml_filter'
 
       # just to reduce noise
       get '/apple-touch-icon-precomposed.png' => proc { [404,{},[]] }
