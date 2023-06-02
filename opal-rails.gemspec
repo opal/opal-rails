@@ -35,10 +35,12 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'opal',                '~> 1.0'
   spec.add_dependency 'opal-sprockets',      '~> 1.0'
 
+  spec.add_development_dependency 'haml'
+
   spec.add_development_dependency 'execjs'
   spec.add_development_dependency 'launchy'
   spec.add_development_dependency 'capybara', '~> 3.25'
-  spec.add_development_dependency 'apparition'
+  spec.add_development_dependency 'cuprite'
   spec.add_development_dependency 'rspec-rails'
   spec.add_development_dependency 'appraisal', '~> 2.1'
   spec.add_development_dependency 'sqlite3'

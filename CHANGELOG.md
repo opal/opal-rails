@@ -18,7 +18,11 @@ Whitespace conventions:
 - 1 spaces before normal text
  -->
 
+## [2.0.3](https://github.com/opal/opal-rails/compare/v2.0.2...v2.0.3) - 2021-12-29
 
+### Added
+
+- Add HAML 6 support
 
 ## [2.0.2](https://github.com/opal/opal-rails/compare/v2.0.1...v2.0.2) - 2021-12-29
 

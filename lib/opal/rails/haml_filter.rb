@@ -1,24 +1,9 @@
-module Haml::Filters::Opal
-  include Haml::Filters::Base
+require 'haml'
 
-  def render_with_options ruby, options
-    text = ::Opal.compile(ruby)
+haml_version = Haml::VERSION.to_i
 
-    if options[:format] == :html5
-      type = ''
-    else
-      type = " type=#{options[:attr_wrapper]}text/javascript#{options[:attr_wrapper]}"
-    end
-
-    text.rstrip!
-    text.gsub!("\n", "\n    ")
-
-    <<HTML
-<script#{type}>
-  //<![CDATA[
-    #{text}
-  //]]>
-</script>
-HTML
-  end
+if haml_version < 6
+  require 'opal/rails/haml5_filter'
+else
+  require 'opal/rails/haml6_filter'
 end
