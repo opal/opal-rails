@@ -11,7 +11,7 @@ module OpalHelper
     compiler = Opal::Compiler.new(opal_code_or_options, compiler_options)
     js_code = compiler.compile
     javascript_tag html_options do
-      js_code
+      js_code.html_safe
     end
   end
 
