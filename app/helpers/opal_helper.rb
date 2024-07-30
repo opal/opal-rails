@@ -17,7 +17,7 @@ module OpalHelper
 
   def javascript_include_tag(*sources)
     options = sources.extract_options!.symbolize_keys
-    debug = options[:debug] != false
+    debug = options.delete(:debug) != false
     skip_loader = options.delete(:skip_opal_loader)
     force_opal_loader_tag = options.delete(:force_opal_loader_tag) || debug
 
@@ -30,7 +30,7 @@ module OpalHelper
 
       if force_opal_loader_tag
         script_tags << super(source, options)
-        script_tags << "\n".html_safe + javascript_tag(loading_code)
+        script_tags << "\n".html_safe + javascript_tag(loading_code, options)
       else
         script_tags << super(source, options.merge(onload: loading_code))
       end

@@ -55,8 +55,13 @@ describe OpalHelper, :js, type: :view do
       %(<script>), %(//<![CDATA[), loading_code, %(//]]>), %(</script>),
     ].join("\n")
 
+    loading_code_with_options_in_script_tag = [
+      %(<script defer="defer">), %(//<![CDATA[), loading_code, %(//]]>), %(</script>),
+    ].join("\n")
+
     expect(helper.javascript_include_tag('application', debug: true)).to include(loading_code_in_script_tag)
     expect(helper.javascript_include_tag('application', debug: true)).not_to include(escaped_loading_code)
+    expect(helper.javascript_include_tag('application', debug: true, defer: true)).not_to include(escaped_loading_code)
 
     expect(helper.javascript_include_tag('application', debug: false)).to include(escaped_loading_code)
     expect(helper.javascript_include_tag('application', debug: false)).not_to include(loading_code_in_script_tag)
