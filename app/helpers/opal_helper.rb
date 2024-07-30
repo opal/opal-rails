@@ -1,12 +1,18 @@
 require 'opal/sprockets'
 
 module OpalHelper
-  def opal_tag(opal_code = nil, &block)
-    opal_code ||= capture(&block)
+  def opal_tag(opal_code = nil, html_options = {}, &block)
+    if block_given?
+      html_options = opal_code if opal_code.is_a?(Hash)
+      opal_code = capture(&block)
+    end
+
     compiler_options = Opal::Config.compiler_options.merge(requirable: false)
     compiler = Opal::Compiler.new(opal_code, compiler_options)
     js_code = compiler.compile
-    javascript_tag js_code
+    javascript_tag html_options do
+      js_code
+    end
   end
 
   def javascript_include_tag(*sources)
