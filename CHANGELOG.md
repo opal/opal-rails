@@ -18,6 +18,12 @@ Whitespace conventions:
 - 1 spaces before normal text
  -->
 
+## [2.0.4](https://github.com/opal/opal-rails/compare/v2.0.3...v2.0.4) - 2024-12-06
+
+### Added
+
+- Add Rails 7.1 & 7.2 support
+
 ## [2.0.3](https://github.com/opal/opal-rails/compare/v2.0.2...v2.0.3) - 2021-12-29
 
 ### Added
