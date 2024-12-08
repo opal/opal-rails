@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   spec.executables = files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency 'rails',               '>= 6.0', '< 7.1'
+  spec.add_dependency 'rails',               '>= 6.0', '< 7.3'
   spec.add_dependency 'sprockets-rails',     '>= 3.0'
 
   spec.add_dependency 'opal',                '~> 1.0'

@@ -20,3 +20,6 @@ Gemfile.lock
 /test_app/log/*.log
 /test_app/tmp/
 /test_app/.sass-cache
+
+.ruby-version
+.ruby-gemset
