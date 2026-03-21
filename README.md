@@ -270,7 +270,7 @@ end
 
 ### As a Haml filter (optional)
 
-Of course you need to require `haml-rails` separately since its presence is not assumed
+Require `haml-rails` separately if you want to use Haml. `opal-rails` supports the optional `:opal` Haml filter on Haml 6 and newer only!
 
 ```haml
 -# app/views/posts/show.html.haml
