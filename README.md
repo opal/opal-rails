@@ -379,8 +379,9 @@ bin/rackup
 Tinker with a sandbox app:
 
 ```
-bin/sandbox # will re-create the app
-bin/rails s # will start the sandbox app server
+bin/sandbox # re-creates the app, installs opal-rails, and runs an initial opal:build
+bin/rails s # starts the sandbox app server
+# or run bin/rails opal:watch in another shell while you edit Opal source files
 # visit localhost:3000
 ```
 
