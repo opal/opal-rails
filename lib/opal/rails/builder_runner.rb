@@ -6,8 +6,9 @@ require 'pathname'
 module Opal
   module Rails
     class BuilderRunner
-      def initialize(config:)
+      def initialize(config:, builder_class: Opal::Builder)
         @config = config
+        @builder_class = builder_class
       end
 
       def build(entrypoints:)
@@ -42,10 +43,10 @@ module Opal
 
       private
 
-      attr_reader :config
+      attr_reader :builder_class, :config
 
       def build_entrypoint(relative_source_file)
-        builder = Opal::Builder.new(
+        builder = builder_class.new(
           compiler_options: Opal::Config.compiler_options,
           missing_require_severity: Opal::Config.missing_require_severity
         )
@@ -58,8 +59,8 @@ module Opal
 
       def builder_paths
         [
-          config.source_path,
           config.entrypoints_path,
+          config.source_path,
           *Array(config.append_paths)
         ].compact.map { |path| Pathname(path).expand_path.to_s }.uniq
       end

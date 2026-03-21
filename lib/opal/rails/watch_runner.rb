@@ -139,7 +139,7 @@ module Opal
       end
 
       def extra_directories
-        directories = [config.source_path]
+        directories = [config.source_path, *Array(config.append_paths)]
         directories << config.entrypoints_path if config.entrypoints == :all
         normalize_paths(directories)
       end

@@ -357,6 +357,8 @@ Example:
 Rails.application.config.opal.use_gems << 'cannonbol'
 ```
 
+Both `opal:build` and `opal:watch` apply `config.opal.use_gems` and `config.opal.append_paths` when creating builders, so the same load-path behavior is used in direct builds, watch-mode rebuilds, and precompile hooks.
+
 
 ## Contributing
 

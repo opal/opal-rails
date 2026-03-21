@@ -56,12 +56,14 @@ RSpec.describe Opal::Rails::WatchRunner do
   end
 
   let(:source_path) { Pathname('/tmp/app/opal') }
+  let(:append_path) { Pathname('/tmp/app/shared/opal') }
   let(:config) do
     ActiveSupport::OrderedOptions.new.tap do |opal|
       opal.source_path = source_path
       opal.entrypoints_path = source_path
       opal.build_path = Pathname('/tmp/app/assets/builds')
       opal.entrypoints = { 'application' => 'application.rb', 'admin' => 'admin.rb' }
+      opal.append_paths = [append_path]
       opal.source_map_enabled = true
     end
   end
@@ -124,7 +126,8 @@ RSpec.describe Opal::Rails::WatchRunner do
                                        ])
     expect(FakeFileWatcher.instances.last).to be_started
     expect(FakeFileWatcher.instances.last.extra_directories).to eq([
-                                                                     source_path.expand_path.to_s
+                                                                     source_path.expand_path.to_s,
+                                                                     append_path.expand_path.to_s
                                                                    ])
   end
 
