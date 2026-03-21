@@ -1,6 +1,4 @@
 require 'rails'
-require 'opal/sprockets'
-require 'sprockets/railtie'
 
 module Opal
   module Rails
@@ -29,10 +27,6 @@ module Opal
 
       config.before_initialize do |app|
         Opal::Rails::PathSetup.apply!(app)
-      end
-
-      initializer 'opal.append_assets_path', after: :append_assets_path, group: :all do |app|
-        app.config.assets.paths.unshift(*Opal.paths)
       end
 
       config.after_initialize do |app|

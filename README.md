@@ -8,13 +8,6 @@
 
 _Rails bindings for [Opal](http://opalrb.com). ([Changelog](https://github.com/opal/opal-rails/blob/master/CHANGELOG.md))_
 
-### Looking for Webpack support? 👀
-
-If you want to integrate Opal via Webpack please refer to [opal-webpack-loader](https://github.com/isomorfeus/opal-webpack-loader#installation) installation instructions.
-
-ℹ️ Webpack and ES6 modules are not yet officially supported, but we're working on it thanks to the awesome work done in _opal-webpack-loader_.
-
-
 ## Installation
 
 In your `Gemfile`
@@ -42,6 +35,7 @@ If the generator finds an existing multi-entrypoint Opal source root, it keeps t
 If the host app already has a non-Opal `application.js`, the generator keeps `app/opal/application.rb` as the source file but configures the built logical asset name as `opal` so the two pipelines do not collide.
 
 It no longer edits `app/assets/config/manifest.js`.
+It no longer depends on `opal-sprockets` or a Sprockets-specific helper loader at runtime.
 
 
 ### Configuration
@@ -68,6 +62,8 @@ Check out the full list of the available configuration options at: [lib/opal/con
 ### Build-based assets
 
 `opal-rails` now also exposes an explicit build task for modern Rails-style asset generation.
+
+The host Rails app is still responsible for choosing an asset server such as Propshaft or Sprockets to serve the built files from `app/assets/builds`.
 
 Current build-oriented config keys are:
 
@@ -213,79 +209,20 @@ In the browser webpage, you should see:
 
 Also, you should see `hello world!` in the browser console.
 
-#### Rails 5 example
+#### Migrating older Sprockets-style apps
 
-This example assumes Rails 5.
+Older `opal-rails` apps often used `app/assets/javascripts/application.js.rb`, `manifest.js`, and request-time Sprockets compilation.
 
-1. Rename `app/assets/javascripts/application.js` to `app/assets/javascripts/application.js.rb`
-2. Replace the Sprockets directives with plain requires
+The build-first migration path is:
 
-```ruby
-# Require the opal runtime and core library
-require 'opal'
+1. move the Opal entrypoint to `app/opal/application.rb` or keep `app/assets/opal/application.rb` for migration-friendly layouts;
+2. configure `config.opal.source_path`, `config.opal.entrypoints_path`, and `config.opal.entrypoints` in `config/initializers/opal.rb`;
+3. build with `bin/rails opal:build` and watch with `bin/rails opal:watch`;
+4. include the built asset with the normal `javascript_include_tag` helper.
 
-# For Rails 5.1 and above, otherwise use 'opal_ujs'
-require 'rails_ujs'
+The documented path no longer relies on Sprockets directives such as `require_tree` or on helper-level Opal loader injection.
 
-# Require of JS libraries will be forwarded to sprockets as is
-require 'turbolinks'
-
-# a Ruby equivalent of the require_tree Sprockets directive is available
-require_tree '.'
-
-puts "hello world!"
-```
-
-#### A more extensive Rails 5 example
-
-```ruby
-require 'opal'
-require 'opal_ujs'
-require 'turbolinks'
-require_tree '.' # a Ruby equivalent of the require_tree Sprockets directive is available
-
-# ---- YOUR FANCY RUBY CODE HERE ----
-#
-# Examples:
-
-# == Print something in the browser's console
-puts "Hello world!"
-pp hello: :world
-require 'console'
-$console.log %w[Hello world!]
-
-# == Use Native to wrap native JS objects, $$ is preconfigured to wrap `window`
-require 'native'
-$$.alert "Hello world!"
-
-# == Do some DOM manipulation with jQuery
-require 'opal-jquery'
-Document.ready? do
-  Element.find('body').html = '<h1>Hello world!</h1>'
-end
-
-# == Or access the DOM api directly
-$$[:document].addEventListener(:DOMContentLoaded, -> {
-  $$[:document].querySelector('body')[:innerHTML] = '<h1>Hello world!</h1>'
-})
-
-```
-
-
-### Using Sprockets directives and `application.js`
-
-If you want to use `application.js` (instead of `application.js.rb`) and keep using Sprockets directives, you'll need to load the Opal files you require via Sprockets manually, e.g.:
-
-```js
-//= require opal
-//= require rails_ujs
-//= require turbolinks
-//= require_tree .
-//= require app
-
-Opal.require('opal');
-Opal.require('app');
-```
+If the host app itself still uses Sprockets during migration, it can keep the minimal manifest entries needed to serve the built files, but `opal-rails` itself no longer requires `opal-sprockets` to compile or boot Opal assets.
 
 
 ### As a template
@@ -316,7 +253,7 @@ post.find('.comments').html = comments_html
 
 By default `opal-rails`, will NOT forward any instance and local variable you'll pass to the template.
 
-This behavior can be enabled by setting `Rails.application.config.opal.assigns_in_templates` to `true` in `config/initializers/assets.rb`:
+This behavior can be enabled by setting `Rails.application.config.opal.assigns_in_templates` to `true` in `config/initializers/opal.rb`:
 
 ```ruby
 Rails.application.configure do
@@ -374,7 +311,7 @@ _Upcoming as `opal-minitest-rails`_
 
 ### Shared templates
 
-As long as the templates are inside the Sprockets/Opal load path, then you should be able to just require them.
+As long as the templates are inside an Opal load path, you should be able to require them.
 
 Let's say we have this template `app/views/shared/test.haml`:
 
@@ -384,17 +321,17 @@ Let's say we have this template `app/views/shared/test.haml`:
     = @bar
 ```
 
-We need to make sure Opal can see and compile that template. So we need to add the path to sprockets:
+We need to make sure Opal can see and compile that template. Add the path to `config.opal.append_paths`:
 
 ```ruby
 # config/initializers/opal.rb
-Rails.application.config.assets.paths << Rails.root.join('app', 'views', 'shared').to_s
+Rails.application.config.opal.append_paths << Rails.root.join('app', 'views', 'shared')
 ```
 
 Now, somewhere in `application.rb` you need to require that template, and you can just run it through `Template`:
 
 ```ruby
-# app/assets/javascripts/application.rb
+# app/opal/application.rb
 require 'opal'
 require 'opal-haml'
 require 'test'
@@ -409,12 +346,12 @@ template.render(self)
 
 ### Using Ruby gems from Opal
 
-Just use `Opal.use_gem` in your asset initializer (`config/initializers/assets.rb`).
+Add gems to the Opal load path from `config/initializers/opal.rb`.
 
 Example:
 
 ```ruby
-Opal.use_gem 'cannonbol'
+Rails.application.config.opal.use_gems << 'cannonbol'
 ```
 
 

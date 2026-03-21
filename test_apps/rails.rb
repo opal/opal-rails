@@ -2,6 +2,7 @@
 
 require 'rails'
 require 'rails/all'
+require 'sprockets/railtie'
 require 'action_view/testing/resolvers'
 
 require 'opal-rails' # our gem

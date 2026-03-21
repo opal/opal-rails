@@ -30,10 +30,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'rails',               '>= 6.0', '< 7.3'
-  spec.add_dependency 'sprockets-rails',     '>= 3.0'
 
   spec.add_dependency 'opal',                '~> 1.0'
-  spec.add_dependency 'opal-sprockets',      '~> 1.0'
 
   spec.add_dependency 'listen',              '>= 3.0'
 
@@ -53,6 +51,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'ostruct'
   spec.add_development_dependency 'puma'
   spec.add_development_dependency 'rspec-rails'
+  spec.add_development_dependency 'sprockets-rails', '>= 3.0'
   spec.add_development_dependency 'sqlite3'
   spec.add_development_dependency 'tsort'
 end

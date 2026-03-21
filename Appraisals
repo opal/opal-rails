@@ -9,17 +9,14 @@ github = -> repo_name { "https://github.com/#{repo_name}.git" }
 {
   opal_1_7: -> gemfile do
     gemfile.gem 'opal', '~> 1.7.0'
-    gemfile.gem 'opal-sprockets'
   end,
 
   opal_1_3: -> gemfile do
     gemfile.gem 'opal', '~> 1.3.0'
-    gemfile.gem 'opal-sprockets'
   end,
 
   opal_1_0: -> gemfile do
     gemfile.gem 'opal', '~> 1.0.0'
-    gemfile.gem 'opal-sprockets'
   end,
 
 }.each do |opal_version, gem_opal|
