@@ -23,11 +23,25 @@ In your `Gemfile`
 gem 'opal-rails'
 ```
 
-Run `opal:install` Rails generator to add `app/assets/javascript` to your asset-pipeline manifest in `app/assets/config/manifest.js`:
+Run the `opal:install` Rails generator to create a build-based Opal setup:
 
 ```
 bin/rails g opal:install
 ```
+
+The generator now creates:
+
+- `app/opal/application.rb` for greenfield apps, or reuses `app/assets/opal` when migrating an older layout
+- `config/initializers/opal.rb` with build-oriented defaults
+- `app/assets/builds/.keep`
+- a `Procfile.dev` entry for `opal: bin/rails opal:watch`
+- a `bin/dev` launcher when the app does not already have one
+
+If the generator finds an existing multi-entrypoint Opal source root, it keeps that layout intact, configures `config.opal.entrypoints = :all`, and avoids inserting a default `javascript_include_tag "application"` when no `application.rb` entrypoint exists.
+
+If the host app already has a non-Opal `application.js`, the generator keeps `app/opal/application.rb` as the source file but configures the built logical asset name as `opal` so the two pipelines do not collide.
+
+It no longer edits `app/assets/config/manifest.js`.
 
 
 ### Configuration
@@ -68,6 +82,16 @@ Rails.application.configure do
 end
 ```
 
+For mixed-stack apps that already use another `application.js`, use an explicit logical name for the Opal output instead of colliding with the existing asset:
+
+```ruby
+Rails.application.configure do
+  config.opal.source_path = Rails.root.join('app/opal')
+  config.opal.entrypoints_path = config.opal.source_path
+  config.opal.entrypoints = { 'opal' => 'application.rb' }
+end
+```
+
 With that in place, you can build Opal entrypoints into browser-ready assets with:
 
 ```bash
@@ -94,7 +118,17 @@ This writes `*.js` outputs, optional `*.js.map` files, and an Opal-owned manifes
 
 `opal:watch` uses the `listen` gem, tracks Opal/core and app dependency files, rebuilds affected entrypoints for known file changes, and falls back to a full rebuild when files are added or removed.
 
-If you are migrating an app that already keeps frontend Ruby under `app/assets/opal`, set `config.opal.source_path` and `config.opal.entrypoints_path` to that directory instead. `opal-rails` will automatically exclude that exact path from served asset paths when the host app supports `config.assets.excluded_paths`.
+Any directories listed in `config.opal.append_paths` are also part of that watch scope, so shared templates or support files can trigger rebuilds too.
+
+Include the built entrypoint in your layout with the normal Rails helper:
+
+```erb
+<%= javascript_include_tag "application", "data-turbo-track": "reload" %>
+```
+
+Boot code should live in the built Opal entrypoint itself rather than in a helper-side loader shim.
+
+If you are migrating an app that already keeps frontend Ruby under `app/assets/opal`, set `config.opal.source_path` and `config.opal.entrypoints_path` to that directory instead. If your asset server would otherwise expose raw files from that directory, exclude it in the host app configuration yourself. For example, Propshaft apps can add `config.assets.excluded_paths << Rails.root.join('app/assets/opal')`. Apps using the default `app/opal` layout do not need this.
 
 The build-based path is intended to replace Sprockets-coupled Opal compilation over time. `opal:watch` and generator migration work will build on top of this foundation.
 
@@ -127,7 +161,7 @@ This example assumes Rails 7 and having followed the [Installation](#installatio
 
 1- Delete `app/javascript/application.js`
 
-2- Enable the following lines in the generated `app/assets/javascript/application.js.rb` below `require "opal"`:
+2- Enable the following lines in the generated `app/opal/application.rb` below `require "opal"`:
 
 ```ruby
 puts "hello world!"
@@ -143,9 +177,11 @@ end
 
 5- Clear `app/views/welcomes/index.html.erb` (empty its content)
 
-6- Run `rails s`
+6- Run `bin/rails opal:build`
 
-7- Visit `http://localhost:3000/welcomes`
+7- Run `rails s`
+
+8- Visit `http://localhost:3000/welcomes`
 
 In the browser webpage, you should see:
 
