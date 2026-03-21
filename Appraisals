@@ -14,6 +14,10 @@ github = -> repo_name { "https://github.com/#{repo_name}.git" }
     gemfile.gem 'opal', '~> 1.8.0'
   end,
 
+  opal_master: -> gemfile do
+    gemfile.gem 'opal', git: github['opal/opal'], branch: :master
+  end,
+
 }.each do |opal_version, gem_opal|
   appraise "rails_7_0_#{opal_version}" do
     gem "rails", "~> 7.0.0"

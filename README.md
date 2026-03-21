@@ -16,7 +16,7 @@ In your `Gemfile`
 gem 'opal-rails'
 ```
 
-This branch explicitly tests Rails 7.0, 8.0, and 8.1 against Opal 1.8. `opal-rails` now requires Opal 1.7.0+ for the builder/watch dependency APIs it uses. Rails 6.x is no longer supported, Rails 7.1/7.2 do not currently have dedicated appraisal coverage, and the Rails 8 appraisals run on Ruby 3.2+ because Rails 8 itself requires that Ruby floor.
+`opal-rails` is tested against Rails 7.0, 8.0, and 8.1 with Opal 1.8 and Opal master (`2.0dev`) on Ruby 3.2 and 4.0. It requires Opal 1.7.0+ for the builder/watch dependency APIs it uses. Rails 6.x is no longer supported, Rails 7.1/7.2 do not have dedicated appraisal coverage, and Rails 8 requires Ruby 3.2+.
 
 Run the `opal:install` Rails generator to create a build-based Opal setup:
 

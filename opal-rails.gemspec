@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'rails',               '>= 7.0', '< 8.2'
 
-  spec.add_dependency 'opal',                '>= 1.7.0', '< 2.0'
+  spec.add_dependency 'opal',                '>= 1.7.0'
 
   spec.add_dependency 'listen',              '>= 3.0'
 
