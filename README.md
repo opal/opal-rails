@@ -51,6 +51,35 @@ end
 
 Check out the full list of the available configuration options at: [lib/opal/config.rb](https://github.com/opal/opal/blob/master/lib/opal/config.rb).
 
+### Build-based assets
+
+`opal-rails` now also exposes an explicit build task for modern Rails-style asset generation.
+
+Current build-oriented config keys are:
+
+```ruby
+Rails.application.configure do
+  config.opal.source_path = Rails.root.join('app/opal')
+  config.opal.entrypoints_path = config.opal.source_path
+  config.opal.build_path = Rails.root.join('app/assets/builds')
+  config.opal.entrypoints = { 'application' => 'application.rb' }
+  config.opal.append_paths = []
+  config.opal.use_gems = []
+end
+```
+
+With that in place, you can build Opal entrypoints into browser-ready assets with:
+
+```bash
+bin/rails opal:build
+```
+
+This writes `*.js` outputs, optional `*.js.map` files, and an Opal-owned manifest into `app/assets/builds`.
+
+If you are migrating an app that already keeps frontend Ruby under `app/assets/opal`, set `config.opal.source_path` and `config.opal.entrypoints_path` to that directory instead. `opal-rails` will automatically exclude that exact path from served asset paths when the host app supports `config.assets.excluded_paths`.
+
+The build-based path is intended to replace Sprockets-coupled Opal compilation over time. `opal:watch` and generator migration work will build on top of this foundation.
+
 #### For template assigns
 
 You may optionally add configuration for rendering assigns when using the template handler from actions:
