@@ -22,6 +22,20 @@ namespace :opal do
       puts "Built Opal assets: #{result[:outputs].join(', ')}"
     end
   end
+
+  desc 'Remove Opal-owned build outputs from app/assets/builds'
+  task clobber: :environment do
+    manifest = Opal::Rails::OutputsManifest.new(build_path: Rails.application.config.opal.build_path)
+    removed_outputs = manifest.clobber!
+
+    if removed_outputs.nil?
+      warn 'Skipped Opal clobber because the build manifest is unreadable'
+    elsif removed_outputs.empty?
+      puts 'Removed 0 Opal assets'
+    else
+      puts "Removed Opal assets: #{removed_outputs.join(', ')}"
+    end
+  end
 end
 
 Opal::Rails::TaskHooks.apply!

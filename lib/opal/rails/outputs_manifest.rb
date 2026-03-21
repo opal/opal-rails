@@ -44,6 +44,20 @@ module Opal
         end
       end
 
+      def clobber!
+        outputs = read_outputs
+        return nil if outputs.nil?
+
+        outputs.each do |relative_path|
+          full_path = safe_build_path(relative_path)
+          full_path.delete if full_path&.exist?
+        end
+
+        manifest_path.delete if manifest_path.exist?
+
+        outputs
+      end
+
       private
 
       attr_reader :build_path

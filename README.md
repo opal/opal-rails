@@ -90,6 +90,8 @@ bin/rails opal:watch
 
 This writes `*.js` outputs, optional `*.js.map` files, and an Opal-owned manifest into `app/assets/builds`.
 
+`opal:clobber` uses that manifest to remove only Opal-tracked outputs, leaving unrelated assets in `app/assets/builds` alone.
+
 If you are migrating an app that already keeps frontend Ruby under `app/assets/opal`, set `config.opal.source_path` and `config.opal.entrypoints_path` to that directory instead. `opal-rails` will automatically exclude that exact path from served asset paths when the host app supports `config.assets.excluded_paths`.
 
 The build-based path is intended to replace Sprockets-coupled Opal compilation over time. `opal:watch` and generator migration work will build on top of this foundation.
