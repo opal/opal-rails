@@ -38,6 +38,7 @@ If the host app already has a non-Opal `application.js`, the generator keeps `ap
 
 It no longer edits `app/assets/config/manifest.js`.
 It no longer depends on `opal-sprockets` or a Sprockets-specific helper loader at runtime.
+The `opal:assets` generator now writes plain `.rb` files into the active Opal source root instead of generating `app/assets/javascripts/*.js.rb` files.
 
 
 ### Configuration

@@ -1,7 +1,5 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use Opal in this file: http://opalrb.com/
-#
+# Place controller-specific Opal code here.
+# Require this file from `app/opal/application.rb` or another configured entrypoint.
 #
 # Here's an example view class for your controller:
 #
@@ -25,7 +23,6 @@ class <%= class_name %>View
     puts "Hello! (You just clicked on a link: #{event.current_target.text})"
   end
 
-
   private
 
   attr_reader :selector, :element
@@ -37,7 +34,7 @@ class <%= class_name %>View
   #   Element.find("#{@selector} #{selector}")
   # end
 
-  # Register events on document to save memory and be friends to Turbolinks
+  # Register events on document so page-level handlers stay centralized.
   def on(event, selector = nil, &block)
     Element[`document`].on(event, selector, &block)
   end
