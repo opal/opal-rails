@@ -16,6 +16,8 @@ In your `Gemfile`
 gem 'opal-rails'
 ```
 
+This branch targets Rails 7.0 through 7.2. Rails 6.x is no longer supported in the build-first workflow.
+
 Run the `opal:install` Rails generator to create a build-based Opal setup:
 
 ```
