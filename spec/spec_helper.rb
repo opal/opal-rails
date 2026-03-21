@@ -1,4 +1,4 @@
-root_dir = File.expand_path('../../', __FILE__)
+File.expand_path('..', __dir__)
 
 require 'support/test_app'
 require 'rspec/rails'
@@ -38,7 +38,7 @@ RSpec.configure do |config|
     # ...rather than:
     #   # => "be bigger than 2"
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
-    expectations.syntax = [:expect, :should]
+    expectations.syntax = %i[expect should]
   end
 
   # rspec-mocks config goes here. You can use an alternate test double
@@ -98,19 +98,28 @@ RSpec.configure do |config|
   # Configure Capybara
   Capybara.javascript_driver = :cuprite
   Capybara.register_driver(:cuprite) do |app|
-    Capybara::Cuprite::Driver.new(app,
+    driver_options = {
       window_size: [1200, 800],
-      browser_options: { 'no-sandbox': nil },
+      browser_options: {
+        'disable-dev-shm-usage': nil,
+        'no-sandbox': nil
+      },
       inspector: ENV['INSPECTOR'],
       headless: !ENV['NO_HEADLESS'],
+      process_timeout: 30,
       timeout: 20,
-      url_blacklist: [],
-    )
+      url_blacklist: []
+    }
+
+    browser_path = BrowserSupport.path
+    driver_options[:browser_path] = browser_path if browser_path
+
+    Capybara::Cuprite::Driver.new(app, **driver_options)
   end
 
   Capybara.register_server :puma do |app, port, host|
     require 'rack/handler/puma'
-    Rack::Handler::Puma.run(app, Host: host, Port: port, Threads: "0:4", Silent: true)
+    Rack::Handler::Puma.run(app, Host: host, Port: port, Threads: '0:4', Silent: true)
   end
 
   Capybara.default_max_wait_time = 5

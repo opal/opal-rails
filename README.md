@@ -16,7 +16,7 @@ In your `Gemfile`
 gem 'opal-rails'
 ```
 
-This branch targets Rails 7.0 through 7.2. Rails 6.x is no longer supported in the build-first workflow.
+This branch explicitly tests Rails 7.0, 8.0, and 8.1 against Opal 1.8. `opal-rails` now requires Opal 1.7.0+ for the builder/watch dependency APIs it uses. Rails 6.x is no longer supported, Rails 7.1/7.2 do not currently have dedicated appraisal coverage, and the Rails 8 appraisals run on Ruby 3.2+ because Rails 8 itself requires that Ruby floor.
 
 Run the `opal:install` Rails generator to create a build-based Opal setup:
 
@@ -368,6 +368,10 @@ Run the specs:
 bin/setup
 bin/rake
 ```
+
+`bin/rake` now runs the non-JS and browser-driven specs in separate RSpec phases so each browser pass starts from a fresh process.
+
+Browser-driven specs auto-detect a usable local Chrome/Chromium binary, including Fedora's headless Chromium shell path when it is installed but not on `PATH`, and only skip when no supported browser binary can be found.
 
 Inspect the test app:
 

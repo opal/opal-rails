@@ -13,9 +13,22 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: ['3.0', '3.1', '3.2']
-        rails: ['rails_7_0']
-        opal: ['opal_1_0', 'opal_1_3', 'opal_1_7']
+        include:
+          - ruby: '3.0'
+            rails: 'rails_7_0'
+            opal: 'opal_1_8'
+          - ruby: '3.1'
+            rails: 'rails_7_0'
+            opal: 'opal_1_8'
+          - ruby: '3.2'
+            rails: 'rails_7_0'
+            opal: 'opal_1_8'
+          - ruby: '3.2'
+            rails: 'rails_8_0'
+            opal: 'opal_1_8'
+          - ruby: '3.2'
+            rails: 'rails_8_1'
+            opal: 'opal_1_8'
     runs-on: ubuntu-latest
 
     steps:
@@ -23,6 +36,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y sqlite3 libsqlite3-dev
+        command -v google-chrome || command -v google-chrome-stable || command -v chromium-browser || command -v chromium || sudo apt-get install -y chromium-browser || sudo apt-get install -y chromium
     - uses: actions/checkout@v1
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
