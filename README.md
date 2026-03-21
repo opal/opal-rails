@@ -130,7 +130,31 @@ Boot code should live in the built Opal entrypoint itself rather than in a helpe
 
 If you are migrating an app that already keeps frontend Ruby under `app/assets/opal`, set `config.opal.source_path` and `config.opal.entrypoints_path` to that directory instead. If your asset server would otherwise expose raw files from that directory, exclude it in the host app configuration yourself. For example, Propshaft apps can add `config.assets.excluded_paths << Rails.root.join('app/assets/opal')`. Apps using the default `app/opal` layout do not need this.
 
-The build-based path is intended to replace Sprockets-coupled Opal compilation over time. `opal:watch` and generator migration work will build on top of this foundation.
+For the default `app/opal` layout, `opal-rails` also ignores that source root in Rails autoloaders so frontend Opal files are not treated as application constants.
+
+If you want one built asset per top-level Opal file, you can opt into bulk entrypoint discovery:
+
+```ruby
+Rails.application.configure do
+  config.opal.source_path = Rails.root.join('app/assets/opal')
+  config.opal.entrypoints_path = config.opal.source_path
+  config.opal.entrypoints = :all
+end
+```
+
+In `:all` mode, `opal-rails` compiles each top-level `*.rb` file in `entrypoints_path` to a same-name asset in `app/assets/builds`, ignores nested support files, and prunes stale Opal-owned outputs when an entrypoint file disappears.
+
+The install generator will choose that `:all` configuration automatically for migration-friendly layouts that already have multiple top-level Opal entrypoints.
+
+If you want to generate a controller-specific Opal file, use:
+
+```bash
+bin/rails g opal:assets dashboard
+```
+
+This now creates `app/opal/dashboard.rb` by default, or `app/assets/opal/dashboard.rb` for migration-friendly layouts.
+
+The bundled test app and integration suite prebuild assets from `app/opal` into `app/assets/builds` instead of relying on `app/assets/javascripts/*.js.rb` request-time compilation.
 
 #### For template assigns
 

@@ -3,14 +3,7 @@ require 'spec_helper'
 require 'opal/source_map'
 
 describe Opal::SourceMap do
-  let(:js_asset_path) { '/assets/source_map_example.debug.js' }
-
-  before do
-    expect(Rails.application.config.opal.source_map_enabled).to be_truthy
-    expect(Rails.application.config.assets.compile).to be_truthy
-    expect(Rails.application.assets).to be_present
-    expect(Rails.application.config.assets.debug).to be_truthy
-  end
+  let(:js_asset_path) { '/assets/source_map_example.js' }
 
   before do
     TestAppAssets.build!
@@ -18,6 +11,7 @@ describe Opal::SourceMap do
 
   let(:map_body) do
     get js_asset_path
+    expect(response).to be_successful
 
     inline_map_prefix = '//# sourceMappingURL=data:application/json;base64,'
 
@@ -26,12 +20,12 @@ describe Opal::SourceMap do
     else
       source_map_regexp = %r{^//[@#] sourceMappingURL=([^\n]+)}
 
-      header_map_path = response.headers['X-SourceMap'].presence
       comment_map_path = response.body.scan(source_map_regexp).flatten.first.to_s.strip.presence
 
-      map_path = (header_map_path || comment_map_path)&.strip
+      map_path = comment_map_path&.strip
+      expect(map_path).to be_present
 
-      get URI.join("http://example.com/", js_asset_path, map_path).path
+      get URI.join('http://example.com/', js_asset_path, map_path).path
 
       expect(response).to be_successful, "url: #{map_path}\nstatus: #{response.status}"
 
