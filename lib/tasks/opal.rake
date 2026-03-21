@@ -36,6 +36,13 @@ namespace :opal do
       puts "Removed Opal assets: #{removed_outputs.join(', ')}"
     end
   end
+
+  desc 'Watch configured Opal entrypoints and rebuild on change'
+  task watch: :environment do
+    require 'opal/rails/file_watcher'
+    require 'opal/rails/watch_runner'
+    Opal::Rails::WatchRunner.new(config: Rails.application.config.opal).watch
+  end
 end
 
 Opal::Rails::TaskHooks.apply!

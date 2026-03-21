@@ -35,6 +35,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'opal',                '~> 1.0'
   spec.add_dependency 'opal-sprockets',      '~> 1.0'
 
+  spec.add_dependency 'listen',              '>= 3.0'
+
   spec.add_development_dependency 'haml'
 
   spec.add_development_dependency 'appraisal', '~> 2.1'
