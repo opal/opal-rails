@@ -12,6 +12,10 @@ describe Opal::SourceMap do
     expect(Rails.application.config.assets.debug).to be_truthy
   end
 
+  before do
+    TestAppAssets.build!
+  end
+
   let(:map_body) do
     get js_asset_path
 

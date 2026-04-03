@@ -74,6 +74,20 @@ With that in place, you can build Opal entrypoints into browser-ready assets wit
 bin/rails opal:build
 ```
 
+`opal-rails` also hooks `opal:build` into `assets:precompile` automatically, and into `test:prepare` / `spec:prepare` when those tasks exist in the host app.
+
+And clean only Opal-owned build outputs with:
+
+```bash
+bin/rails opal:clobber
+```
+
+To rebuild entrypoints while you develop, run:
+
+```bash
+bin/rails opal:watch
+```
+
 This writes `*.js` outputs, optional `*.js.map` files, and an Opal-owned manifest into `app/assets/builds`.
 
 If you are migrating an app that already keeps frontend Ruby under `app/assets/opal`, set `config.opal.source_path` and `config.opal.entrypoints_path` to that directory instead. `opal-rails` will automatically exclude that exact path from served asset paths when the host app supports `config.assets.excluded_paths`.

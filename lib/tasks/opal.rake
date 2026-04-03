@@ -24,8 +24,4 @@ namespace :opal do
   end
 end
 
-Rake::Task['assets:precompile'].enhance(['opal:build']) if Rake::Task.task_defined?('assets:precompile')
-
-Rake::Task['test:prepare'].enhance(['opal:build']) if Rake::Task.task_defined?('test:prepare')
-
-Rake::Task['spec:prepare'].enhance(['opal:build']) if Rake::Task.task_defined?('spec:prepare')
+Opal::Rails::TaskHooks.apply!
