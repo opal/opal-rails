@@ -58,7 +58,7 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y sqlite3 libsqlite3-dev
         command -v google-chrome || command -v google-chrome-stable || command -v chromium-browser || command -v chromium || sudo apt-get install -y chromium-browser || sudo apt-get install -y chromium
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
