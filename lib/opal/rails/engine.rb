@@ -12,6 +12,7 @@ module Opal
       config.opal.entrypoints = { 'application' => 'application.rb' }
       config.opal.append_paths = []
       config.opal.use_gems = []
+      config.opal.suppress_legacy_upgrade_warning = false
 
       def (config.opal).assign_locals_in_templates?
         [true, :locals].include?(assigns_in_templates)
@@ -26,6 +27,7 @@ module Opal
       config.eager_load_paths
 
       config.before_initialize do |app|
+        Opal::Rails::LegacyUpgradeWarning.warn_if_needed(app)
         Opal::Rails::PathSetup.apply!(app)
       end
 
