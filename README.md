@@ -36,6 +36,8 @@ The generator now creates:
 - for Sprockets apps, `app/assets/config/manifest.js` links for `app/assets/builds`
 - for Sprockets test environments, `config.assets.debug = true` in `config/environments/test.rb` so rebuilt assets win over stale checked-in digests
 
+For already-installed 2.x apps, do not treat `bin/rails g opal:install` as a drop-in migration step. Follow [`PORTING.md`](PORTING.md) instead, and pin `opal-rails` to the `2.0` series until you are ready to port the app deliberately.
+
 `bin/dev` is a small Foreman launcher for `Procfile.dev`; the generated script installs the `foreman` gem if it is missing and then starts both Rails and `opal:watch` together.
 
 If the generator finds an existing multi-entrypoint Opal source root, it keeps that layout intact, configures `config.opal.entrypoints = :all`, and avoids inserting a default `javascript_include_tag "application"` when no `application.rb` entrypoint exists.

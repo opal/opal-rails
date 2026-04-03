@@ -12,11 +12,13 @@
 
 ## Fast path
 
-If you are starting from a 2.x app, run:
+For a fresh install, or for an app you are intentionally reshaping into the 3.x build layout in one pass, you can run:
 
 ```bash
 bin/rails g opal:install
 ```
+
+Do not treat that generator as a safe in-place upgrade for an existing 2.x app that already has legacy Opal assets wired in. In a real Rails 7 `2.0.4 -> 3.x` upgrade repro, it layered 3.x files on top of the old setup and still left the app in a broken state. For those apps, pin `opal-rails` to the `2.0` series until you can port deliberately, or follow the manual checklist below.
 
 The generator now:
 
