@@ -8,6 +8,8 @@
 
 _Rails bindings for [Opal](http://opalrb.com). ([Changelog](https://github.com/opal/opal-rails/blob/master/CHANGELOG.md))_
 
+If you are upgrading an existing app, see [`PORTING.md`](PORTING.md) for a focused 2.x -> 3.x migration guide.
+
 ## Installation
 
 In your `Gemfile`
@@ -31,12 +33,15 @@ The generator now creates:
 - `app/assets/builds/.keep`
 - a `Procfile.dev` entry for `opal: bin/rails opal:watch`
 - a `bin/dev` launcher when the app does not already have one
+- for Sprockets apps, `app/assets/config/manifest.js` links for `app/assets/builds`
+- for Sprockets test environments, `config.assets.debug = true` in `config/environments/test.rb` so rebuilt assets win over stale checked-in digests
+
+`bin/dev` is a small Foreman launcher for `Procfile.dev`; the generated script installs the `foreman` gem if it is missing and then starts both Rails and `opal:watch` together.
 
 If the generator finds an existing multi-entrypoint Opal source root, it keeps that layout intact, configures `config.opal.entrypoints = :all`, and avoids inserting a default `javascript_include_tag "application"` when no `application.rb` entrypoint exists.
 
 If the host app already has a non-Opal `application.js`, the generator keeps `app/opal/application.rb` as the source file but configures the built logical asset name as `opal` so the two pipelines do not collide.
 
-It no longer edits `app/assets/config/manifest.js`.
 It no longer depends on `opal-sprockets` or a Sprockets-specific helper loader at runtime.
 The `opal:assets` generator now writes plain `.rb` files into the active Opal source root instead of generating `app/assets/javascripts/*.js.rb` files.
 
@@ -215,6 +220,8 @@ Also, you should see `hello world!` in the browser console.
 #### Migrating older Sprockets-style apps
 
 Older `opal-rails` apps often used `app/assets/javascripts/application.js.rb`, `manifest.js`, and request-time Sprockets compilation.
+
+See [`PORTING.md`](PORTING.md) for the full 2.x -> 3.x checklist.
 
 The build-first migration path is:
 
