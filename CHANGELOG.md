@@ -20,6 +20,8 @@ Whitespace conventions:
 
 ## [Unreleased]
 
+## [3.0.0](https://github.com/opal/opal-rails/compare/v2.0.4...v3.0.0) - 2026-04-09
+
 ### Added
 
 - Add build-based Opal compilation with `opal:build`.

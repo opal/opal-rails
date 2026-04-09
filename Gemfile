@@ -12,3 +12,5 @@ when 'master'
 end
 
 gem 'net-smtp'
+
+gem "gem-release", "~> 2.2"
