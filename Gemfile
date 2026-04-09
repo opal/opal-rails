@@ -6,11 +6,9 @@ case ENV['OPAL_VERSION']
 when 'local'
   gem 'opal', path: '../opal'
   gem 'opal-rspec', path: '../opal-rspec'
-  gem 'opal-sprockets', path: '../opal-sprockets'
   gem 'pry'
 when 'master'
   gem 'opal', git: github['opal/opal'], branch: :master
-  gem 'opal-sprockets', git: github['opal/opal-sprockets'], branch: :master
 end
 
 gem 'net-smtp'

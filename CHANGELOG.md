@@ -18,6 +18,34 @@ Whitespace conventions:
 - 1 spaces before normal text
  -->
 
+## [Unreleased]
+
+### Added
+
+- Add build-based Opal compilation with `opal:build`.
+- Add `opal:clobber` for Opal-owned build outputs.
+- Add dependency-aware `opal:watch`.
+
+### Changed
+
+- Rework `opal:install` for build-based apps and migration-friendly layouts.
+- Make Sprockets optional at runtime.
+- Make `opal:assets` generate `.rb` files in the active Opal source root.
+- Update the sandbox flow to run an initial `opal:build`.
+- Drop Rails 6.x support and require Ruby 2.7+.
+- Add Rails 8.0 and 8.1 support.
+- Require Opal 1.7+ and move the active matrix to Opal 1.8.
+- Add Opal master coverage and focus CI on Ruby 3.2 and 4.0.
+- Require Haml 6+ for the optional `:opal` filter.
+
+### Removed
+
+- Remove helper-side Opal loader integration and Sprockets path injection.
+
+### Fixed
+
+- Stabilize browser-driven specs on Ruby 4.
+
 ## [2.0.4](https://github.com/opal/opal-rails/compare/v2.0.3...v2.0.4) - 2024-12-06
 
 ### Added

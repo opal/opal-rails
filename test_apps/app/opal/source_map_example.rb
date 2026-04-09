@@ -1,4 +1,3 @@
 class SourceMapExample
-  def works?
-  end
+  def works?; end
 end

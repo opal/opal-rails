@@ -2,10 +2,13 @@
 
 require 'rails'
 require 'rails/all'
+require 'sprockets/railtie'
 require 'action_view/testing/resolvers'
 
 require 'opal-rails' # our gem
 require 'opal/rails/haml_filter'
+
+RAILS_VERSION_SERIES = Gem::Version.new(Rails.gem_version.segments.first(2).join('.'))
 
 module RailsApp
   class Application < Rails::Application
@@ -21,9 +24,14 @@ module RailsApp
     config.active_support.deprecation                 = :stderr
     config.secret_key_base                            = '49837489qkuweoiuoqwe'
 
-    if config.active_record.sqlite3
-      config.active_record.sqlite3.represent_boolean_as_integer = true
+    if RAILS_VERSION_SERIES < Gem::Version.new('8.0') && config.active_record.respond_to?(:legacy_connection_handling=)
+      config.active_record.legacy_connection_handling = false
     end
+    if RAILS_VERSION_SERIES == Gem::Version.new('8.0') && config.active_support.respond_to?(:to_time_preserves_timezone=)
+      config.active_support.to_time_preserves_timezone = :zone
+    end
+
+    config.active_record.sqlite3.represent_boolean_as_integer = true if config.active_record.sqlite3
 
     config.middleware.delete Rack::Lock
     config.middleware.delete ActionDispatch::Flash
@@ -34,14 +42,20 @@ module RailsApp
       get '/application/haml_filter' => 'application#haml_filter'
 
       # just to reduce noise
-      get '/apple-touch-icon-precomposed.png' => proc { [404,{},[]] }
-      get '/favicon.ico' => proc { [404,{},[]] }
+      get '/apple-touch-icon-precomposed.png' => proc { [404, {}, []] }
+      get '/favicon.ico' => proc { [404, {}, []] }
     end
 
-    config.assets.debug = true
     config.assets.digest = true
 
     # Opal specific:
+    config.opal.source_path = root.join('app/opal')
+    config.opal.entrypoints_path = config.opal.source_path
+    config.opal.build_path = root.join('app/assets/builds')
+    config.opal.entrypoints = {
+      'application' => 'application.rb',
+      'source_map_example' => 'source_map_example.rb'
+    }
     config.opal.source_map_enabled = true
   end
 end

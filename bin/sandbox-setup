@@ -12,3 +12,5 @@ root.join('config/routes.rb').write <<~RUBY
     root to: "home#index"
   end
 RUBY
+
+system 'bin/rails opal:build'

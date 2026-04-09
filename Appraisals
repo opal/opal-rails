@@ -1,40 +1,39 @@
 current_ruby = Gem::Version.new(RUBY_VERSION)
-ruby_2_5_0 = Gem::Version.new('2.5.0')
 ruby_2_7_0 = Gem::Version.new('2.7.0')
+ruby_3_2_0 = Gem::Version.new('3.2.0')
+
+rails_7_sqlite3 = '~> 1.4'
+rails_8_sqlite3 = '>= 2.1'
 
 ENV['OPAL_VERSION'] = nil # ensure the env is clean
 
 github = -> repo_name { "https://github.com/#{repo_name}.git" }
 
 {
-  opal_1_7: -> gemfile do
-    gemfile.gem 'opal', '~> 1.7.0'
-    gemfile.gem 'opal-sprockets'
+  opal_1_8: -> gemfile do
+    gemfile.gem 'opal', '~> 1.8.0'
   end,
 
-  opal_1_3: -> gemfile do
-    gemfile.gem 'opal', '~> 1.3.0'
-    gemfile.gem 'opal-sprockets'
-  end,
-
-  opal_1_0: -> gemfile do
-    gemfile.gem 'opal', '~> 1.0.0'
-    gemfile.gem 'opal-sprockets'
+  opal_master: -> gemfile do
+    gemfile.gem 'opal', git: github['opal/opal'], branch: :master
   end,
 
 }.each do |opal_version, gem_opal|
-  appraise "rails_6_0_#{opal_version}" do
-    gem "rails", "~> 6.0.0"
-    gem_opal[self]
-  end if current_ruby >= ruby_2_5_0
-
-  appraise "rails_6_1_#{opal_version}" do
-    gem "rails", "~> 6.1.0"
-    gem_opal[self]
-  end if current_ruby >= ruby_2_5_0
-
   appraise "rails_7_0_#{opal_version}" do
     gem "rails", "~> 7.0.0"
+    gem 'sqlite3', rails_7_sqlite3
     gem_opal[self]
   end if current_ruby >= ruby_2_7_0
+
+  appraise "rails_8_0_#{opal_version}" do
+    gem "rails", "~> 8.0.0"
+    gem 'sqlite3', rails_8_sqlite3
+    gem_opal[self]
+  end if current_ruby >= ruby_3_2_0
+
+  appraise "rails_8_1_#{opal_version}" do
+    gem "rails", "~> 8.1.0"
+    gem 'sqlite3', rails_8_sqlite3
+    gem_opal[self]
+  end if current_ruby >= ruby_3_2_0
 end

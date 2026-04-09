@@ -1,6 +1,4 @@
 require 'rails'
-require 'opal/sprockets'
-require 'sprockets/railtie'
 
 module Opal
   module Rails
@@ -11,13 +9,17 @@ module Opal
 
       config.opal.dynamic_require_severity = :ignore
       config.opal.assigns_in_templates = true
+      config.opal.entrypoints = { 'application' => 'application.rb' }
+      config.opal.append_paths = []
+      config.opal.use_gems = []
+      config.opal.suppress_legacy_upgrade_warning = false
 
       def (config.opal).assign_locals_in_templates?
-        assigns_in_templates == true || assigns_in_templates == :locals
+        [true, :locals].include?(assigns_in_templates)
       end
 
       def (config.opal).assign_instance_variables_in_templates?
-        assigns_in_templates == true || assigns_in_templates == :ivars
+        [true, :ivars].include?(assigns_in_templates)
       end
 
       # Cache eager_load_paths now, otherwise the assets dir is added
@@ -25,11 +27,8 @@ module Opal
       config.eager_load_paths
 
       config.before_initialize do |app|
-        app.config.eager_load_paths = app.config.eager_load_paths.dup - Dir["#{app.root}/app/{assets,views}"]
-      end
-
-      initializer 'opal.append_assets_path', after: :append_assets_path, group: :all do |app|
-        app.config.assets.paths.unshift(*Opal.paths)
+        Opal::Rails::LegacyUpgradeWarning.warn_if_needed(app)
+        Opal::Rails::PathSetup.apply!(app)
       end
 
       config.after_initialize do |app|
@@ -43,6 +42,9 @@ module Opal
         end
       end
 
+      rake_tasks do
+        load File.expand_path('../../tasks/opal.rake', __dir__)
+      end
     end
   end
 end

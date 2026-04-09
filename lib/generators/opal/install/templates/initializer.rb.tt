@@ -19,4 +19,12 @@ Rails.application.configure do
   #   - :ivars  # only instance variables
   #
   config.opal.assigns_in_templates = false
+
+  # Build-oriented Opal asset configuration
+  config.opal.source_path = Rails.root.join('<%= opal_source_path %>')
+  config.opal.entrypoints_path = config.opal.source_path
+  config.opal.build_path = Rails.root.join('app/assets/builds')
+  config.opal.entrypoints = <%= entrypoints_literal %>
+  config.opal.append_paths = []
+  config.opal.use_gems = []
 end

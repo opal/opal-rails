@@ -1,9 +1,6 @@
+require 'opal'
 require 'haml'
 
-haml_version = Haml::VERSION.to_i
+raise LoadError, 'opal-rails requires Haml 6 or newer for the :opal filter' if Haml::VERSION.to_i < 6
 
-if haml_version < 6
-  require 'opal/rails/haml5_filter'
-else
-  require 'opal/rails/haml6_filter'
-end
+require 'opal/rails/haml6_filter'
