@@ -95,12 +95,14 @@ module Opal
         @opal_dependencies = normalize_paths(Opal.dependent_files)
         rebuild_reverse_dependencies!
 
-        watcher&.stop
+        old_watcher = watcher
         self.watcher = file_watcher_class.new(files: watched_files,
                                               extra_directories: extra_directories) do |modified:, added:, removed:|
           process_changes(modified: modified, added: added, removed: removed)
         end
         watcher.start
+
+        Thread.new { old_watcher.stop } if old_watcher
       end
 
       def rebuild_reverse_dependencies!
